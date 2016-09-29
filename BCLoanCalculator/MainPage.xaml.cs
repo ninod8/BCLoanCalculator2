@@ -53,21 +53,6 @@ namespace BCLoanCalculator
                 Frame.Navigate(typeof(efficientloan));
                 TitleTextBlock.Text = "ყოველდღიური გადახდის კალკულატორი" ;
             }
-            if (NperListBoxItem.IsSelected)
-            {
-                Frame.Navigate(typeof(Nper));
-                TitleTextBlock.Text = "პერიოდის კალკულატორი";
-            }
-            if (PVListBoxItem.IsSelected)                
-            {
-                Frame.Navigate(typeof(PV));
-                TitleTextBlock.Text = "სესხის რაოდენობის კალკულატორი";
-            }
-            else if (RateListBoxItem.IsSelected)
-            {
-                Frame.Navigate(typeof(Rate));
-                TitleTextBlock.Text = "საპროცენტო განაკვეთის კალკულატორი";
-            }
         }
     }
 }

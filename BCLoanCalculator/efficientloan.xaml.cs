@@ -33,43 +33,36 @@ namespace BCLoanCalculator
         }
         private void DailyPercentTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Data.DailyPercent = Convert.ToDouble(DailyPercentTB.Text);
-            //double dailyPercent = Data.DailyPercent;
-            //double annualPercent = Data.AnnualPercent;
-            //bool success = double.TryParse(AnnualPercentTB.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out annualPercent);          
-            //bool suc = double.TryParse(AnnualPercentTB.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out dailyPercent);
-            Data.AnnualPercent = Data.DailyPercent * 365;
-            AnnualPercentTB.Text = Data.AnnualPercent.ToString();
+            Data.DailyInterest = Convert.ToDouble(DailyPercentTB.Text);
+          
+            Data.AnnualInterest = Data.DailyInterest * 365;
+            AnnualPercentTB.Text = Data.AnnualInterest.ToString();
         }
 
         public void AnnualPercentTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Data.AnnualPercent = Convert.ToDouble(AnnualPercentTB.Text);
+            Data.AnnualInterest = Convert.ToDouble(AnnualPercentTB.Text);
 
-            //double dailyPercent = Data.DailyPercent;
-            //double annualPercent = Data.AnnualPercent;
-            //bool success = double.TryParse(AnnualPercentTB.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out annualPercent);
-            //bool suc = double.TryParse(AnnualPercentTB.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out dailyPercent);
-            Data.DailyPercent = Data.AnnualPercent / 365;
-            DailyPercentTB.Text = Data.DailyPercent.ToString();
+            Data.DailyInterest = Data.AnnualInterest / 365;
+            DailyPercentTB.Text = Data.DailyInterest.ToString();
 
         }
 
         public void LoanAmount_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Data.PV = Convert.ToDouble(LoanAmount.Text);
+            Data.LoanAmount = Convert.ToDouble(LoanAmount.Text);
         }
 
         public void DatePicker1_DateChanged(object sender, DatePickerValueChangedEventArgs e)
         {
             Data.StartDate = DatePicker1.Date.Date;
-            TermsOfLoanTB.Text = Data.t().ToString();
+            TermsOfLoanTB.Text = Data.CountDays().ToString();
         }
 
         public void DatePicker2_DateChanged(object sender, DatePickerValueChangedEventArgs e)
         {
             Data.EndDate = DatePicker2.Date.Date;
-            TermsOfLoanTB.Text = Data.t().ToString();
+            TermsOfLoanTB.Text = Data.CountDays().ToString();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -79,14 +72,24 @@ namespace BCLoanCalculator
 
         private void TermsOfLoan_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Data.TermsOfLoan = Convert.ToDouble(TermsOfLoanTB.Text);
-            PMTTB.Text = Data.PMT().ToString();
+            if (!string.IsNullOrWhiteSpace(TermsOfLoanTB.Text))
+            {
+                Data.Term = Convert.ToDouble(TermsOfLoanTB.Text);
+                PMTTB.Text = Data.PMT().ToString();
+            }
+            else
+                PMTTB.Text = string.Empty;
         }
 
         private void PMTTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Data.Payment = Convert.ToDouble(PMTTB.Text);
-            TermsOfLoanTB.Text = Data.Nper().ToString();
+            if (!string.IsNullOrWhiteSpace(PMTTB.Text))
+            {
+                Data.DailyPayment = Convert.ToDouble(PMTTB.Text);
+                TermsOfLoanTB.Text = Data.Nper().ToString();
+            }
+            else
+                TermsOfLoanTB.Text = string.Empty;
         }
     }
 }

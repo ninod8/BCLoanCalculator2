@@ -106,9 +106,6 @@
       <DependentUpon>Nper.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PV.xaml.cs">
-      <DependentUpon>PV.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Rate.xaml.cs">
       <DependentUpon>Rate.xaml</DependentUpon>
     </Compile>
@@ -143,10 +140,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Nper.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

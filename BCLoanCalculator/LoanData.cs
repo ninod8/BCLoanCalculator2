@@ -6,38 +6,88 @@ using System.Threading.Tasks;
 
 namespace BCLoanCalculator
 {
-   public class LoanData
+    public class LoanData
     {
-        public double Payment { get; set; }
-
-        public double DailyPercent { get; set; }
-
-        public double AnnualPercent { get; set; }
-
-        public DateTime StartDate { get; set; }
-
-        public DateTime EndDate { get; set; }
-
-        public double TermsOfLoan { get; set; }
-
-        public double PV { get; set; }
-
-        public double t()
+        #region Private Variables
+        private double _dailyInterest;
+        private double _annualInterest;
+        private DateTime _startDate;
+        private DateTime _endDate;
+        #endregion
+        public double DailyInterest
         {
-            TimeSpan t = EndDate - StartDate;
-            return t.Days;
+            get { return _dailyInterest; }
+            set
+            {
+                _dailyInterest = value;
+                _annualInterest = value * 365;
+            }
+        }
+
+        public double AnnualInterest
+        {
+            get { return _annualInterest; }
+            set
+            {
+                _annualInterest = value;
+                _dailyInterest = value / 365;
+            }
+        }
+
+        public double DailyPayment { get; set; }
+
+        public DateTime StartDate
+        {
+            get { return _startDate; }
+            set
+            {
+                _startDate = value;
+                Term = CountDays();
+            }
+        }
+
+        public DateTime EndDate
+        {
+            get { return _endDate; }
+            set
+            {
+                _endDate = value;
+                Term = CountDays();
+            }
+        }
+
+
+        private double _term;
+
+        public double Term
+        {
+            get { return _term; }
+            set
+            {
+                _term = value;
+
+                DailyPayment = PMT();
+
+            }
+        }
+
+        public double LoanAmount { get; set; }
+
+        public double CountDays()
+        {
+            return (EndDate - StartDate).Days;
         }
         public double PMT()
         {
-            double rate = DailyPercent / 100;
-            double pmt = Math.Round(PV * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), TermsOfLoan)))), 2);
+            double rate = DailyInterest / 100;
+            double pmt = Math.Round(LoanAmount * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Term)))), 2);
             return pmt;
         }
         public double Nper()
         {
-            double rate = DailyPercent / 100;
-            double nper = Math.Round(-Math.Log((1 - rate * PV / Payment), Math.E) / Math.Log((1 + rate), Math.E));
-            return nper; 
+            double rate = DailyInterest / 100;
+            double nper = -Math.Log((1 - rate * LoanAmount / DailyPayment), Math.E) / Math.Log((1 + rate), Math.E);
+            return nper;
         }
     }
 }
