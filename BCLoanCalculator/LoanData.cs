@@ -37,7 +37,7 @@ namespace BCLoanCalculator
         {
             double rate = DailyPercent / 100;
             double nper = Math.Round(-Math.Log((1 - rate * PV / Payment), Math.E) / Math.Log((1 + rate), Math.E));
-            return nper;
+            return nper; 
         }
     }
 }
