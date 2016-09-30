@@ -23,7 +23,7 @@
                 
                 <TextBlock FontSize="11" Margin="10,0" VerticalAlignment="Center">სესხის თანხა</TextBlock>
                 
-                <TextBox Margin="10,5" BorderThickness="0" Name="LoanAmount" TextChanged="LoanAmount_TextChanged"></TextBox>
+                <TextBox Margin="10,5" BorderThickness="0" Name="LoanAmountTB" TextChanged="LoanAmount_TextChanged"></TextBox>
                 
                 <TextBlock FontSize="11" Margin="10,0" VerticalAlignment="Center">სესხის ვადა(-დან)</TextBlock>
 
@@ -40,6 +40,8 @@
                 <TextBlock FontSize="11" Margin="10,0" VerticalAlignment="Center">ყოველდღიური გადასახადი</TextBlock>
 
                 <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged"></TextBox>
+
+                <TextBlock Name="ErorrTB" FontSize="13" Margin="10,0" VerticalAlignment="Center" Foreground="Red"></TextBlock>
 
                 <Button Margin="10" FontSize="13" Click="Button_Click_1" HorizontalAlignment="Center">გამოთვლა</Button>
                 

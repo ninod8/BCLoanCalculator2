@@ -13,6 +13,8 @@ namespace BCLoanCalculator
         private double _annualInterest;
         private DateTime _startDate;
         private DateTime _endDate;
+        private double _term;
+        private double _dailyPayment;
         #endregion
         public double DailyInterest
         {
@@ -34,7 +36,7 @@ namespace BCLoanCalculator
             }
         }
 
-        public double DailyPayment { get; set; }
+        public double LoanAmount { get; set; }
 
         public DateTime StartDate
         {
@@ -56,9 +58,6 @@ namespace BCLoanCalculator
             }
         }
 
-
-        private double _term;
-
         public double Term
         {
             get { return _term; }
@@ -66,12 +65,19 @@ namespace BCLoanCalculator
             {
                 _term = value;
 
-                DailyPayment = PMT();
+                _dailyPayment = PMT();
+            }
+        }        
 
+        public double DailyPayment
+        {
+            get { return _dailyPayment; }
+            set
+            {
+                _dailyPayment = value;
+                _term = Nper();
             }
         }
-
-        public double LoanAmount { get; set; }
 
         public double CountDays()
         {
@@ -80,14 +86,15 @@ namespace BCLoanCalculator
         public double PMT()
         {
             double rate = DailyInterest / 100;
-            double pmt = Math.Round(LoanAmount * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Term)))), 2);
-            return pmt;
+            double pmt = LoanAmount * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Term))));
+            return Math.Round(pmt, 2);
         }
         public double Nper()
         {
             double rate = DailyInterest / 100;
-            double nper = -Math.Log((1 - rate * LoanAmount / DailyPayment), Math.E) / Math.Log((1 + rate), Math.E);
-            return nper;
+            //double nper = -Math.Log((1 - rate * LoanAmount / DailyPayment), Math.E) / Math.Log((1 + rate), Math.E);
+            double nper = LoanAmount / rate;
+            return Math.Round( nper);
         }
     }
 }

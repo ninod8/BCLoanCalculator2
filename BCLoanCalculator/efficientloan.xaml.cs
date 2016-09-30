@@ -33,63 +33,122 @@ namespace BCLoanCalculator
         }
         private void DailyPercentTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Data.DailyInterest = Convert.ToDouble(DailyPercentTB.Text);
-          
-            Data.AnnualInterest = Data.DailyInterest * 365;
-            AnnualPercentTB.Text = Data.AnnualInterest.ToString();
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(DailyPercentTB.Text))
+                {
+                    Data.DailyInterest = Convert.ToDouble(DailyPercentTB.Text);
+                    AnnualPercentTB.Text = Data.AnnualInterest.ToString();
+                }
+                else
+                    DailyPercentTB.Text = string.Empty;
+            }
+            catch (FormatException) { ErorrTB.Text = "*აკრიფეთ მხოლოდ ციფრები"; }
+
+
         }
 
         public void AnnualPercentTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Data.AnnualInterest = Convert.ToDouble(AnnualPercentTB.Text);
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(AnnualPercentTB.Text))
+                {
+                    Data.AnnualInterest = Convert.ToDouble(AnnualPercentTB.Text);
+                    DailyPercentTB.Text = Data.DailyInterest.ToString();
+                }
+                else
+                    AnnualPercentTB.Text = string.Empty;
+            }
+            catch (FormatException) { ErorrTB.Text = "*აკრიფეთ მხოლოდ ციფრები"; }
 
-            Data.DailyInterest = Data.AnnualInterest / 365;
-            DailyPercentTB.Text = Data.DailyInterest.ToString();
 
         }
 
         public void LoanAmount_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Data.LoanAmount = Convert.ToDouble(LoanAmount.Text);
+            try
+            {
+                if (!String.IsNullOrEmpty(LoanAmountTB.Text))
+                {
+                    Data.LoanAmount = Convert.ToDouble(LoanAmountTB.Text);
+                }
+                else
+                    LoanAmountTB.Text = string.Empty;
+            }
+            catch (FormatException) { ErorrTB.Text = "*აკრიფეთ მხოლოდ ციფრები"; }
+
+
         }
 
         public void DatePicker1_DateChanged(object sender, DatePickerValueChangedEventArgs e)
         {
             Data.StartDate = DatePicker1.Date.Date;
-            TermsOfLoanTB.Text = Data.CountDays().ToString();
+            TermsOfLoanTB.Text = Data.EndDate.ToString();
         }
 
         public void DatePicker2_DateChanged(object sender, DatePickerValueChangedEventArgs e)
         {
             Data.EndDate = DatePicker2.Date.Date;
-            TermsOfLoanTB.Text = Data.CountDays().ToString();
+            TermsOfLoanTB.Text = Data.StartDate.ToString();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (!String.IsNullOrEmpty(TermsOfLoanTB.Text))
+            {
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(PMTTB.Text))
+                    {
 
+                        TermsOfLoanTB.Text = Data.Nper().ToString();
+                    }
+                    else
+                        TermsOfLoanTB.Text = string.Empty;
+                }
+                catch (FormatException) { ErorrTB.Text = "*აკრიფეთ მხოლოდ ციფრები"; }
+            }
+            else
+            {
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(TermsOfLoanTB.Text))
+                    {
+
+                        PMTTB.Text = Data.PMT().ToString();
+                    }
+                    else
+                        PMTTB.Text = string.Empty;
+                }
+                catch (FormatException) { ErorrTB.Text = "*აკრიფეთ მხოლოდ ციფრები"; }
+            }
         }
 
         private void TermsOfLoan_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(TermsOfLoanTB.Text))
+            try
             {
                 Data.Term = Convert.ToDouble(TermsOfLoanTB.Text);
-                PMTTB.Text = Data.PMT().ToString();
             }
-            else
-                PMTTB.Text = string.Empty;
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
         private void PMTTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(PMTTB.Text))
+            try
             {
                 Data.DailyPayment = Convert.ToDouble(PMTTB.Text);
-                TermsOfLoanTB.Text = Data.Nper().ToString();
             }
-            else
-                TermsOfLoanTB.Text = string.Empty;
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
     }
 }
