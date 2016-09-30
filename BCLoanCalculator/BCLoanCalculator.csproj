@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DateTimeToDateTimeOffsetConverter.cs" />
     <Compile Include="efficientloan.xaml.cs">
       <DependentUpon>efficientloan.xaml</DependentUpon>
     </Compile>

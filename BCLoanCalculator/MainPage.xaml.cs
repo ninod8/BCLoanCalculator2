@@ -26,7 +26,7 @@ namespace BCLoanCalculator
         {
             this.InitializeComponent();
             
-            MyFrame.Navigate(typeof(efficientloan));
+            MyFrame.Navigate(typeof(EfficientLoan));
             TitleTextBlock.Text = "ეფექტური საპროცენტო განაკვეთის კალკულატორი";
             PMTListBoxItem.IsSelected = true;
         }
@@ -50,7 +50,7 @@ namespace BCLoanCalculator
             if (PMTListBoxItem.IsSelected)
             {
                 
-                Frame.Navigate(typeof(efficientloan));
+                MyFrame.Navigate(typeof(EfficientLoan));
                 TitleTextBlock.Text = "ყოველდღიური გადახდის კალკულატორი" ;
             }
         }

@@ -1,21 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BCLoanCalculator
 {
-    public class LoanData
+    public class LoanData : INotifyPropertyChanged
     {
+        public LoanData()
+        {
+            _startDate = DateTime.Today.Date;
+            _endDate = DateTime.Today.Date;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(this, e);
+        }
+
         #region Private Variables
         private double _dailyInterest;
         private double _annualInterest;
+        private double _loanAmount;
         private DateTime _startDate;
         private DateTime _endDate;
         private double _term;
         private double _dailyPayment;
         #endregion
+
         public double DailyInterest
         {
             get { return _dailyInterest; }
@@ -23,6 +39,9 @@ namespace BCLoanCalculator
             {
                 _dailyInterest = value;
                 _annualInterest = value * 365;
+
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterest"));
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyInterest"));
             }
         }
 
@@ -33,10 +52,23 @@ namespace BCLoanCalculator
             {
                 _annualInterest = value;
                 _dailyInterest = value / 365;
+
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyInterest"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterest"));
             }
         }
 
-        public double LoanAmount { get; set; }
+
+        public double LoanAmount
+        {
+            get { return _loanAmount; }
+            set
+            {
+                _loanAmount = value;
+
+                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmount"));
+            }
+        }
 
         public DateTime StartDate
         {
@@ -45,6 +77,9 @@ namespace BCLoanCalculator
             {
                 _startDate = value;
                 Term = CountDays();
+
+                OnPropertyChanged(new PropertyChangedEventArgs("Term"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDate"));
             }
         }
 
@@ -55,6 +90,9 @@ namespace BCLoanCalculator
             {
                 _endDate = value;
                 Term = CountDays();
+
+                OnPropertyChanged(new PropertyChangedEventArgs("Term"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDate"));
             }
         }
 
@@ -64,10 +102,12 @@ namespace BCLoanCalculator
             set
             {
                 _term = value;
-
                 _dailyPayment = PMT();
+
+                OnPropertyChanged(new PropertyChangedEventArgs("Term"));
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
             }
-        }        
+        }
 
         public double DailyPayment
         {
@@ -76,6 +116,9 @@ namespace BCLoanCalculator
             {
                 _dailyPayment = value;
                 _term = Nper();
+
+                OnPropertyChanged(new PropertyChangedEventArgs("Term"));
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
             }
         }
 
@@ -92,9 +135,9 @@ namespace BCLoanCalculator
         public double Nper()
         {
             double rate = DailyInterest / 100;
-            //double nper = -Math.Log((1 - rate * LoanAmount / DailyPayment), Math.E) / Math.Log((1 + rate), Math.E);
-            double nper = LoanAmount / rate;
-            return Math.Round( nper);
+            double nper = -Math.Log((1 - rate * LoanAmount / DailyPayment), Math.E) / Math.Log((1 + rate), Math.E);
+            //double nper = LoanAmount / rate;
+            return Math.Round(nper);
         }
     }
 }
