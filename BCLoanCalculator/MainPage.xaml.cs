@@ -36,15 +36,6 @@ namespace BCLoanCalculator
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
 
-        //private void BackButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (MyFrame.CanGoBack)
-        //    {
-        //        MyFrame.GoBack();
-        //        Financial.IsSelected = true;
-        //    }
-        //}
-
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (PMTListBoxItem.IsSelected)

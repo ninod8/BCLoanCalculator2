@@ -47,26 +47,8 @@
                          SelectionChanged="ListBox_SelectionChanged">
                     <ListBoxItem Name="PMTListBoxItem">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text=" &#xE1CE;" />
+                            <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text=" &#x20BE;" />
                             <TextBlock FontSize="11" TextWrapping="Wrap"  Margin="20,0,0,0">ეფექტური საპროცენტო განაკვეთის კალკულატორი</TextBlock>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="NperListBoxItem">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text=" &#xECC5;" />
-                            <TextBlock FontSize="11" TextWrapping="Wrap" Margin="20,0,0,0">სესხის კალკულატორი</TextBlock>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="PVListBoxItem">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe UI" FontSize="16" Text="  &#x20BE;" />
-                            <TextBlock FontSize="11" TextWrapping="Wrap" Margin="20,0,0,0">სესხის კალკულატორი</TextBlock>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="RateListBoxItem">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe UI Symbol" FontSize="16" Text="  &#x0025;" />
-                            <TextBlock FontSize="11" TextWrapping="Wrap" Margin="20,0,0,0">სესხის კალკულატორი</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
                 </ListBox>
