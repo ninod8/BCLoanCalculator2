@@ -6,62 +6,16 @@ using System.Threading.Tasks;
 
 namespace BCLoanCalculator
 {
-    public class ListViewItems
+    public class GridItem
     {
-        LoanData Data = new LoanData();
-        public List<int> NumberOfPayment()
-        {
-            for (int i = 1; i <= Data.Term; i++)
-            {
-                NumberOfPayment().Add(i);
-            }
-            return NumberOfPayment();
-        }
-        public List<DateTime> Date()
-        {
-            for (int i = 0; i < Data.Term; i++)
-            {
-                DateTime dateTime = Data.StartDate.AddDays(1);
-                Date().Add(dateTime);
-            }
-            return Date();
-        }
-        public List<double> Payment()
-        {
-            for (int i = 0; i < Data.Term; i++)
-            {
-                Payment().Add(Data.DailyPayment);
-            }
-            return Payment();
-        }
-        public List<double> Principal()
-        {
-            for (int i = 0; i < Data.Term; i++)
-            {
-                double principal = Data.PMT() - Data.LoanAmount * Data.DailyInterest / 100;
-                Principal().Add(principal);
-                Data.LoanAmount -= principal;
-            }
-            return Principal();
-        }
-        public List<double> Interest()
-        {
-            for (int i = 0; i < Data.Term; i++)
-            {
-                double startingBalance = Data.LoanAmount - (Data.PMT() - Data.LoanAmount * Data.DailyInterest / 100);
-                double interest = startingBalance * Data.DailyInterest / 100;
-                Interest().Add(interest);
-            }
-            return Interest();
-        }
-        public List<double> StartingBalance()
-        {
-            for (int i = 0; i < Data.Term; i++)
-            {
-                double startingBalance = Data.LoanAmount - (Data.PMT() - Data.LoanAmount * Data.DailyInterest / 100);
-                StartingBalance().Add(startingBalance);
-            }
-            return StartingBalance();
-        }
+        private LoanData Data = new LoanData();
+
+        public int PaymentNumber { get; set; }
+        public DateTime DateTime { get; set; }
+        public double Payment { get; set; }
+        public double Principal { get; set; }
+        public double Interest { get; set; }
+        public double StartingBalance { get; set; }
+        public double EndingBalance { get; set; }
     }
 }

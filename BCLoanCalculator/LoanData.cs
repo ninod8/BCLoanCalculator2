@@ -58,7 +58,6 @@ namespace BCLoanCalculator
             }
         }
 
-
         public double LoanAmount
         {
             get { return _loanAmount; }
@@ -126,12 +125,14 @@ namespace BCLoanCalculator
         {
             return (EndDate - StartDate).Days;
         }
+
         public double PMT()
         {
             double rate = DailyInterest / 100;
             double pmt = LoanAmount * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Term))));
             return Math.Round(pmt, 2);
         }
+
         public double Nper()
         {
             double rate = DailyInterest / 100;
@@ -139,5 +140,25 @@ namespace BCLoanCalculator
             //double nper = LoanAmount / rate;
             return Math.Round(nper);
         }
+
+        private void Graph()
+        {
+            double amount = LoanAmount;
+            double dailyInterest = DailyInterest / 100;
+            Items = new List<GridItem>();
+
+            for (int i = 0; i < Term; i++)
+            {
+                DateTime dateTime = StartDate.AddDays(1);
+                double principal = PMT() - amount * dailyInterest;
+                double startingBalance = amount - principal;
+                double interest = startingBalance * dailyInterest;
+                amount -= principal;
+                Items.Add(new GridItem() { PaymentNumber = i, DateTime = dateTime, Payment = DailyPayment, Principal = principal, Interest = interest, StartingBalance = startingBalance });
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+            }
+        }
+        public ICollection<GridItem> Items { get; set; }
     }
 }

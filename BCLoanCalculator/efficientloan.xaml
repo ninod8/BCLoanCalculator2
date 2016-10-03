@@ -49,6 +49,15 @@
 
                 <TextBlock Name="ErorrTB" FontSize="13" Margin="10,0" VerticalAlignment="Center" Foreground="Red"></TextBlock>
 
+                <GridView Name="GraphGridView">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
             </StackPanel>
         </ScrollViewer>
     </Grid>
