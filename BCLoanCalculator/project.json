@@ -1,6 +1,8 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "MyToolkit": "2.5.13",
+    "MyToolkit.Extended": "2.5.13"
   },
   "frameworks": {
     "uap10.0": {}

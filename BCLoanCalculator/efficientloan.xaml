@@ -5,6 +5,7 @@
     xmlns:local="using:BCLoanCalculator"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:MyToolkit.UI"
     mc:Ignorable="d">
     <Page.Resources>
         <local:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter"/>
@@ -18,11 +19,11 @@
         <ScrollViewer HorizontalScrollBarVisibility="Hidden"
                       VerticalScrollBarVisibility="Hidden">
             <StackPanel Margin="0,10">
-                
+
                 <TextBlock FontSize="11" Margin="10,0" VerticalAlignment="Center">ყოველდღიური საპროცენტო განაკვეთი (%)</TextBlock>
 
                 <TextBox BorderThickness="0"  Name="DailyPercentTB" Margin="10,5" Text="{Binding DailyInterest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                
+
                 <TextBlock FontSize="11" Margin="10,0" VerticalAlignment="Center">წლიური საპროცენტო განაკვეთი (%)</TextBlock>
 
                 <TextBox BorderThickness="0" Name="AnnualPercentTB" Margin="10,5" Text="{Binding AnnualInterest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -30,7 +31,7 @@
                 <TextBlock FontSize="11" Margin="10,0" VerticalAlignment="Center">სესხის თანხა</TextBlock>
 
                 <TextBox Margin="10,5" BorderThickness="0" Name="LoanAmountTB" Text="{Binding LoanAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                
+
                 <TextBlock FontSize="11" Margin="10,0" VerticalAlignment="Center">სესხის ვადა(-დან)</TextBlock>
 
                 <DatePicker Name="DatePicker1" FontSize="11" Margin="10" Date="{Binding StartDate, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -42,22 +43,45 @@
                 <TextBlock FontSize="11" Margin="10,0" VerticalAlignment="Center">სესხის ვადა</TextBlock>
 
                 <TextBox BorderThickness="0"  Name="TermsOfLoanTB"  Margin="10,5" VerticalAlignment="Center" Text="{Binding Term, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                
+
                 <TextBlock FontSize="11" Margin="10,0" VerticalAlignment="Center">ყოველდღიური გადასახადი</TextBlock>
 
                 <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" Text="{Binding DailyPayment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                <TextBlock Name="ErorrTB" FontSize="13" Margin="10,0" VerticalAlignment="Center" Foreground="Red"></TextBlock>
+                <GridView Name="gridview"
+                          Margin="10,5"
+                          FontSize="11"
+                          ItemsSource="{Binding Items}"
+                          IsItemClickEnabled="True"
+                          SelectionMode="Single">
 
-                <GridView Name="GraphGridView">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapGrid Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding PaymentNumber}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Date}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Payment}"/>
+                                <TextBlock Grid.Column="3" Text="{Binding Principal}"/>
+                                <TextBlock Grid.Column="4" Text="{Binding Interest}"/>
+                            </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
                 </GridView>
+
             </StackPanel>
         </ScrollViewer>
     </Grid>

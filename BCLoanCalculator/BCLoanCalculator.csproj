@@ -96,10 +96,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="DateTimeToDateTimeOffsetConverter.cs" />
-    <Compile Include="efficientloan.xaml.cs">
-      <DependentUpon>efficientloan.xaml</DependentUpon>
+    <Compile Include="EfficientLoan.xaml.cs">
+      <DependentUpon>EfficientLoan.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListViewItems.cs" />
+    <Compile Include="GridItem.cs" />
     <Compile Include="LoanData.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -127,7 +127,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="efficientloan.xaml">
+    <Page Include="EfficientLoan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

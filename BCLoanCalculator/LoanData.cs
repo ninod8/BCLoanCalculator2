@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace BCLoanCalculator
         {
             _startDate = DateTime.Today.Date;
             _endDate = DateTime.Today.Date;
+            Items = new ObservableCollection<GridItem>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -105,6 +107,8 @@ namespace BCLoanCalculator
 
                 OnPropertyChanged(new PropertyChangedEventArgs("Term"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+
+                Graph();
             }
         }
 
@@ -143,22 +147,25 @@ namespace BCLoanCalculator
 
         private void Graph()
         {
+            Items.Clear();
             double amount = LoanAmount;
             double dailyInterest = DailyInterest / 100;
-            Items = new List<GridItem>();
+            //Items = new List<GridItem>();
 
-            for (int i = 0; i < Term; i++)
+            Items.Add(new GridItem() { Date = "Date", EndingBalance = "EndingBalance", Interest = "Interest", Payment = "Payment", PaymentNumber = "PaymentNumber", Principal = "Principal", StartingBalance = "StartingBalance" });
+
+            for (int i = 1; i <= Term; i++)
             {
                 DateTime dateTime = StartDate.AddDays(1);
                 double principal = PMT() - amount * dailyInterest;
                 double startingBalance = amount - principal;
                 double interest = startingBalance * dailyInterest;
                 amount -= principal;
-                Items.Add(new GridItem() { PaymentNumber = i, DateTime = dateTime, Payment = DailyPayment, Principal = principal, Interest = interest, StartingBalance = startingBalance });
-                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                Items.Add(new GridItem() { PaymentNumber = i.ToString(), Date = dateTime.Date.ToString(), Payment = DailyPayment.ToString(), Principal = principal.ToString(), Interest = interest.ToString(), StartingBalance = startingBalance.ToString() });
+
                 OnPropertyChanged(new PropertyChangedEventArgs("Items"));
             }
         }
-        public ICollection<GridItem> Items { get; set; }
+        public ObservableCollection<GridItem> Items { get; set; }
     }
 }
