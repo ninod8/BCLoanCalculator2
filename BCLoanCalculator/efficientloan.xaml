@@ -48,7 +48,7 @@
 
                 <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" Text="{Binding DailyPayment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                <GridView Name="gridview"
+                <GridView Name="GridView"
                           Margin="10,5"
                           FontSize="13"
                           ItemsSource="{Binding Items}">

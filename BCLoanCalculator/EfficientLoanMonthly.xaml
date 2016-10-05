@@ -42,13 +42,13 @@
 
                 <TextBlock FontSize="11" Foreground= "#C67511" Margin="10,0" VerticalAlignment="Center">სესხის ვადა (თვე)</TextBlock>
 
-                <TextBox BorderThickness="0"  Name="TermsOfLoanTB"  Margin="10,5" VerticalAlignment="Center" Text="{Binding TermMonthly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0" Name="TermsOfLoanTB"  Margin="10,5" VerticalAlignment="Center" Text="{Binding TermMonthly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock FontSize="11" Margin="10,0" Foreground= "#C67511" VerticalAlignment="Center">ყოველთვიური გადასახადი</TextBlock>
 
                 <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" Text="{Binding MonthlyPayment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                <GridView Name="gridview"
+                <GridView Name="GridView1"
                           Margin="10,5"
                           FontSize="13"
                           ItemsSource="{Binding ItemsMonthly}">

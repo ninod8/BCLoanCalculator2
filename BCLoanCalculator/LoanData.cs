@@ -16,7 +16,10 @@ namespace BCLoanCalculator
         {
             _startDateDaily = DateTime.Today.Date;
             _endDateDaily = DateTime.Today.Date;
+            _endDateMonthly = DateTime.Today.Date;
+            _startDateMonthly = DateTime.Today.Date;
             Items = new ObservableCollection<GridItem>();
+            ItemsMonthly = new ObservableCollection<GridItem>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -121,8 +124,9 @@ namespace BCLoanCalculator
             get { return _endDateMonthly; }
             set
             {
+
                 _endDateMonthly = value;
-                TermMonthly = CountDays();
+                TermMonthly = CountMonths();
 
                 OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
@@ -148,7 +152,7 @@ namespace BCLoanCalculator
             set
             {
                 _termMonthly = value;
-                _dailyPayment = PMTMonthly();
+                _monthlyPayment = PMTMonthly();
                 GraphMonthly();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
@@ -188,7 +192,7 @@ namespace BCLoanCalculator
 
         public double CountMonths()
         {
-            return StartDateDaily.Subtract(EndDateDaily).Days / (365.25 / 12);
+            return (EndDateMonthly.Month - StartDateMonthly.Month) + 12 * (EndDateMonthly.Year - StartDateMonthly.Year);
         }
 
         public double PMTDaily()
@@ -200,8 +204,8 @@ namespace BCLoanCalculator
 
         public double PMTMonthly()
         {
-            double rate = AnnualInterest / 1200;
-            double pmt = LoanAmount * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), TermDaily))));
+            double rate = DailyInterest*31/100;
+            double pmt = LoanAmount * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), TermMonthly))));
             return Math.Round(pmt, 2);
         }
 
@@ -215,7 +219,7 @@ namespace BCLoanCalculator
         public double NperMonthly()
         {
             double rate = AnnualInterest / 1200;
-            double nper = -Math.Log((1 - rate * LoanAmount / DailyPayment), Math.E) / Math.Log((1 + rate), Math.E);
+            double nper = -Math.Log((1 - rate * LoanAmount / MonthlyPayment), Math.E) / Math.Log((1 + rate), Math.E);
             return Math.Round(nper);
         }
 
@@ -239,18 +243,18 @@ namespace BCLoanCalculator
         }
         public void GraphMonthly()
         {
-            Items.Clear();
+            ItemsMonthly.Clear();
             double amount = LoanAmount;
-            double monthlyInterest = AnnualInterest / 1200;
-
-            Items.Add(new GridItem() { Date = "თარიღი", EndingBalance = "EndingBalance", Interest = "პროცენტი", Payment = "გადასახადი", PaymentNumber = "#", Principal = "ძირი", StartingBalance = "საბოლოო ბალანსი" });
+            double monthlyRate = AnnualInterest / 1200;
+            ItemsMonthly.Add(new GridItem() { Date = "თარიღი", EndingBalance = "EndingBalance", Interest = "პროცენტი", Payment = "გადასახადი", PaymentNumber = "#", Principal = "ძირი", StartingBalance = "საბოლოო ბალანსი" });
 
             for (int i = 1; i <= TermMonthly; i++)
             {
+   
                 DateTime dateTime = StartDateMonthly.AddMonths(i - 1);
-                double principal = PMTMonthly() - amount * monthlyInterest;
-                double interest = amount * monthlyInterest;
-                Items.Add(new GridItem() { PaymentNumber = i.ToString(), Date = dateTime.Date.ToString("MM/yyyy"), Payment = MonthlyPayment.ToString(), Principal = Math.Round(principal, 2).ToString(), Interest = Math.Round(interest, 2).ToString(), StartingBalance = Math.Round(amount, 2).ToString() });
+                double principal = PMTMonthly() - amount * monthlyRate;
+                double interest = amount * monthlyRate;
+                ItemsMonthly.Add(new GridItem() { PaymentNumber = i.ToString(), Date = dateTime.Date.ToString("dd/MM/yyyy"), Payment = MonthlyPayment.ToString(), Principal = Math.Round(principal, 2).ToString(), Interest = Math.Round(interest, 2).ToString(), StartingBalance = Math.Round(amount, 2).ToString() });
                 amount -= principal;
                 OnPropertyChanged(new PropertyChangedEventArgs("ItemsMonthly"));
             }
