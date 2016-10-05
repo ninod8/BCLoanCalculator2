@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="#A7B4B7">
+    <Grid Background="#032B5B">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="45"/>
             <ColumnDefinition Width="*"/>
@@ -24,13 +24,14 @@
                     FontSize="16" 
                     Content="&#xE700;" 
                     Click="HamburgerButton_Click" 
+                    Foreground= "#C67511"
                     Width="45"
                     Height="45"/>
 
             <TextBlock Name="TitleTextBlock"
                        RelativePanel.RightOf="HamburgerButton"
-                       FontSize="11"
-                       Foreground="Black"
+                       FontSize="13"
+                       Foreground= "#C67511"
                        Margin="20,5,0,0"/>
         </RelativePanel>
         
@@ -47,10 +48,23 @@
                          SelectionChanged="ListBox_SelectionChanged">
                     <ListBoxItem Name="PMTListBoxItem">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text=" &#x20BE;" />
-                            <TextBlock FontSize="11" TextWrapping="Wrap"  Margin="20,0,0,0">ეფექტური საპროცენტო განაკვეთის კალკულატორი</TextBlock>
+                            <TextBlock FontFamily="Segoe UI" FontSize="16" Foreground= "#C67511" Text=" &#x20BE;" />
+                            <TextBlock FontSize="11" TextWrapping="Wrap" Foreground= "#C67511" Margin="20,0,0,0">ყოველდღიური გადახდის კალკულატორი</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
+                    <ListBoxItem Name="PMTMonthlyListBoxItem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe UI" FontSize="16" Foreground= "#C67511" Text=" &#x13BE;" />
+                            <TextBlock FontSize="11" TextWrapping="Wrap" Foreground= "#C67511" Margin="20,0,0,0">ყოველთვიური გადახდის კალკულატორი</TextBlock>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Name="FlatPercentageListBoxItem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe UI" FontSize="16" Foreground= "#C67511" Text=" &#x17BE;" />
+                            <TextBlock FontSize="11" TextWrapping="Wrap" Foreground= "#C67511" Margin="20,0,0,0">ბრტყელი პროცნეტის კალკულატორი</TextBlock>
+                        </StackPanel>
+                    </ListBoxItem>
+                    
                 </ListBox>
             </SplitView.Pane>
             <SplitView.Content>

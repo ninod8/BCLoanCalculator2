@@ -96,8 +96,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="DateTimeToDateTimeOffsetConverter.cs" />
+    <Compile Include="EfficientLoanMonthly.xaml.cs">
+      <DependentUpon>EfficientLoanMonthly.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EfficientLoan.xaml.cs">
       <DependentUpon>EfficientLoan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlatPercentage.xaml.cs">
+      <DependentUpon>FlatPercentage.xaml</DependentUpon>
     </Compile>
     <Compile Include="GridItem.cs" />
     <Compile Include="LoanData.cs" />
@@ -127,7 +133,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="EfficientLoanMonthly.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EfficientLoan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlatPercentage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
