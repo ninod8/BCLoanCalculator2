@@ -20,6 +20,7 @@ namespace BCLoanCalculator
             _startDateMonthly = DateTime.Today.Date;
             Items = new ObservableCollection<GridItem>();
             ItemsMonthly = new ObservableCollection<GridItem>();
+            FlatPercentageItems = new ObservableCollection<GridItem>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -241,6 +242,7 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("Items"));
             }
         }
+
         public void GraphMonthly()
         {
             ItemsMonthly.Clear();
@@ -259,7 +261,11 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("ItemsMonthly"));
             }
         }
+
+        public ObservableCollection<GridItem> FlatPercentageItems { get; set; }
+
         public ObservableCollection<GridItem> ItemsMonthly { get; set; }
+
         public ObservableCollection<GridItem> Items { get; set; }
     }
 }

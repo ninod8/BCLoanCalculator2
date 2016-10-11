@@ -25,7 +25,6 @@ namespace BCLoanCalculator
         public MainPage()
         {
             this.InitializeComponent();
-            
             MyFrame.Navigate(typeof(EfficientLoanMonthly));
             TitleTextBlock.Text = "ეფექტური საპროცენტო განაკვეთის კალკულატორი";
             PMTListBoxItem.IsSelected = true;

@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="#032B5B">
+    <Grid Background="#D6D6D6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="45"/>
             <ColumnDefinition Width="*"/>
@@ -17,51 +17,74 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <RelativePanel Grid.ColumnSpan="2">
+        <RelativePanel Grid.ColumnSpan="2" 
+                       Background="#0F0F0F">
             <Button Name="HamburgerButton" 
                     RelativePanel.AlignLeftWithPanel="True"
                     FontFamily="Segoe MDL2 Assets"
                     FontSize="16" 
                     Content="&#xE700;" 
                     Click="HamburgerButton_Click" 
-                    Foreground= "#C67511"
+                    Foreground="#5BEABF"
                     Width="45"
                     Height="45"/>
 
-            <TextBlock Name="TitleTextBlock"
+            <TextBlock VerticalAlignment="Center"
+                       Name="TitleTextBlock"
                        RelativePanel.RightOf="HamburgerButton"
                        FontSize="13"
-                       Foreground= "#C67511"
+                       Foreground="#5BEABF"
                        Margin="20,5,0,0"/>
         </RelativePanel>
         
         <SplitView Grid.Row="1" 
-                   Background="#25963F"
+                   Background="#0F0F0F"
                    Name="MySplitView"
                    DisplayMode="CompactOverlay" 
                    OpenPaneLength="350"
-                   CompactPaneLength="45" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                   CompactPaneLength="45" 
+                   Grid.ColumnSpan="2" 
+                   Grid.RowSpan="2"
                    Padding="0">
             <SplitView.Pane>
-                
-                <ListBox SelectionMode="Single" 
-                         SelectionChanged="ListBox_SelectionChanged">
-                    <ListBoxItem Name="PMTListBoxItem">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe UI" FontSize="16" Foreground= "#C67511" Text=" &#x20BE;" />
-                            <TextBlock FontSize="11" TextWrapping="Wrap" Foreground= "#C67511" Margin="20,0,0,0">ყოველდღიური გადახდის კალკულატორი</TextBlock>
+
+                <ListBox Background="#0F0F0F"
+                         SelectionMode="Single" 
+                         SelectionChanged="ListBox_SelectionChanged" >
+                    <ListBoxItem Name="PMTListBoxItem" >
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock FontFamily="Segoe UI" 
+                                       FontSize="16" 
+                                       Foreground= "#5BEABF" 
+                                       Text=" &#x20BE;" />
+                            <TextBlock FontSize="11" 
+                                       TextWrapping="Wrap" 
+                                       Foreground= "#5BEABF" 
+                                       Margin="20,0,0,0">ყოველდღიური გადახდის კალკულატორი</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
-                    <ListBoxItem Name="PMTMonthlyListBoxItem">
+                    <ListBoxItem Name="PMTMonthlyListBoxItem" >
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe UI" FontSize="16" Foreground= "#C67511" Text=" &#x13BE;" />
-                            <TextBlock FontSize="11" TextWrapping="Wrap" Foreground= "#C67511" Margin="20,0,0,0">ყოველთვიური გადახდის კალკულატორი</TextBlock>
+                            <TextBlock FontFamily="Segoe UI" 
+                                       FontSize="16" 
+                                       Foreground= "#5BEABF" 
+                                       Text=" &#x13BE;" />
+                            <TextBlock FontSize="11" 
+                                       TextWrapping="Wrap" 
+                                       Foreground= "#5BEABF" 
+                                       Margin="20,0,0,0">ყოველთვიური გადახდის კალკულატორი</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
                     <ListBoxItem Name="FlatPercentageListBoxItem">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe UI" FontSize="16" Foreground= "#C67511" Text=" &#x17BE;" />
-                            <TextBlock FontSize="11" TextWrapping="Wrap" Foreground= "#C67511" Margin="20,0,0,0">ბრტყელი პროცნეტის კალკულატორი</TextBlock>
+                            <TextBlock FontFamily="Segoe UI" 
+                                       FontSize="16" 
+                                       Foreground= "#5BEABF" 
+                                       Text=" &#x17BE;" />
+                            <TextBlock FontSize="11" 
+                                       TextWrapping="Wrap" 
+                                       Foreground= "#5BEABF" 
+                                       Margin="20,0,0,0">ბრტყელი პროცნეტის კალკულატორი</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
                     
@@ -70,6 +93,7 @@
             <SplitView.Content>
                 <Frame Name="MyFrame" ></Frame>
             </SplitView.Content>
+            
 
         </SplitView>
         
