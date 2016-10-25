@@ -47,6 +47,8 @@
                 <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველთვიური გადასახადი</TextBlock>
 
                 <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" Text="{Binding MonthlyPayment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                
+                <Button FontSize="13" Margin="10,0" Foreground="#5BEABF" Background="#0F0F0F" HorizontalAlignment="Center" Click="Button_Click">გრაფიკის გამოტანა</Button>
 
                 <GridView Name="GridView1"
                           Margin="10,5"

@@ -28,7 +28,6 @@ namespace BCLoanCalculator
         public EfficientLoan()
         {
             this.InitializeComponent();
-            PMTTB.Text = " 4";
         }
     }
 }

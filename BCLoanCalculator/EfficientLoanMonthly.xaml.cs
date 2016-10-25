@@ -23,9 +23,15 @@ namespace BCLoanCalculator
     /// </summary>
     public sealed partial class EfficientLoanMonthly : Page
     {
+       
         public EfficientLoanMonthly()
         {
-            this.InitializeComponent();
+            this.InitializeComponent();           
+        }
+        public void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoanData Data = new LoanData();           
+            Data.GraphMonthly();
         }
     }
 }
