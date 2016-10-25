@@ -279,7 +279,7 @@ namespace BCLoanCalculator
             double rate = DailyInterest * CountDaysForMonthly() / (100 * TermMonthly);
             if (rate == 0)
             {
-                rate = DailyInterest * TermFlat * 30 / (100 * TermMonthly);
+                rate = DailyInterest * TermMonthly * 30 / (100 * TermMonthly);
             }
             double pmt = LoanAmount * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), TermMonthly))));
             return Math.Round(pmt, 2, MidpointRounding.AwayFromZero);
@@ -307,7 +307,7 @@ namespace BCLoanCalculator
             double rate = DailyInterest * CountDaysForMonthly() / (100 * TermMonthly);
             if (rate == 0)
             {
-                rate = DailyInterest * TermFlat * 30 / (100 * TermMonthly);
+                rate = DailyInterest * TermMonthly * 30 / (100 * TermMonthly);
             }
             double nper = -Math.Log((1 - rate * LoanAmount / MonthlyPayment), Math.E) / Math.Log((1 + rate), Math.E);
             return Math.Round(nper);
