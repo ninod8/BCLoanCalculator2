@@ -30,7 +30,7 @@ namespace BCLoanCalculator
         }
         public void Button_Click(object sender, RoutedEventArgs e)
         {
-            LoanData Data = new LoanData();           
+            LoanData Data = new LoanData();
             Data.GraphMonthly();
         }
     }

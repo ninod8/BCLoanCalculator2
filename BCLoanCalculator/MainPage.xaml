@@ -32,9 +32,19 @@
             <TextBlock VerticalAlignment="Center"
                        Name="TitleTextBlock"
                        RelativePanel.RightOf="HamburgerButton"
-                       FontSize="13"
+                       FontSize="12"
                        Foreground="#5BEABF"
-                       Margin="20,5,0,0"/>
+                       Margin="10,5"/>
+            <Button Name="Clear"
+                    RelativePanel.AlignRightWithPanel="True"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="16" 
+                    Content="&#xED60;"
+                    Click="Clear_Click"
+                    Foreground="#5BEABF"
+                    Width="45"
+                    Height="45"
+                />
         </RelativePanel>
         
         <SplitView Grid.Row="1" 

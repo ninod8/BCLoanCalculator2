@@ -19,19 +19,11 @@
         <ScrollViewer HorizontalScrollBarVisibility="Hidden"
                       VerticalScrollBarVisibility="Hidden">
             <StackPanel Margin="0,10">
-
-                <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველდღიური საპროცენტო განაკვეთი (%)</TextBlock>
-
-                <TextBox BorderThickness="0" Name="DailyPercentTB" Margin="10,5" Text="{Binding DailyInterest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-
-                <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">წლიური საპროცენტო განაკვეთი (%)</TextBlock>
-
-                <TextBox BorderThickness="0" Name="AnnualPercentTB" Margin="10,5" Text="{Binding AnnualInterest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
+                
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის თანხა</TextBlock>
 
                 <TextBox Margin="10,5" BorderThickness="0" Name="LoanAmountTB" Text="{Binding LoanAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-
+                
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის ვადა (-დან)</TextBlock>
 
                 <DatePicker Name="DatePicker11" FontSize="11" Margin="10" Date="{Binding StartDateMonthly, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -43,6 +35,14 @@
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის ვადა (თვე)</TextBlock>
 
                 <TextBox BorderThickness="0" Name="TermsOfLoanTB"  Margin="10,5" VerticalAlignment="Center" Text="{Binding TermMonthly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველთვიური საპროცენტო განაკვეთი (%)</TextBlock>
+
+                <TextBox BorderThickness="0" Name="DailyPercentTB" Margin="10,5" Text="{Binding MonthlyInterest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">წლიური საპროცენტო განაკვეთი (%)</TextBlock>
+
+                <TextBox BorderThickness="0" Name="AnnualPercentTB" Margin="10,5" Text="{Binding AnnualInterestForMonthly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველთვიური გადასახადი</TextBlock>
 
@@ -67,18 +67,20 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="30"/>
                                     <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="110"/>
                                     <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="80"/>
                                     <ColumnDefinition Width="80"/>
                                     <ColumnDefinition Width="110"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Margin="7"  FontSize ="10"  Grid.Column="0" Text="{Binding PaymentNumber}"/>
-                                <TextBlock Margin="7"  FontSize ="10"  Grid.Column="1" Text="{Binding Date}"/>
+                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="0" Text="{Binding PaymentNumber}"/>
+                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="1" Text="{Binding Date}"/>
                                 <TextBlock Margin="7" FontSize ="10"  Grid.Column="2" Text="{Binding Payment}"/>
-                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="3" Text="{Binding Principal}"/>
-                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="4" Text="{Binding Interest}"/>
-                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="5" Text="{Binding StartingBalance}"/>
+                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="4" Text="{Binding Principal}"/>
+                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="5" Text="{Binding Interest}"/>
+                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="3" Text="{Binding StartingBalance}"/>
+                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="6" Text="{Binding EndingBalance}"/>
                             </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
