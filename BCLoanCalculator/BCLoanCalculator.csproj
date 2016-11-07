@@ -102,6 +102,9 @@
     <Compile Include="EfficientLoan.xaml.cs">
       <DependentUpon>EfficientLoan.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FlatDaily.xaml.cs">
+      <DependentUpon>FlatDaily.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FlatPercentage.xaml.cs">
       <DependentUpon>FlatPercentage.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EfficientLoan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlatDaily.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

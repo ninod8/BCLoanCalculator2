@@ -39,7 +39,7 @@
                     RelativePanel.AlignRightWithPanel="True"
                     FontFamily="Segoe MDL2 Assets"
                     FontSize="16" 
-                    Content="&#xED60;"
+                    Content="&#xE94F;"
                     Click="Clear_Click"
                     Foreground="#5BEABF"
                     Width="45"
@@ -70,7 +70,7 @@
                             <TextBlock FontSize="11" 
                                        TextWrapping="Wrap" 
                                        Foreground= "#5BEABF" 
-                                       Margin="20,0,0,0">ყოველდღიური გადახდის კალკულატორი</TextBlock>
+                                       Margin="20,0,0,0">ყოველდღიური გადახდა</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
                     <ListBoxItem Name="PMTMonthlyListBoxItem" >
@@ -82,7 +82,7 @@
                             <TextBlock FontSize="11" 
                                        TextWrapping="Wrap" 
                                        Foreground= "#5BEABF" 
-                                       Margin="20,0,0,0">ყოველთვიური გადახდის კალკულატორი</TextBlock>
+                                       Margin="20,0,0,0">ყოველთვიური გადახდა</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
                     <ListBoxItem Name="FlatPercentageListBoxItem">
@@ -94,10 +94,22 @@
                             <TextBlock FontSize="11" 
                                        TextWrapping="Wrap" 
                                        Foreground= "#5BEABF" 
-                                       Margin="20,0,0,0">ბრტყელი პროცნეტის კალკულატორი</TextBlock>
+                                       Margin="20,0,0,0">ყოველთვიური ბრტყელი პროცნეტი</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
-                    
+                    <ListBoxItem Name="FlatDailyListBoxItem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe UI" 
+                                       FontSize="16" 
+                                       Foreground= "#5BEABF" 
+                                       Text=" &#x178E;" />
+                            <TextBlock FontSize="11" 
+                                       TextWrapping="Wrap" 
+                                       Foreground= "#5BEABF" 
+                                       Margin="20,0,0,0">ყოველდღიური ბრტყელი პროცნეტი</TextBlock>
+                        </StackPanel>
+                    </ListBoxItem>
+
                 </ListBox>
             </SplitView.Pane>
             <SplitView.Content>

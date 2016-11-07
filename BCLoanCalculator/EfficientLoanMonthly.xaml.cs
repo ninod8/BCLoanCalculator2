@@ -31,7 +31,75 @@ namespace BCLoanCalculator
         public void Button_Click(object sender, RoutedEventArgs e)
         {
             LoanData Data = new LoanData();
+            
             Data.GraphMonthly();
         }
+
+        private void TermsOfLoanTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                DatePicker12.Date = DatePicker11.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+            }
+            catch (Exception)
+            {
+                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                throw;
+            }
+            
+        }
+        #region PrivateVariables
+        private string _loanAmountValue;
+        private DateTime _datePicker1Value;
+        private DateTime _datePicker2Value;
+        private string _termsOfLoan;
+        private string _monthlyInterestVlaue;
+        private string _annualInterestValue;
+        private string _paymentValue;
+        #endregion
+
+        public string LoanAmountVlaue
+        {
+            get { return _loanAmountValue; }
+            set { _loanAmountValue = LoanAmountTB.Text; }
+        }
+
+        public DateTime DatePicker1Value
+        {
+            get { return _datePicker1Value; }
+            set { _datePicker1Value = DatePicker11.Date.DateTime; }
+        }
+
+        public DateTime DatePicker2Value
+        {
+            get { return _datePicker2Value; }
+            set { _datePicker2Value = DatePicker12.Date.DateTime; }
+        }
+
+        public string TermsOfLoan
+        {
+            get { return _termsOfLoan; }
+            set { _termsOfLoan = TermsOfLoanTB.Text; }
+        }
+
+        public string MonthlyInterestValue
+        {
+            get { return _monthlyInterestVlaue; }
+            set { _monthlyInterestVlaue = DailyPercentTB.Text; }
+        }
+
+        public string AnnualInterestVlaue
+        {
+            get { return _annualInterestValue; }
+            set { _annualInterestValue = AnnualPercentTB.Text; }
+        }
+
+        public string PaymentValue
+        {
+            get { return _paymentValue; }
+            set { _paymentValue = PMTTB.Text; }
+        }
+
+
     }
 }

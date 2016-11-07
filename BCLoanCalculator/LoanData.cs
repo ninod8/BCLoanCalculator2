@@ -20,9 +20,12 @@ namespace BCLoanCalculator
             _startDateMonthly = DateTime.Today.Date;
             _endDateFlat = DateTime.Today.Date;
             _startDateFlat = DateTime.Today.Date;
+            _startDateFlatDaily = DateTime.Today.Date;
+            _endDateFlatDaily = DateTime.Today.Date;
             Items = new ObservableCollection<GridItem>();
             ItemsMonthly = new ObservableCollection<GridItem>();
             FlatPercentageItems = new ObservableCollection<GridItem>();
+            FlatDailyItems = new ObservableCollection<GridItem>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -40,16 +43,24 @@ namespace BCLoanCalculator
         private DateTime _endDateDaily;
         private double _termDaily;
         private double _dailyPayment;
+        private DateTime _releaseDate;
         private DateTime _startDateMonthly;
         private DateTime _endDateMonthly;
         private double _termMonthly;
         private double _monthlyPayment;
         private DateTime _endDateFlat;
         private DateTime _startDateFlat;
+        private DateTime _releaseDateFlat;
         private double _termFlat;
         private double _monthlyPaymentFlat;
-        #endregion
+        private double _dailyPaymentFlat;
+        private DateTime _endDateFlatDaily;
+        private DateTime _startDateFlatDaily;
+        private double _termFlatDaily;
+        private double _annualInterestForMonthly;
         private double _monthlyInterest;
+
+        #endregion
 
         public double MonthlyInterest
         {
@@ -64,8 +75,6 @@ namespace BCLoanCalculator
             }
         }
 
-        private double _annualInterestForMonthly;
-
         public double AnnualInterestForMonthly
         {
             get { return _annualInterestForMonthly; }
@@ -73,6 +82,8 @@ namespace BCLoanCalculator
             {
                 _annualInterestForMonthly = value;
                 _monthlyInterest = Math.Round(value/12,3,MidpointRounding.AwayFromZero);
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterest"));
             }
         }
 
@@ -139,6 +150,12 @@ namespace BCLoanCalculator
             }
         }
 
+        public DateTime ReleaseDate //add a method
+        {
+            get { return _releaseDate; }
+            set { _releaseDate = value; }
+        }
+
         public DateTime StartDateMonthly
         {
             get { return _startDateMonthly; }
@@ -163,6 +180,12 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
             }
+        }
+
+        public DateTime ReleaseDateFlat //add a method
+        {
+            get { return _releaseDateFlat; }
+            set { _releaseDateFlat = value; }
         }
 
         public DateTime StartDateFlat
@@ -191,6 +214,30 @@ namespace BCLoanCalculator
             }
         }
 
+        public DateTime StartdateFlatDaily
+        {
+            get { return _startDateFlatDaily; }
+            set
+            {
+                _startDateFlatDaily = value;
+                TermFlatDaily = CountDaysForFlatDaily();
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlatDaily"));
+            }
+        }
+
+        public DateTime EndDateFlatDaily
+        {
+            get { return _endDateFlatDaily; }
+            set
+            {
+                _endDateFlatDaily = value;
+                TermFlatDaily = CountDaysForFlatDaily();
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlatDaily"));
+            }
+        }
+
         public double TermDaily
         {
             get { return _termDaily; }
@@ -198,9 +245,9 @@ namespace BCLoanCalculator
             {
                 _termDaily = value;
                 _dailyPayment = PMTDaily();
-                DateTime today = DateTime.Now;
-                _endDateDaily = today.AddDays(TermDaily);
-                GraphDaily();
+                //DateTime today = DateTime.Now;
+               // _endDateDaily = today.AddDays(TermDaily);
+              GraphDaily();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
             }
@@ -232,6 +279,19 @@ namespace BCLoanCalculator
             }
         }
 
+        public double TermFlatDaily
+        {
+            get { return _termFlatDaily; }
+            set
+            {
+                _termFlatDaily = value;
+                _dailyPaymentFlat = FlatDaily();
+                GraphFlatPercentageDaily();
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPaymentFlat"));
+            }
+        }
+
         public double DailyPayment
         {
             get { return _dailyPayment; }
@@ -239,7 +299,7 @@ namespace BCLoanCalculator
             {
                 _dailyPayment = value;
                 _termDaily = NperDaily();
-                GraphDaily();
+                //GraphDaily();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
             }
@@ -271,6 +331,19 @@ namespace BCLoanCalculator
             }
         }
 
+        public double DailyPaymentFlat
+        {
+            get { return _dailyPaymentFlat; }
+            set
+            {
+                _dailyPaymentFlat = value;
+                _termFlatDaily = NperDailyFlat();
+                GraphFlatPercentageDaily();
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPaymentFlat"));
+            }
+        }
+
         public double CountDays()
         {
             return (EndDateDaily - StartDateDaily).Days;
@@ -296,6 +369,11 @@ namespace BCLoanCalculator
             return (EndDateFlat.Month - StartDateFlat.Month) + 12 * (EndDateFlat.Year - StartDateFlat.Year);
         }
 
+        public double CountDaysForFlatDaily()
+        {
+            return (EndDateFlatDaily - StartdateFlatDaily).Days;
+        }
+
         public double PMTDaily()
         {
             double rate = DailyInterest / 100;
@@ -316,12 +394,19 @@ namespace BCLoanCalculator
 
         public double FlatMonthly()
         {
-            double rate = DailyInterest * CountDaysForFlat() / 100;
+            double rate = ((AnnualInterestForMonthly / 365) * (CountDaysForFlat()) / 100);
             if (rate == 0)
             {
-                rate = DailyInterest * TermFlat * 30 / 100;
+                rate = (AnnualInterestForMonthly / 365) * TermFlat * 30 / 100;
             }
             double flatPayment = (LoanAmount + (rate * LoanAmount)) / TermFlat;
+            return Math.Round(flatPayment, 2, MidpointRounding.AwayFromZero);
+        }
+
+        public double FlatDaily()
+        {
+            double rate = DailyInterest * CountDaysForFlatDaily() / 100;
+            double flatPayment = (LoanAmount + (rate * LoanAmount)) / TermFlatDaily;
             return Math.Round(flatPayment, 2, MidpointRounding.AwayFromZero);
         }
 
@@ -353,6 +438,13 @@ namespace BCLoanCalculator
             double nper = LoanAmount * (rate + 1) / MonthlyPaymentFlat;
             return Math.Round(nper);
         }
+        
+        public double NperDailyFlat()
+        {
+            double rate = DailyInterest * CountDaysForFlatDaily() / 100;
+            double nper = LoanAmount * (rate + 1) / DailyPaymentFlat;
+            return Math.Round(nper);
+        }
 
         public void GraphDaily()
         {
@@ -366,8 +458,9 @@ namespace BCLoanCalculator
             for (int i = 1; i <= TermDaily; i++)
             {
                 DateTime dateTime = StartDateDaily.AddDays(i);
-                double principal = PMTDaily() - amount * dailyInterest;
-                double interest = amount * dailyInterest;
+                double interest = Math.Round(amount * dailyInterest,2, MidpointRounding.AwayFromZero);
+                double principal = Math.Round(PMTDaily() - interest, 2, MidpointRounding.AwayFromZero);
+                //double interest = 
                 balance -= principal;
                 Items.Add(new GridItem() { PaymentNumber = i.ToString(), Date = dateTime.Date.ToString("dd/MM/yyyy"), Payment = DailyPayment.ToString(), EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(), Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(), Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(), StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString() });
                 amount -= principal;
@@ -375,7 +468,7 @@ namespace BCLoanCalculator
             }
         }
 
-        public void GraphMonthly() //needs corrections
+        public void GraphMonthly()
         {
             ItemsMonthly.Clear();
             double amount = LoanAmount;
@@ -398,11 +491,11 @@ namespace BCLoanCalculator
             }
         }
 
-        public void GraphFlatPercentageMonthly()  //needs corrections
+        public void GraphFlatPercentageMonthly()
         {
             FlatPercentageItems.Clear();
             double amount = LoanAmount;
-            double rate = DailyInterest * CountDaysForFlat() / 100;
+            double rate = ((AnnualInterestForMonthly / 365) * (CountDaysForFlat()) / 100);
             if (rate == 0)
             {
                 rate = DailyInterest * TermFlat * 30 / 100;
@@ -412,7 +505,7 @@ namespace BCLoanCalculator
             for (int i = 1; i <= TermFlat; i++)
             {
                 DateTime dateTime = StartDateFlat.AddMonths(i);
-                double principal = LoanAmount / TermFlat;
+                double principal = Math.Round((LoanAmount / TermFlat),2,MidpointRounding.AwayFromZero);
                 double interest = LoanAmount * rate / TermFlat;
                 FlatPercentageItems.Add(new GridItem() { PaymentNumber = i.ToString(), Date = dateTime.Date.ToString("dd/MM/yyyy"), Payment = FlatMonthly().ToString(), Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(), Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(), StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString() });
                 amount -= principal;
@@ -420,6 +513,26 @@ namespace BCLoanCalculator
             }
 
         }
+
+        public void GraphFlatPercentageDaily()
+        {
+            FlatDailyItems.Clear();
+            double amount = LoanAmount;
+            double rate = DailyInterest * CountDays() / 100;
+            FlatDailyItems.Add(new GridItem() { Date = "თარიღი", EndingBalance = "საბოლოო ბალანსი", Interest = "პროცენტი", Payment = "გადასახადი", PaymentNumber = "#", Principal = "ძირი", StartingBalance = "საწყისი ბალანსი" });
+
+            for (int i = 1; i <= TermFlatDaily; i++)
+            {
+                DateTime dateTime = StartDateFlat.AddDays(i);
+                double principal = LoanAmount / TermFlatDaily;
+                double interest = LoanAmount * rate / TermFlatDaily;
+                FlatDailyItems.Add(new GridItem() { PaymentNumber = i.ToString(), Date = dateTime.Date.ToString("dd/MM/yyyy"), Payment = FlatDaily().ToString(), Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(), Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(), StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString() });
+                amount -= principal;
+                OnPropertyChanged(new PropertyChangedEventArgs("FlatDailyItems"));
+            }
+        }
+
+        public ObservableCollection<GridItem> FlatDailyItems { get; set; }
 
         public ObservableCollection<GridItem> FlatPercentageItems { get; set; }
 

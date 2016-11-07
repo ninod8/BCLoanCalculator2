@@ -20,9 +20,9 @@ namespace BCLoanCalculator
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class FlatPercentage : Page
+    public sealed partial class FlatDaily : Page
     {
-        public FlatPercentage()
+        public FlatDaily()
         {
             this.InitializeComponent();
         }
@@ -31,19 +31,20 @@ namespace BCLoanCalculator
         {
             try
             {
-                DatePicker2.Date = DatePicker1.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToInt32(TermsOfLoanTB.Text));
             }
             catch (Exception)
             {
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-            }         
+
+            }
         }
         #region PrivateVariables
         private string _loanAmountValue;
         private DateTime _datePicker1Value;
         private DateTime _datePicker2Value;
         private string _termsOfLoanValue;
-        private string _monthlyInterestValue;
+        private string _dailyInterestValue;
         private string _annualInterestValue;
         private string _paymentValue;
         #endregion
@@ -72,10 +73,10 @@ namespace BCLoanCalculator
             set { _termsOfLoanValue = TermsOfLoanTB.Text; }
         }
 
-        public string MonthlyInterestValue
+        public string DailyInterestValue
         {
-            get { return _monthlyInterestValue; }
-            set { _monthlyInterestValue = DailyPercentTB.Text; }
+            get { return _dailyInterestValue; }
+            set { _dailyInterestValue = DailyPercentTB.Text; }
         }
 
         public string AnnualInterestValue
@@ -89,5 +90,6 @@ namespace BCLoanCalculator
             get { return _paymentValue; }
             set { _paymentValue = PMTTB.Text; }
         }
+
     }
 }

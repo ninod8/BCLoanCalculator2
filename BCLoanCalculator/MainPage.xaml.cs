@@ -22,12 +22,13 @@ namespace BCLoanCalculator
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        LoanData Data = new LoanData();
         public MainPage()
         {
             this.InitializeComponent();
-        //    TitleTextBlock.Text = "ყოველდღიური გადახდა";
             MyFrame.Navigate(typeof(EfficientLoan));
             PMTListBoxItem.IsSelected = true;
+            TitleTextBlock.Text = "ყოველდღიური გადახდა";
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
@@ -41,7 +42,7 @@ namespace BCLoanCalculator
             {
 
                 MyFrame.Navigate(typeof(EfficientLoan));
-                TitleTextBlock.Text = "ყოველდღიური გადახდია" ;
+                TitleTextBlock.Text = "ყოველდღიური გადახდა";
             }
             if (PMTMonthlyListBoxItem.IsSelected)
             {
@@ -51,14 +52,65 @@ namespace BCLoanCalculator
             if (FlatPercentageListBoxItem.IsSelected)
             {
                 MyFrame.Navigate(typeof(FlatPercentage));
-                TitleTextBlock.Text = "ბრტყელი პროცნეტი";
+                TitleTextBlock.Text = "ყოველთვიური ბრტყელი პროცნეტი";
             }
-            
-        }
+            if (FlatDailyListBoxItem.IsSelected)
+            {
+                MyFrame.Navigate(typeof(FlatDaily));
+                TitleTextBlock.Text = "ყოველდღიური ბრტყელი პროცნეტი";
+            }
 
+        }
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
+            if (PMTListBoxItem.IsSelected)
+            {
+                EfficientLoan el = new EfficientLoan();
+                MyFrame.Navigate(typeof(EfficientLoan), el);
+                el.LoanAmountValue = String.Empty;
+                el.DatePickerValue = DateTime.Now;
+                el.DateTimePicker2Value = DateTime.Now;
+                el.TermValue = String.Empty;
+                el.DailyInterestValue = String.Empty;
+                el.AnnualInterest = String.Empty;
+                el.PMTValue = String.Empty;
+            }
+            if (PMTMonthlyListBoxItem.IsSelected)
+            {
+                EfficientLoanMonthly elm = new EfficientLoanMonthly();
+                MyFrame.Navigate(typeof(EfficientLoanMonthly), elm);
+                elm.LoanAmountVlaue = String.Empty;
+                elm.DatePicker1Value = DateTime.Today.Date;
+                elm.DatePicker2Value = DateTime.Today.Date;
+                elm.TermsOfLoan = String.Empty;
+                elm.MonthlyInterestValue = String.Empty;
+                elm.AnnualInterestVlaue = String.Empty;
+                elm.PaymentValue = String.Empty;
+            }
+            if (FlatDailyListBoxItem.IsSelected)
+            {
+                FlatDaily fd = new FlatDaily();
+                MyFrame.Navigate(typeof(FlatDaily), fd);
+                fd.LoanAmountValue = String.Empty;
+                fd.Datepicker1Value = DateTime.Today.Date;
+                fd.DatePicker2Value = DateTime.Today.Date;
+                fd.TermsOfLoan = String.Empty;
+                fd.DailyInterestValue = String.Empty;
+                fd.AnnualInterestValue = String.Empty;
+                fd.PaymentValue = String.Empty;
+            }
+            if (FlatPercentageListBoxItem.IsSelected)
+            {
+                FlatDaily fm = new FlatDaily();
+                MyFrame.Navigate(typeof(FlatDaily), fm);
+                fm.LoanAmountValue = String.Empty;
+                fm.Datepicker1Value = DateTime.Today.Date;
+                fm.DatePicker2Value = DateTime.Today.Date;
+                fm.TermsOfLoan = String.Empty;
+                fm.DailyInterestValue = String.Empty;
+                fm.AnnualInterestValue = String.Empty;
+                fm.PaymentValue = String.Empty;
+            }
         }
     }
 }
-
