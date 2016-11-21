@@ -40,6 +40,7 @@ namespace BCLoanCalculator
             try
             {
                 DatePicker12.Date = DatePicker11.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {

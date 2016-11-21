@@ -14,6 +14,8 @@ namespace BCLoanCalculator
     {
         public LoanData()
         {
+            //EfficientLoan ef = new EfficientLoan();
+            //_loanAmount = Convert.ToDouble(ef.LoanAmountValue);
             _startDateDaily = DateTime.Today.Date;
             _endDateDaily = DateTime.Today.Date;
             _endDateMonthly = DateTime.Today.Date;
@@ -22,10 +24,16 @@ namespace BCLoanCalculator
             _startDateFlat = DateTime.Today.Date;
             _startDateFlatDaily = DateTime.Today.Date;
             _endDateFlatDaily = DateTime.Today.Date;
+            _releaseDate = DateTime.Today.Date;
+            _releaseDateFlat = DateTime.Today.Date;
             Items = new ObservableCollection<GridItem>();
+            ItemsSum = new ObservableCollection<GridItem>();
             ItemsMonthly = new ObservableCollection<GridItem>();
+            ItemsMonthlySum = new ObservableCollection<GridItem>();
             FlatPercentageItems = new ObservableCollection<GridItem>();
+            FlatPercentageItemsSum = new ObservableCollection<GridItem>();
             FlatDailyItems = new ObservableCollection<GridItem>();
+            FlatDailyItemsSum = new ObservableCollection<GridItem>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -36,84 +44,87 @@ namespace BCLoanCalculator
         }
 
         #region Private Variables
-        private double _dailyInterest;
-        private double _annualInterest;
-        private double _loanAmount;
+        private string _interestOnly;
+        private string _dailyInterest;
+        private string _annualInterest;
+        private string _loanAmount;
         private DateTime _startDateDaily;
         private DateTime _endDateDaily;
-        private double _termDaily;
-        private double _dailyPayment;
+        private string _termDaily;
+        private string _dailyPayment;
         private DateTime _releaseDate;
         private DateTime _startDateMonthly;
         private DateTime _endDateMonthly;
-        private double _termMonthly;
-        private double _monthlyPayment;
+        private string _termMonthly;
+        private string _monthlyPayment;
         private DateTime _endDateFlat;
         private DateTime _startDateFlat;
         private DateTime _releaseDateFlat;
-        private double _termFlat;
-        private double _monthlyPaymentFlat;
-        private double _dailyPaymentFlat;
+        private string _termFlat;
+        private string _monthlyPaymentFlat;
+        private string _dailyPaymentFlat;
         private DateTime _endDateFlatDaily;
         private DateTime _startDateFlatDaily;
-        private double _termFlatDaily;
-        private double _annualInterestForMonthly;
-        private double _monthlyInterest;
+        private string _termFlatDaily;
+        private string _annualInterestForMonthly;
+        private string _monthlyInterest;
 
         #endregion
 
-        public double MonthlyInterest
+        public string MonthlyInterest
         {
             get { return _monthlyInterest; }
             set
             {
                 _monthlyInterest = value;
-                _annualInterestForMonthly = Math.Round(value * 12, 3, MidpointRounding.AwayFromZero);
-
+                _annualInterestForMonthly = Math.Round(Convert.ToDouble(value) * 12, 3, MidpointRounding.AwayFromZero).ToString();
+                _dailyInterest = (Convert.ToDouble(_annualInterestForMonthly) / 365).ToString();
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterest"));
             }
         }
 
-        public double AnnualInterestForMonthly
+        public string AnnualInterestForMonthly
         {
             get { return _annualInterestForMonthly; }
             set
             {
                 _annualInterestForMonthly = value;
-                _monthlyInterest = Math.Round(value/12,3,MidpointRounding.AwayFromZero);
+                _monthlyInterest = Math.Round(Convert.ToDouble(value) / 12, 3, MidpointRounding.AwayFromZero).ToString();
+                _dailyInterest = (Convert.ToDouble(_annualInterestForMonthly) / 365).ToString();
+
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterest"));
             }
         }
 
-        public double DailyInterest
+        public string DailyInterest
         {
             get { return _dailyInterest; }
             set
             {
                 _dailyInterest = value;
-                _annualInterest = Math.Round(value * 365, 3, MidpointRounding.AwayFromZero);
+                _annualInterest = Math.Round(Convert.ToDouble(value) * 365, 3, MidpointRounding.AwayFromZero).ToString();
 
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterest"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterest"));
             }
         }
 
-        public double AnnualInterest
+        public string AnnualInterest
         {
             get { return _annualInterest; }
             set
             {
                 _annualInterest = value;
-                _dailyInterest = Math.Round(value / 365,3,MidpointRounding.AwayFromZero);
+                _dailyInterest = Math.Round(Convert.ToDouble(value) / 365, 3, MidpointRounding.AwayFromZero).ToString();
 
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterest"));
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterest"));
             }
         }
 
-        public double LoanAmount
+        public string LoanAmount
         {
             get { return _loanAmount; }
             set
@@ -130,7 +141,7 @@ namespace BCLoanCalculator
             set
             {
                 _startDateDaily = value;
-                TermDaily = CountDays();
+                TermDaily = CountDays().ToString();
 
                 OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
@@ -143,7 +154,7 @@ namespace BCLoanCalculator
             set
             {
                 _endDateDaily = value;
-                TermDaily = CountDays();
+                TermDaily = CountDays().ToString();
 
                 OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
@@ -153,7 +164,11 @@ namespace BCLoanCalculator
         public DateTime ReleaseDate //add a method
         {
             get { return _releaseDate; }
-            set { _releaseDate = value; }
+            set
+            {
+                _releaseDate = value;
+
+            }
         }
 
         public DateTime StartDateMonthly
@@ -162,7 +177,7 @@ namespace BCLoanCalculator
             set
             {
                 _startDateMonthly = value;
-                TermMonthly = CountMonths();
+                TermMonthly = CountMonths().ToString();
 
                 OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
@@ -175,7 +190,7 @@ namespace BCLoanCalculator
             set
             {
                 _endDateMonthly = value;
-                TermMonthly = CountMonths();
+                TermMonthly = CountMonths().ToString();
 
                 OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
@@ -185,7 +200,10 @@ namespace BCLoanCalculator
         public DateTime ReleaseDateFlat //add a method
         {
             get { return _releaseDateFlat; }
-            set { _releaseDateFlat = value; }
+            set
+            {
+                _releaseDateFlat = value;
+            }
         }
 
         public DateTime StartDateFlat
@@ -194,7 +212,7 @@ namespace BCLoanCalculator
             set
             {
                 _startDateFlat = value;
-                TermFlat = CountMonthsForFlat();
+                TermFlat = CountMonthsForFlat().ToString();
 
                 OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
                 OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
@@ -207,7 +225,7 @@ namespace BCLoanCalculator
             set
             {
                 _endDateFlat = value;
-                TermFlat = CountMonthsForFlat();
+                TermFlat = CountMonthsForFlat().ToString();
 
                 OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
@@ -220,7 +238,7 @@ namespace BCLoanCalculator
             set
             {
                 _startDateFlatDaily = value;
-                TermFlatDaily = CountDaysForFlatDaily();
+                TermFlatDaily = CountDaysForFlatDaily().ToString();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlatDaily"));
             }
@@ -232,13 +250,13 @@ namespace BCLoanCalculator
             set
             {
                 _endDateFlatDaily = value;
-                TermFlatDaily = CountDaysForFlatDaily();
+                TermFlatDaily = CountDaysForFlatDaily().ToString();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlatDaily"));
             }
         }
 
-        public double TermDaily
+        public string TermDaily
         {
             get { return _termDaily; }
             set
@@ -246,14 +264,15 @@ namespace BCLoanCalculator
                 _termDaily = value;
                 _dailyPayment = PMTDaily();
                 //DateTime today = DateTime.Now;
-               // _endDateDaily = today.AddDays(TermDaily);
-              GraphDaily();
+                // _endDateDaily = today.AddDays(TermDaily);
+                GraphDaily();
+                SumDaily();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
             }
         }
 
-        public double TermMonthly
+        public string TermMonthly
         {
             get { return _termMonthly; }
             set
@@ -261,12 +280,13 @@ namespace BCLoanCalculator
                 _termMonthly = value;
                 _monthlyPayment = PMTMonthly();
                 GraphMonthly();
+                SumMonthly();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
             }
         }
 
-        public double TermFlat
+        public string TermFlat
         {
             get { return _termFlat; }
             set
@@ -279,7 +299,7 @@ namespace BCLoanCalculator
             }
         }
 
-        public double TermFlatDaily
+        public string TermFlatDaily
         {
             get { return _termFlatDaily; }
             set
@@ -287,12 +307,13 @@ namespace BCLoanCalculator
                 _termFlatDaily = value;
                 _dailyPaymentFlat = FlatDaily();
                 GraphFlatPercentageDaily();
+                FlatSum();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyPaymentFlat"));
             }
         }
 
-        public double DailyPayment
+        public string DailyPayment
         {
             get { return _dailyPayment; }
             set
@@ -305,7 +326,7 @@ namespace BCLoanCalculator
             }
         }
 
-        public double MonthlyPayment
+        public string MonthlyPayment
         {
             get { return _monthlyPayment; }
             set
@@ -318,20 +339,20 @@ namespace BCLoanCalculator
             }
         }
 
-        public double MonthlyPaymentFlat
+        public string MonthlyPaymentFlat
         {
             get { return _monthlyPaymentFlat; }
             set
             {
                 _monthlyPaymentFlat = value;
-                _termFlat = NperMonthlyFlat();
+                //_termFlat = NperMonthlyFlat();
                 GraphFlatPercentageMonthly();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
             }
         }
 
-        public double DailyPaymentFlat
+        public string DailyPaymentFlat
         {
             get { return _dailyPaymentFlat; }
             set
@@ -344,189 +365,429 @@ namespace BCLoanCalculator
             }
         }
 
-        public double CountDays()
+        public int CounterForFlat()
+        {
+            return (StartDateFlat - ReleaseDateFlat).Days;
+        }
+
+        public int CountDays()
         {
             return (EndDateDaily - StartDateDaily).Days;
         }
 
-        public double CountDaysForMonthly()
+        public int CountDaysForMonthly()
         {
             return (EndDateMonthly - StartDateMonthly).Days;
         }
 
-        public double CountDaysForFlat()
+        public int CountDaysForFlat()
         {
             return (EndDateFlat - StartDateFlat).Days;
         }
 
-        public double CountMonths()
+        public int CountMonths()
         {
             return (EndDateMonthly.Month - StartDateMonthly.Month) + 12 * (EndDateMonthly.Year - StartDateMonthly.Year);
         }
 
-        public double CountMonthsForFlat()
+        public int CountMonthsForFlat()
         {
-            return (EndDateFlat.Month - StartDateFlat.Month) + 12 * (EndDateFlat.Year - StartDateFlat.Year);
+            return (EndDateFlat.Month - StartDateFlat.Month) + 12 * (EndDateFlat.Year - StartDateFlat.Year) + 1;
         }
 
-        public double CountDaysForFlatDaily()
+        public int CountDaysForFlatDaily()
         {
             return (EndDateFlatDaily - StartdateFlatDaily).Days;
         }
 
-        public double PMTDaily()
+        public string PMTDaily()
         {
-            double rate = DailyInterest / 100;
-            double pmt = LoanAmount * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), TermDaily))));
-            return Math.Round(pmt, 2, MidpointRounding.AwayFromZero);
+            double rate = Convert.ToDouble(DailyInterest) / 100;
+            double pmt = Convert.ToDouble(LoanAmount) * Convert.ToDouble(rate) / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Convert.ToDouble(TermDaily) - Convert.ToDouble(InterestOnly)))));
+            return pmt.ToString();
         }
 
-        public double PMTMonthly()
+        public string PMTMonthly()
         {
-            double rate = DailyInterest * CountDaysForMonthly() / (100 * TermMonthly);
+            double rate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
             if (rate == 0)
             {
-                rate = DailyInterest * TermMonthly * 30 / (100 * TermMonthly);
+                rate = Convert.ToDouble(DailyInterest) * Convert.ToDouble(TermMonthly) * 30 / (100 * Convert.ToDouble(TermMonthly));
             }
-            double pmt = LoanAmount * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), TermMonthly))));
-            return Math.Round(pmt, 2, MidpointRounding.AwayFromZero);
+            double pmt = Convert.ToDouble(LoanAmount) * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Convert.ToDouble(TermMonthly) - Convert.ToDouble(InterestOnly)))));
+            return pmt.ToString();
         }
 
-        public double FlatMonthly()
+        public string FlatMonthly()
         {
-            double rate = ((AnnualInterestForMonthly / 365) * (CountDaysForFlat()) / 100);
+            double rate = ((Convert.ToDouble(AnnualInterestForMonthly) / 365) * (CountDaysForFlat()) / 100);
             if (rate == 0)
             {
-                rate = (AnnualInterestForMonthly / 365) * TermFlat * 30 / 100;
+                rate = (Convert.ToDouble(AnnualInterestForMonthly) / 365) * Convert.ToDouble(TermFlat) * 30 / 100;
             }
-            double flatPayment = (LoanAmount + (rate * LoanAmount)) / TermFlat;
-            return Math.Round(flatPayment, 2, MidpointRounding.AwayFromZero);
+            double flatPayment = (Convert.ToDouble(LoanAmount) + (rate * Convert.ToDouble(LoanAmount))) / Convert.ToDouble(TermFlat);
+            return Math.Round(flatPayment, 2, MidpointRounding.AwayFromZero).ToString();
         }
 
-        public double FlatDaily()
+        public string FlatDaily()
         {
-            double rate = DailyInterest * CountDaysForFlatDaily() / 100;
-            double flatPayment = (LoanAmount + (rate * LoanAmount)) / TermFlatDaily;
-            return Math.Round(flatPayment, 2, MidpointRounding.AwayFromZero);
+            double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlatDaily() / 100;
+            double flatPayment = (Convert.ToDouble(LoanAmount) + (rate * Convert.ToDouble(LoanAmount))) / Convert.ToDouble(TermFlatDaily);
+            return flatPayment.ToString();
         }
 
-        public double NperDaily()
+        public string NperDaily()
         {
-            double rate = DailyInterest / 100;
-            double nper = -Math.Log((1 - rate * LoanAmount / DailyPayment), Math.E) / Math.Log((1 + rate), Math.E);
-            return Math.Round(nper);
+            double rate = Convert.ToDouble(DailyInterest) / 100;
+            double nper = -Math.Log((1 - rate * Convert.ToDouble(LoanAmount) / Convert.ToDouble(DailyPayment)), Math.E) / Math.Log((1 + rate), Math.E);
+            return nper.ToString();
         }
 
-        public double NperMonthly()
+        public string NperMonthly()
         {
-            double rate = DailyInterest * CountDaysForMonthly() / (100 * TermMonthly);
+            double rate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
             if (rate == 0)
             {
-                rate = DailyInterest * TermMonthly * 30 / (100 * TermMonthly);
+                rate = Convert.ToDouble(DailyInterest) * Convert.ToDouble(TermMonthly) * 30 / (100 * Convert.ToDouble(TermMonthly));
             }
-            double nper = -Math.Log((1 - rate * LoanAmount / MonthlyPayment), Math.E) / Math.Log((1 + rate), Math.E);
-            return Math.Round(nper);
+            double nper = -Math.Log((1 - rate * Convert.ToDouble(LoanAmount) / Convert.ToDouble(MonthlyPayment)), Math.E) / Math.Log((1 + rate), Math.E);
+            return nper.ToString();
         }
 
-        public double NperMonthlyFlat()
+        public string NperMonthlyFlat()
         {
-            double rate = DailyInterest * CountDaysForFlat() / 100;
+            double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlat() / 100;
             if (rate == 0)
             {
-                rate = DailyInterest * TermFlat * 30 / 100;
+                rate = Convert.ToDouble(DailyInterest) * Convert.ToDouble(TermFlat) * 30 / 100;
             }
-            double nper = LoanAmount * (rate + 1) / MonthlyPaymentFlat;
-            return Math.Round(nper);
+            double nper = Convert.ToDouble(LoanAmount) * (rate + 1) / Convert.ToDouble(MonthlyPaymentFlat);
+            return nper.ToString();
         }
-        
-        public double NperDailyFlat()
+
+        public string NperDailyFlat()
         {
-            double rate = DailyInterest * CountDaysForFlatDaily() / 100;
-            double nper = LoanAmount * (rate + 1) / DailyPaymentFlat;
-            return Math.Round(nper);
+            double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlatDaily() / 100;
+            double nper = Convert.ToDouble(LoanAmount) * (rate + 1) / Convert.ToDouble(DailyPaymentFlat);
+            return nper.ToString();
+        }
+
+        public string InterestOnly
+        {
+            get { return _interestOnly; }
+            set
+            {
+                _interestOnly = value;
+            }
+        }
+
+        public void SumDaily()
+        {
+            ItemsSum.Clear();
+            double amount = Convert.ToDouble(LoanAmount);
+            double balance = Convert.ToDouble(LoanAmount);
+            double dailyInterest = Convert.ToDouble(DailyInterest) / 100;
+            double sumP = 0;
+            double sumI = 0;
+            double interest = 0;
+            for (int i = 1; i <= Convert.ToDouble(TermDaily); i++)
+            {
+                if (Convert.ToDouble(InterestOnly) > 0)
+                {
+                    while (i <= Convert.ToDouble(InterestOnly))
+                    {
+                        i++;
+                        double interest1 = amount * dailyInterest;
+                        sumI += interest1;
+                        amount = Convert.ToDouble(LoanAmount);
+                    }
+                }
+
+                interest = amount * dailyInterest;
+                double principal = Convert.ToDouble(PMTDaily()) - interest;
+                balance -= principal;
+
+                amount -= principal;
+                sumI += interest;
+                sumP = sumI + Convert.ToDouble(LoanAmount);
+                OnPropertyChanged(new PropertyChangedEventArgs("ItemsSum"));
+            }
+            ItemsSum.Add(new GridItem() { InterestSum = Math.Round(sumI, 2, MidpointRounding.AwayFromZero).ToString(), PeymentSum = Math.Round(sumP, 2, MidpointRounding.AwayFromZero).ToString() });
         }
 
         public void GraphDaily()
         {
             Items.Clear();
-            double amount = LoanAmount;
-            double balance = LoanAmount;
-            double dailyInterest = DailyInterest / 100;
-
-            Items.Add(new GridItem() { Date = "თარიღი", EndingBalance = "საბოლოო ბალანსი", Interest = "პროცენტი", Payment = "გადასახადი", PaymentNumber = "#", Principal = "ძირი", StartingBalance = "საწყისი ბალანსი" });
-
-            for (int i = 1; i <= TermDaily; i++)
+            double amount = Convert.ToDouble(LoanAmount);
+            double balance = Convert.ToDouble(LoanAmount);
+            double dailyInterest = Convert.ToDouble(DailyInterest) / 100;
+            Items.Add(new GridItem()
             {
+                Date = "თარიღი",
+                EndingBalance = "საბოლოო ბალანსი",
+                Interest = "პროცენტი",
+                Payment = "გადასახადი",
+                PaymentNumber = "#",
+                Principal = "ძირი",
+                StartingBalance = "საწყისი ბალანსი"
+            });
+
+            for (int i = 1; i <= Convert.ToDouble(TermDaily); i++)
+            {
+                if (Convert.ToDouble(InterestOnly) > 0)
+                {
+                    while (i <= Convert.ToDouble(InterestOnly))
+                    {
+                        i++;
+                        DateTime dateTime1 = StartDateDaily.AddDays(i);
+                        double interest1 = amount * dailyInterest;
+                        double principal1 = 0.00;
+                        balance = Convert.ToDouble(LoanAmount);
+                        Items.Add(new GridItem()
+                        {
+                            PaymentNumber = i.ToString(),
+                            Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                            Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                            EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                            Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                            Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                            StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                        });
+                        amount = Convert.ToDouble(LoanAmount);
+                    }
+                }
+
                 DateTime dateTime = StartDateDaily.AddDays(i);
-                double interest = Math.Round(amount * dailyInterest,2, MidpointRounding.AwayFromZero);
-                double principal = Math.Round(PMTDaily() - interest, 2, MidpointRounding.AwayFromZero);
-                //double interest = 
+                double interest = amount * dailyInterest;
+                double principal = Convert.ToDouble(PMTDaily()) - interest;
                 balance -= principal;
-                Items.Add(new GridItem() { PaymentNumber = i.ToString(), Date = dateTime.Date.ToString("dd/MM/yyyy"), Payment = DailyPayment.ToString(), EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(), Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(), Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(), StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString() });
+                Items.Add(new GridItem()
+                {
+                    PaymentNumber = i.ToString(),
+                    Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                    Payment = Math.Round(Convert.ToDouble(DailyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
+                    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                });
                 amount -= principal;
                 OnPropertyChanged(new PropertyChangedEventArgs("Items"));
             }
         }
 
+        public void SumMonthly()
+        {
+            ItemsMonthlySum.Clear();
+            double amount = Convert.ToDouble(LoanAmount);
+            double balance = Convert.ToDouble(LoanAmount);
+            double sumP = 0;
+            double sumI = 0;
+            double monthlyRate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
+            if (monthlyRate == 0)
+            {
+                monthlyRate = Convert.ToDouble(DailyInterest) * Convert.ToInt32(TermFlat) * 30 / (100 * Convert.ToDouble(TermMonthly));
+            }
+            for (int i = 1; i <= Convert.ToDouble(TermMonthly); i++)
+            {
+                if (Convert.ToDouble(InterestOnly) > 0)
+                {
+                    while (i <= Convert.ToDouble(InterestOnly))
+                    {
+                        i++;
+                        double interest1 = amount * monthlyRate;
+                        sumI += interest1;
+                    }
+                    sumP = sumI;
+                }
+                double principal = Convert.ToDouble(PMTMonthly()) - amount * monthlyRate;
+                double interest = amount * monthlyRate;
+                sumI += interest;
+
+                amount -= principal;
+                OnPropertyChanged(new PropertyChangedEventArgs("ItemsMonthly"));
+            }
+            sumP = sumI + Convert.ToDouble(LoanAmount);
+            ItemsMonthlySum.Add(new GridItem()
+            {
+                InterestSum = Math.Round(sumI, 2, MidpointRounding.AwayFromZero).ToString(),
+                PeymentSum = Math.Round(sumP, 2, MidpointRounding.AwayFromZero).ToString()
+            });
+        }
+
         public void GraphMonthly()
         {
             ItemsMonthly.Clear();
-            double amount = LoanAmount;
-            double balance = LoanAmount;
-            double monthlyRate = Math.Round(DailyInterest * CountDaysForMonthly() / (100 * TermMonthly), 2, MidpointRounding.AwayFromZero);
+            double amount = Convert.ToDouble(LoanAmount);
+            double balance = Convert.ToDouble(LoanAmount);
+            double monthlyRate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
             if (monthlyRate == 0)
             {
-                monthlyRate = DailyInterest * TermFlat * 30 / (100 * TermMonthly);
+                monthlyRate = Convert.ToDouble(DailyInterest) * Convert.ToInt32(TermFlat) * 30 / (100 * Convert.ToDouble(TermMonthly));
             }
-            ItemsMonthly.Add(new GridItem() { Date = "თარიღი", EndingBalance = "საბოლოო ბალანსი", Interest = "პროცენტი", Payment = "გადასახადი", PaymentNumber = "#", Principal = "ძირი", StartingBalance = "საწყისი ბალანსი" });
-
-            for (int i = 1; i <= TermMonthly; i++)
+            ItemsMonthly.Add(new GridItem()
             {
+                Date = "თარიღი",
+                EndingBalance = "საბოლოო ბალანსი",
+                Interest = "პროცენტი",
+                Payment = "გადასახადი",
+                PaymentNumber = "#",
+                Principal = "ძირი",
+                StartingBalance = "საწყისი ბალანსი"
+            });
+
+            for (int i = 1; i <= Convert.ToDouble(TermMonthly); i++)
+            {
+                if (Convert.ToDouble(InterestOnly) > 0)
+                {
+                    while (i <= Convert.ToDouble(InterestOnly))
+                    {
+                        i++;
+                        DateTime dateTime1 = StartDateDaily.AddDays(i);
+                        double interest1 = amount * monthlyRate;
+                        double principal1 = 0.00;
+                        balance = Convert.ToDouble(LoanAmount);
+                        ItemsMonthly.Add(new GridItem()
+                        {
+                            PaymentNumber = i.ToString(),
+                            Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                            Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                            EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                            Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                            Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                            StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                        });
+                        amount = Convert.ToDouble(LoanAmount);
+                    }
+                }
                 DateTime dateTime = StartDateMonthly.AddMonths(i);
-                double principal = Math.Round(PMTMonthly() - amount * monthlyRate,2,MidpointRounding.AwayFromZero);
+                double principal = Convert.ToDouble(PMTMonthly()) - amount * monthlyRate;
                 double interest = amount * monthlyRate;
-                ItemsMonthly.Add(new GridItem() { PaymentNumber = i.ToString(), Date = dateTime.Date.ToString("dd/MM/yyyy"), Payment = MonthlyPayment.ToString(), Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(), Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(), StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString() });
+                balance -= principal;
+                ItemsMonthly.Add(new GridItem()
+                {
+                    PaymentNumber = i.ToString(),
+                    Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                    Payment = Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
+                    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                    EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
+                });
                 amount -= principal;
                 OnPropertyChanged(new PropertyChangedEventArgs("ItemsMonthly"));
             }
         }
 
+        public void FlatMonthlySum()
+        {
+
+        }
+
         public void GraphFlatPercentageMonthly()
         {
             FlatPercentageItems.Clear();
-            double amount = LoanAmount;
-            double rate = ((AnnualInterestForMonthly / 365) * (CountDaysForFlat()) / 100);
+            double amount = Convert.ToDouble(LoanAmount);
+            double balance = Convert.ToDouble(LoanAmount);
+            double rate = ((Convert.ToDouble(AnnualInterestForMonthly) / 365) * (CountDaysForFlat()) / 100);
             if (rate == 0)
             {
-                rate = DailyInterest * TermFlat * 30 / 100;
+                rate = Convert.ToDouble(DailyInterest) * Convert.ToDouble(TermFlat) * 30 / 100;
             }
+
             FlatPercentageItems.Add(new GridItem() { Date = "თარიღი", EndingBalance = "საბოლოო ბალანსი", Interest = "პროცენტი", Payment = "გადასახადი", PaymentNumber = "#", Principal = "ძირი", StartingBalance = "საწყისი ბალანსი" });
 
-            for (int i = 1; i <= TermFlat; i++)
+            for (int i = 1; i <= Convert.ToDouble(TermFlat); i++)
             {
+                if (CounterForFlat() > 31)
+                {
+                    while (i < 2)
+                    {
+                        i++;
+                        rate = ((Convert.ToDouble(AnnualInterestForMonthly) / 365) * (CounterForFlat()) / 100);
+                        DateTime dateTime1 = StartDateFlat.AddMonths(i);
+                        double principal1 = Convert.ToDouble(LoanAmount) / Convert.ToDouble(TermFlat);
+                        double interest1 = Convert.ToDouble(LoanAmount) * rate / 100;
+                        balance -= principal1;
+                        FlatPercentageItems.Add(new GridItem()
+                        {
+                            PaymentNumber = i.ToString(),
+                            Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                            Payment = FlatMonthly(),
+                            Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                            Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                            StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                        });
+                        amount -= principal1;
+                    }
+                }
                 DateTime dateTime = StartDateFlat.AddMonths(i);
-                double principal = Math.Round((LoanAmount / TermFlat),2,MidpointRounding.AwayFromZero);
-                double interest = LoanAmount * rate / TermFlat;
-                FlatPercentageItems.Add(new GridItem() { PaymentNumber = i.ToString(), Date = dateTime.Date.ToString("dd/MM/yyyy"), Payment = FlatMonthly().ToString(), Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(), Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(), StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString() });
+                double principal = Convert.ToDouble(LoanAmount) / Convert.ToDouble(TermFlat);
+                double interest = Convert.ToDouble(LoanAmount) * rate / Convert.ToDouble(TermFlat);
+                balance -= principal;
+                FlatPercentageItems.Add(new GridItem()
+                {
+                    PaymentNumber = i.ToString(),
+                    Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                    Payment = FlatMonthly(),
+                    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
+
+                });
                 amount -= principal;
                 OnPropertyChanged(new PropertyChangedEventArgs("FlatPercentageItems"));
             }
+        }
 
+        public void FlatSum()
+        {
+            FlatDailyItemsSum.Clear();
+            string sumP = Math.Round((Convert.ToDouble(FlatDaily()) * Convert.ToDouble(TermFlatDaily)), 2, MidpointRounding.AwayFromZero).ToString();
+            double rate = Convert.ToDouble(DailyInterest) * CountDays() / 100;
+            
+             string   sumI = Math.Round((Convert.ToDouble(DailyPaymentFlat) * rate), 2, MidpointRounding.AwayFromZero).ToString();
+
+            FlatDailyItemsSum.Add(new GridItem()
+            {
+                InterestSum = sumI,
+                PeymentSum  =sumP           
+            });
         }
 
         public void GraphFlatPercentageDaily()
         {
             FlatDailyItems.Clear();
-            double amount = LoanAmount;
-            double rate = DailyInterest * CountDays() / 100;
-            FlatDailyItems.Add(new GridItem() { Date = "თარიღი", EndingBalance = "საბოლოო ბალანსი", Interest = "პროცენტი", Payment = "გადასახადი", PaymentNumber = "#", Principal = "ძირი", StartingBalance = "საწყისი ბალანსი" });
-
-            for (int i = 1; i <= TermFlatDaily; i++)
+            double amount = Convert.ToDouble(LoanAmount);
+            double rate = Convert.ToDouble(DailyInterest) * CountDays() / 100;
+            double balance = Convert.ToDouble(LoanAmount);
+            FlatDailyItems.Add(new GridItem()
+            {
+                Date = "თარიღი",
+                EndingBalance = "საბოლოო ბალანსი",
+                Interest = "პროცენტი",
+                Payment = "გადასახადი",
+                PaymentNumber = "#",
+                Principal = "ძირი",
+                StartingBalance = "საწყისი ბალანსი"
+            });
+            for (int i = 1; i <= Convert.ToDouble(TermFlatDaily); i++)
             {
                 DateTime dateTime = StartDateFlat.AddDays(i);
-                double principal = LoanAmount / TermFlatDaily;
-                double interest = LoanAmount * rate / TermFlatDaily;
-                FlatDailyItems.Add(new GridItem() { PaymentNumber = i.ToString(), Date = dateTime.Date.ToString("dd/MM/yyyy"), Payment = FlatDaily().ToString(), Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(), Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(), StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString() });
+                double principal = Convert.ToDouble(LoanAmount) / Convert.ToDouble(TermFlatDaily);
+                double interest = Convert.ToDouble(DailyPaymentFlat) - principal;
+                balance -= principal;
+                FlatDailyItemsSum.Add(new GridItem()
+                {
+                    PaymentNumber = i.ToString(),
+                    Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                    Payment = FlatDaily(),
+                    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
+                });
                 amount -= principal;
                 OnPropertyChanged(new PropertyChangedEventArgs("FlatDailyItems"));
             }
@@ -534,10 +795,20 @@ namespace BCLoanCalculator
 
         public ObservableCollection<GridItem> FlatDailyItems { get; set; }
 
+        public ObservableCollection<GridItem> FlatDailyItemsSum { get; set; }
+
         public ObservableCollection<GridItem> FlatPercentageItems { get; set; }
+
+        public ObservableCollection<GridItem> FlatPercentageItemsSum { get; set; }
 
         public ObservableCollection<GridItem> ItemsMonthly { get; set; }
 
+        public ObservableCollection<GridItem> ItemsMonthlySum { get; set; }
+
         public ObservableCollection<GridItem> Items { get; set; }
+
+        public ObservableCollection<GridItem> ItemsSum { get; set; }
+
+
     }
 }

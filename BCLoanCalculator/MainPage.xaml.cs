@@ -22,14 +22,32 @@ namespace BCLoanCalculator
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        //public Dictionary<Type, Frame> FramesHistory { get; set; }
+
         LoanData Data = new LoanData();
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            //LoanData s = (LoanData)e.Parameter;
+        }
         public MainPage()
         {
             this.InitializeComponent();
-            MyFrame.Navigate(typeof(EfficientLoan));
+            //MyFrame.Navigated += MyFrame_Navigated;
+            MyFrame.Navigate(typeof(EfficientLoanMonthly));
             PMTListBoxItem.IsSelected = true;
             TitleTextBlock.Text = "ყოველდღიური გადახდა";
         }
+
+        //private void MyFrame_Navigated(object sender, NavigationEventArgs e)
+        //{
+        //    var frame = sender as Frame;
+        //    frame.Content = FramesHistory[frame.CurrentSourcePageType];
+
+        //    if (FramesHistory.ContainsKey(frame.CurrentSourcePageType))
+        //        FramesHistory.Remove(frame.CurrentSourcePageType);
+
+        //    FramesHistory.Add(frame.CurrentSourcePageType, frame);
+        //}
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
@@ -40,7 +58,6 @@ namespace BCLoanCalculator
         {
             if (PMTListBoxItem.IsSelected)
             {
-
                 MyFrame.Navigate(typeof(EfficientLoan));
                 TitleTextBlock.Text = "ყოველდღიური გადახდა";
             }
@@ -63,7 +80,7 @@ namespace BCLoanCalculator
         }
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            if (PMTListBoxItem.IsSelected)
+            if (PMTListBoxItem.IsSelected || MyFrame.Navigate(typeof(EfficientLoan)) == true)
             {
                 EfficientLoan el = new EfficientLoan();
                 MyFrame.Navigate(typeof(EfficientLoan), el);
@@ -110,6 +127,14 @@ namespace BCLoanCalculator
                 fm.DailyInterestValue = String.Empty;
                 fm.AnnualInterestValue = String.Empty;
                 fm.PaymentValue = String.Empty;
+            }
+        }
+
+        private void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (MySplitView.IsPaneOpen)
+            {
+                MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
             }
         }
     }

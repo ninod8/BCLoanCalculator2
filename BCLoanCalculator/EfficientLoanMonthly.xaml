@@ -54,12 +54,43 @@
 
                 <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">საშეღავათო პერიოდი</TextBlock>
 
-                <TextBox BorderThickness="0" Margin="10,5" Name="InterestOnly"></TextBox>
+                <TextBox BorderThickness="0" Margin="10,5" Name="InterestOnly" Text="{Binding InterestOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock Name="ErrorTB" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
 
                 <Button FontSize="13" Margin="10,0" Foreground="#5BEABF" Background="#0F0F0F" HorizontalAlignment="Center" Click="Button_Click">გრაფიკის გამოტანა</Button>
 
+                <GridView Name="GridView2"
+                          Margin="10,5"
+                          FontSize="13"
+                          ItemsSource="{Binding ItemsMonthlySum}">
+
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapGrid Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+
+                    <GridView.ItemTemplate >
+                        <DataTemplate >
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="150"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Margin="7" FontSize ="10" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Text="გადახდების ჯამი"/>
+                                <TextBlock Margin="7" FontSize ="10" FontWeight="Bold" Grid.Column="0" Grid.Row="1" Text="პროცენტის ჯამი"/>
+                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="1" Grid.Row="0" Text="{Binding PeymentSum}"/>
+                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="1" Grid.Row="1" Text="{Binding InterestSum}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+                
                 <GridView Name="GridView1"
                           Margin="10,5"
                           FontSize="13"

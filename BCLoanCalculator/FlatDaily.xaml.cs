@@ -32,6 +32,7 @@ namespace BCLoanCalculator
             try
             {
                 DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToInt32(TermsOfLoanTB.Text));
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {

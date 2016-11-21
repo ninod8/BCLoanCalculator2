@@ -17,5 +17,7 @@ namespace BCLoanCalculator
         public string Interest { get; set; }
         public string StartingBalance { get; set; }
         public string EndingBalance { get; set; }
+        public string PeymentSum { get; set; }
+        public string InterestSum { get; set; }
     }
 }

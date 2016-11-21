@@ -28,11 +28,19 @@ namespace BCLoanCalculator
     public sealed partial class EfficientLoan : Page
     {
         //private string _tBValue;
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            LoanData data = e.Parameter as LoanData;
+           // LoanData s = new LoanData() { LoanAmount = Convert.ToDouble(LoanAmountTB.Text)};
+            //this.Frame.Navigate(typeof(MainPage), s);
+           // LoanAmountTB.Text = data.LoanAmount.ToString();
+        }
+        
 
         public EfficientLoan()
         {
             this.InitializeComponent();
-        }
+        }        
         private string _loanAmountValue;
 
         public string LoanAmountValue
@@ -88,19 +96,18 @@ namespace BCLoanCalculator
             try
             {
                 DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToDouble(TermsOfLoanTB.Text));
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
             }            
         }
-
-        private async void Graph_Click(object sender, RoutedEventArgs e)
+        //LoanData eflo = new LoanData();
+        
+        public void Graph_Click(object sender, RoutedEventArgs e)
         {
-            LoanData eflo = new LoanData();
-            var dialog = new MessageDialog("Your message here");
-            await dialog.ShowAsync();
-            eflo.GraphDaily();
+
         }
     }
 }

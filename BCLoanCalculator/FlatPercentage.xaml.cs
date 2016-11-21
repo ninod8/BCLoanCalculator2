@@ -12,6 +12,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Windows;
+using Windows.Storage;
+using MyToolkit.Resources;
+using Microsoft.VisualBasic;
+using Windows.UI.ViewManagement;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,17 +31,19 @@ namespace BCLoanCalculator
         {
             this.InitializeComponent();
         }
+        
 
         private void TermsOfLoanTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
                 DatePicker2.Date = DatePicker1.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-            }         
+            }
         }
         #region PrivateVariables
         private string _loanAmountValue;
@@ -90,4 +97,5 @@ namespace BCLoanCalculator
             set { _paymentValue = PMTTB.Text; }
         }
     }
+
 }

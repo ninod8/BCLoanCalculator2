@@ -60,7 +60,8 @@
 
                 <ListBox Background="#0F0F0F"
                          SelectionMode="Single" 
-                         SelectionChanged="ListBox_SelectionChanged" >
+                         SelectionChanged="ListBox_SelectionChanged"
+                         Tapped="ListBox_Tapped">
                     <ListBoxItem Name="PMTListBoxItem" >
                         <StackPanel Orientation="Horizontal" >
                             <TextBlock FontFamily="Segoe UI" 
