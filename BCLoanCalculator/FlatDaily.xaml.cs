@@ -37,7 +37,6 @@ namespace BCLoanCalculator
             catch (Exception)
             {
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-
             }
         }
         #region PrivateVariables

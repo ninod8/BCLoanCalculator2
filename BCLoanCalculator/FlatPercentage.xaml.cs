@@ -31,12 +31,13 @@ namespace BCLoanCalculator
         {
             this.InitializeComponent();
         }
-        
+
 
         private void TermsOfLoanTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
+                //DatePicker1.Date = DatePicker0.Date.AddMonths(i);
                 DatePicker2.Date = DatePicker1.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
                 ErrorTB.Text = String.Empty;
             }

@@ -33,7 +33,7 @@ namespace BCLoanCalculator
         {
             this.InitializeComponent();
             //MyFrame.Navigated += MyFrame_Navigated;
-            MyFrame.Navigate(typeof(EfficientLoanMonthly));
+            MyFrame.Navigate(typeof(FlatPercentage));
             PMTListBoxItem.IsSelected = true;
             TitleTextBlock.Text = "ყოველდღიური გადახდა";
         }
