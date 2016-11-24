@@ -35,20 +35,6 @@ namespace BCLoanCalculator
             Data.GraphMonthly();
         }
 
-        private void TermsOfLoanTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                DatePicker12.Date = DatePicker11.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
-                ErrorTB.Text = String.Empty;
-            }
-            catch (Exception)
-            {
-                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-                throw;
-            }
-            
-        }
         #region PrivateVariables
         private string _loanAmountValue;
         private DateTime _datePicker1Value;
@@ -101,6 +87,19 @@ namespace BCLoanCalculator
             set { _paymentValue = PMTTB.Text; }
         }
 
-
+        private void TermsOfLoanTB_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            int i = Convert.ToInt32(TermsOfLoanTB.Text);
+            try
+            {
+                DatePicker12.Date = DatePicker11.Date.AddMonths(i-1);
+                ErrorTB.Text = String.Empty;
+            }
+            catch (Exception)
+            {
+                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                throw;
+            }
+        }
     }
 }

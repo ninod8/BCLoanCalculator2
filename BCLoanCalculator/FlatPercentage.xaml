@@ -38,7 +38,7 @@
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის ვადა (თვე)</TextBlock>
 
-                <TextBox BorderThickness="0"  Name="TermsOfLoanTB"  Margin="10,5" TextChanged="TermsOfLoanTB_TextChanged" VerticalAlignment="Center" Text="{Binding TermFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0"  Name="TermsOfLoanTB"  Margin="10,5" TextChanging="TermsOfLoanTB_TextChanging"  VerticalAlignment="Center" Text="{Binding TermFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 
                 <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველთვიური საპროცენტო განაკვეთი (%)</TextBlock>
 

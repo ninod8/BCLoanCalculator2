@@ -28,15 +28,20 @@ namespace BCLoanCalculator
     public sealed partial class EfficientLoan : Page
     {
         //private string _tBValue;
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            LoanData data = e.Parameter as LoanData;
-           // LoanData s = new LoanData() { LoanAmount = Convert.ToDouble(LoanAmountTB.Text)};
-            //this.Frame.Navigate(typeof(MainPage), s);
-           // LoanAmountTB.Text = data.LoanAmount.ToString();
-        }
-        
+        //protected override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    LoanData data = e.Parameter as LoanData;
+        //   // LoanData s = new LoanData() { LoanAmount = Convert.ToDouble(LoanAmountTB.Text)};
+        //    //this.Frame.Navigate(typeof(MainPage), s);
+        //   // LoanAmountTB.Text = data.LoanAmount.ToString();
+        //}
 
+        //protected override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    base.OnNavigatedTo(e);
+        //    string id = e.Parameter.ToString();
+        //}
+        
         public EfficientLoan()
         {
             this.InitializeComponent();
@@ -46,7 +51,10 @@ namespace BCLoanCalculator
         public string LoanAmountValue
         {
             get { return _loanAmountValue; }
-            set { _loanAmountValue = LoanAmountTB.Text; }
+            set
+            {
+                _loanAmountValue = LoanAmountTB.Text;
+            }
         }
         private DateTime _datePickerValue;
 
@@ -107,7 +115,8 @@ namespace BCLoanCalculator
         
         public void Graph_Click(object sender, RoutedEventArgs e)
         {
-
+            LoanData data = new LoanData();
+            data.GraphDaily();
         }
     }
 }

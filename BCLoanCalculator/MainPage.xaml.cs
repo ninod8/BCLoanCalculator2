@@ -24,16 +24,16 @@ namespace BCLoanCalculator
     {
         //public Dictionary<Type, Frame> FramesHistory { get; set; }
 
-        LoanData Data = new LoanData();
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            //LoanData s = (LoanData)e.Parameter;
-        }
+        //LoanData Data = new LoanData();
+        //protected override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    LoanData s = (LoanData)e.Parameter;
+        //}
         public MainPage()
         {
             this.InitializeComponent();
             //MyFrame.Navigated += MyFrame_Navigated;
-            MyFrame.Navigate(typeof(FlatPercentage));
+            MyFrame.Navigate(typeof(EfficientLoan));
             PMTListBoxItem.IsSelected = true;
             TitleTextBlock.Text = "ყოველდღიური გადახდა";
         }
@@ -53,11 +53,12 @@ namespace BCLoanCalculator
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
-
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (PMTListBoxItem.IsSelected)
             {
+                EfficientLoan el = new EfficientLoan();
+
                 MyFrame.Navigate(typeof(EfficientLoan));
                 TitleTextBlock.Text = "ყოველდღიური გადახდა";
             }
