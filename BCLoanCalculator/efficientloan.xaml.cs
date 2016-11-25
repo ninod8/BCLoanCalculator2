@@ -42,10 +42,13 @@ namespace BCLoanCalculator
         //    string id = e.Parameter.ToString();
         //}
         
+
         public EfficientLoan()
         {
             this.InitializeComponent();
-        }        
+            //EfficientLoan elfo = new EfficientLoan();
+            //this.Frame.Navigate(typeof(EfficientLoanMonthly), elfo.LoanAmountTB);
+        }
         private string _loanAmountValue;
 
         public string LoanAmountValue

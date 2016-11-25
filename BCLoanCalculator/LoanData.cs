@@ -70,15 +70,29 @@ namespace BCLoanCalculator
         private string _monthlyInterest;
 
         #endregion
+        private string _ex;
+
+        public string Ex
+        {
+            get { return _ex; }
+            set { _ex = value; }
+        }
 
         public string MonthlyInterest
         {
             get { return _monthlyInterest; }
             set
             {
-                _monthlyInterest = value;
-                _annualInterestForMonthly = Math.Round(Convert.ToDouble(value) * 12, 3, MidpointRounding.AwayFromZero).ToString();
-                _dailyInterest = (Convert.ToDouble(_annualInterestForMonthly) / 365).ToString();
+                try
+                {
+                    _monthlyInterest = value;
+                    _annualInterestForMonthly = Math.Round(Convert.ToDouble(value) * 12, 3, MidpointRounding.AwayFromZero).ToString();
+                    _dailyInterest = (Convert.ToDouble(_annualInterestForMonthly) / 365).ToString();
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterest"));
             }
@@ -89,10 +103,16 @@ namespace BCLoanCalculator
             get { return _annualInterestForMonthly; }
             set
             {
-                _annualInterestForMonthly = value;
-                _monthlyInterest = Math.Round(Convert.ToDouble(value) / 12, 3, MidpointRounding.AwayFromZero).ToString();
-                _dailyInterest = (Convert.ToDouble(_annualInterestForMonthly) / 365).ToString();
-
+                try
+                {
+                    _annualInterestForMonthly = value;
+                    _monthlyInterest = Math.Round(Convert.ToDouble(value) / 12, 3, MidpointRounding.AwayFromZero).ToString();
+                    _dailyInterest = (Convert.ToDouble(_annualInterestForMonthly) / 365).ToString();
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterest"));
             }
@@ -103,9 +123,15 @@ namespace BCLoanCalculator
             get { return _dailyInterest; }
             set
             {
-                _dailyInterest = value;
-                _annualInterest = Math.Round(Convert.ToDouble(value) * 365, 3, MidpointRounding.AwayFromZero).ToString();
-
+                try
+                {
+                    _dailyInterest = value;
+                    _annualInterest = Math.Round(Convert.ToDouble(value) * 365, 3, MidpointRounding.AwayFromZero).ToString();
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)"; ;
+                }
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterest"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterest"));
             }
@@ -116,21 +142,34 @@ namespace BCLoanCalculator
             get { return _annualInterest; }
             set
             {
-                _annualInterest = value;
-                _dailyInterest = Math.Round(Convert.ToDouble(value) / 365, 3, MidpointRounding.AwayFromZero).ToString();
-
+                try
+                {
+                    _annualInterest = value;
+                    _dailyInterest = Math.Round(Convert.ToDouble(value) / 365, 3, MidpointRounding.AwayFromZero).ToString();
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterest"));
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterest"));
             }
         }
 
+
         public string LoanAmount
         {
             get { return _loanAmount; }
             set
-            {
-                _loanAmount = value;
-
+            {               
+                try
+                {
+                   _loanAmount = Convert.ToDouble(value).ToString();
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmount"));
             }
         }
@@ -140,9 +179,15 @@ namespace BCLoanCalculator
             get { return _startDateDaily; }
             set
             {
-                _startDateDaily = value;
-                TermDaily = CountDays().ToString();
-
+                try
+                {
+                    _startDateDaily = value;
+                    TermDaily = CountDays().ToString();
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
                 OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
             }
@@ -153,9 +198,15 @@ namespace BCLoanCalculator
             get { return _endDateDaily; }
             set
             {
-                _endDateDaily = value;
-                TermDaily = CountDays().ToString();
-
+                try
+                {
+                    _endDateDaily = value;
+                    TermDaily = CountDays().ToString();
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
                 OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
             }
@@ -167,7 +218,6 @@ namespace BCLoanCalculator
             set
             {
                 _releaseDate = value;
-
             }
         }
 
@@ -176,9 +226,15 @@ namespace BCLoanCalculator
             get { return _startDateMonthly; }
             set
             {
-                _startDateMonthly = value;
-                TermMonthly = CountMonths().ToString();
-
+                try
+                {
+                    _startDateMonthly = value;
+                    TermMonthly = CountMonths().ToString();
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)"; 
+                }
                 OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
             }
@@ -191,13 +247,12 @@ namespace BCLoanCalculator
             {
                 _endDateMonthly = value;
                 TermMonthly = CountMonths().ToString();
-
                 OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
             }
         }
 
-        public DateTime ReleaseDateFlat //add a method
+        public DateTime ReleaseDateFlat 
         {
             get { return _releaseDateFlat; }
             set
@@ -212,7 +267,6 @@ namespace BCLoanCalculator
             set
             {
                 _startDateFlat = value;
-
                 OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
             }
         }
@@ -224,7 +278,6 @@ namespace BCLoanCalculator
             {
                 _endDateFlat = value;
                 TermFlat = CountMonthsForFlat().ToString();
-
                 OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
             }
         }
@@ -260,8 +313,6 @@ namespace BCLoanCalculator
             {
                 _termDaily = value;
                 _dailyPayment = PMTDaily();
-                //DateTime today = DateTime.Now;
-                // _endDateDaily = today.AddDays(TermDaily);
                 GraphDaily();
                 SumDaily();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
@@ -288,10 +339,19 @@ namespace BCLoanCalculator
             get { return _termFlat; }
             set
             {
-                _termFlat = value;
-                _endDateFlat = StartDateFlat.AddMonths(Convert.ToInt32(TermFlat) - 1);
+                try
+                {
+                    _termFlat = value;
+                    _endDateFlat = StartDateFlat.AddMonths(Convert.ToInt32(TermFlat) - 1);
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5.)";
+                }
+
                 _monthlyPaymentFlat = FlatMonthly();
                 GraphFlatPercentageMonthly();
+                FlatMonthlySum();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
             }
@@ -302,9 +362,17 @@ namespace BCLoanCalculator
             get { return _termFlatDaily; }
             set
             {
-                _termFlatDaily = value;
-                _dailyPaymentFlat = FlatDaily();
-                _endDateFlatDaily = _startDateFlatDaily.AddDays(Convert.ToInt32(TermFlatDaily));
+                try
+                {
+                    _termFlatDaily = value;
+                    _dailyPaymentFlat = FlatDaily();
+                    _endDateFlatDaily = _startDateFlatDaily.AddDays(Convert.ToInt32(TermFlatDaily));
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
+
                 GraphFlatPercentageDaily();
                 FlatSum();
                 OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
@@ -401,79 +469,143 @@ namespace BCLoanCalculator
 
         public string PMTDaily()
         {
-            double rate = Convert.ToDouble(DailyInterest) / 100;
-            double pmt = Convert.ToDouble(LoanAmount) * Convert.ToDouble(rate) / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Convert.ToDouble(TermDaily) - Convert.ToDouble(InterestOnly)))));
-            return pmt.ToString();
+            try
+            {
+                double rate = Convert.ToDouble(DailyInterest) / 100;
+                double pmt = Convert.ToDouble(LoanAmount) * Convert.ToDouble(rate) / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Convert.ToDouble(TermDaily) - Convert.ToDouble(InterestOnly)))));
+                return pmt.ToString();
+            }
+            catch (Exception)
+            {
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+            return "";
         }
 
         public string PMTMonthly()
         {
-            double rate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
-            if (rate == 0)
+            try
             {
-                rate = Convert.ToDouble(DailyInterest) * Convert.ToDouble(TermMonthly) * 30 / (100 * Convert.ToDouble(TermMonthly));
+                double rate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
+                if (rate == 0)
+                {
+                    rate = Convert.ToDouble(DailyInterest) * Convert.ToDouble(TermMonthly) * 30 / (100 * Convert.ToDouble(TermMonthly));
+                }
+                double pmt = Convert.ToDouble(LoanAmount) * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Convert.ToDouble(TermMonthly) - Convert.ToDouble(InterestOnly)))));
+                return pmt.ToString();
             }
-            double pmt = Convert.ToDouble(LoanAmount) * rate / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Convert.ToDouble(TermMonthly) - Convert.ToDouble(InterestOnly)))));
-            return pmt.ToString();
+            catch (Exception)
+            {
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+            return "";
         }
 
         public string FlatMonthly()
         {
-            double flatPayment;
-            double rate = ((Convert.ToDouble(AnnualInterestForMonthly) / 365) * (CountDaysForFlat()) / 100);
-            if (rate == 0)
+            try
             {
-                rate = (Convert.ToDouble(AnnualInterestForMonthly) / 365) * Convert.ToDouble(TermFlat) * 30 / 100;
+                double flatPayment;
+                double rate = ((Convert.ToDouble(AnnualInterestForMonthly) / 365) * (CountDaysForFlat()) / 100);
+                if (rate == 0)
+                {
+                    rate = (Convert.ToDouble(AnnualInterestForMonthly) / 365) * Convert.ToDouble(TermFlat) * 30 / 100;
+                }
+                if (CounterForFlat() > 31)
+                {
+                    flatPayment = (Convert.ToDouble(LoanAmount) + (rate * Convert.ToDouble(LoanAmount))) / (Convert.ToDouble(TermFlat) + 1);
+                }
+                flatPayment = (Convert.ToDouble(LoanAmount) + (rate * Convert.ToDouble(LoanAmount))) / Convert.ToDouble(TermFlat);
+                return Math.Round(flatPayment, 2, MidpointRounding.AwayFromZero).ToString();
             }
-            if (CounterForFlat() > 31)
+            catch (Exception)
             {
-                flatPayment = (Convert.ToDouble(LoanAmount) + (rate * Convert.ToDouble(LoanAmount))) / (Convert.ToDouble(TermFlat) + 1);
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
             }
-            flatPayment = (Convert.ToDouble(LoanAmount) + (rate * Convert.ToDouble(LoanAmount))) / Convert.ToDouble(TermFlat);
-            return Math.Round(flatPayment, 2, MidpointRounding.AwayFromZero).ToString();
+            return "";
         }
 
         public string FlatDaily()
         {
-            double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlatDaily() / 100;
-            double flatPayment = (Convert.ToDouble(LoanAmount) + (rate * Convert.ToDouble(LoanAmount))) / Convert.ToDouble(TermFlatDaily);
-            return flatPayment.ToString();
+            try
+            {
+                double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlatDaily() / 100;
+                double flatPayment = (Convert.ToDouble(LoanAmount) + (rate * Convert.ToDouble(LoanAmount))) / Convert.ToDouble(TermFlatDaily);
+                return flatPayment.ToString();
+            }
+            catch (Exception)
+            {
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+            return "";
         }
 
         public string NperDaily()
         {
-            double rate = Convert.ToDouble(DailyInterest) / 100;
-            double nper = -Math.Log((1 - rate * Convert.ToDouble(LoanAmount) / Convert.ToDouble(DailyPayment)), Math.E) / Math.Log((1 + rate), Math.E);
-            return nper.ToString();
+            try
+            {
+                double rate = Convert.ToDouble(DailyInterest) / 100;
+                double nper = -Math.Log((1 - rate * Convert.ToDouble(LoanAmount) / Convert.ToDouble(DailyPayment)), Math.E) / Math.Log((1 + rate), Math.E);
+                return nper.ToString();
+            }
+            catch (Exception)
+            {
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+            return "";
         }
 
         public string NperMonthly()
         {
-            double rate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
-            if (rate == 0)
+            try
             {
-                rate = Convert.ToDouble(DailyInterest) * Convert.ToDouble(TermMonthly) * 30 / (100 * Convert.ToDouble(TermMonthly));
+                double rate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
+                if (rate == 0)
+                {
+                    rate = Convert.ToDouble(DailyInterest) * Convert.ToDouble(TermMonthly) * 30 / (100 * Convert.ToDouble(TermMonthly));
+                }
+                double nper = -Math.Log((1 - rate * Convert.ToDouble(LoanAmount) / Convert.ToDouble(MonthlyPayment)), Math.E) / Math.Log((1 + rate), Math.E);
+                return nper.ToString();
             }
-            double nper = -Math.Log((1 - rate * Convert.ToDouble(LoanAmount) / Convert.ToDouble(MonthlyPayment)), Math.E) / Math.Log((1 + rate), Math.E);
-            return nper.ToString();
+            catch (Exception)
+            {
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+            return "";
         }
 
         public string NperMonthlyFlat()
         {
-            double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlat() / 100;
-            if (rate == 0)
+            try
             {
-                rate = Convert.ToDouble(DailyInterest) * Convert.ToDouble(TermFlat) * 30 / 100;
+                double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlat() / 100;
+                if (rate == 0)
+                {
+                    rate = Convert.ToDouble(DailyInterest) * Convert.ToDouble(TermFlat) * 30 / 100;
+                }
+                double nper = Convert.ToDouble(LoanAmount) * (rate + 1) / Convert.ToDouble(MonthlyPaymentFlat);
+                return nper.ToString();
             }
-            double nper = Convert.ToDouble(LoanAmount) * (rate + 1) / Convert.ToDouble(MonthlyPaymentFlat);
-            return nper.ToString();
+            catch (Exception)
+            {
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+            return "";
         }
 
         public string NperDailyFlat()
         {
-            double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlatDaily() / 100;
-            double nper = Convert.ToDouble(LoanAmount) * (rate + 1) / Convert.ToDouble(DailyPaymentFlat);
-            return nper.ToString();
+            try
+            {
+                double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlatDaily() / 100;
+                double nper = Convert.ToDouble(LoanAmount) * (rate + 1) / Convert.ToDouble(DailyPaymentFlat);
+                return nper.ToString();
+            }
+            catch (Exception)
+            {
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+            return "";
         }
 
         public string InterestOnly
@@ -487,359 +619,445 @@ namespace BCLoanCalculator
 
         public void SumDaily()
         {
-            ItemsSum.Clear();
-            double amount = Convert.ToDouble(LoanAmount);
-            double balance = Convert.ToDouble(LoanAmount);
-            double dailyInterest = Convert.ToDouble(DailyInterest) / 100;
-            double sumP = 0;
-            double sumI = 0;
-            double interest = 0;
-            for (int i = 1; i <= Convert.ToDouble(TermDaily); i++)
+            try
             {
-                if (Convert.ToDouble(InterestOnly) > 0)
+                ItemsSum.Clear();
+                double amount = Convert.ToDouble(LoanAmount);
+                double balance = Convert.ToDouble(LoanAmount);
+                double dailyInterest = Convert.ToDouble(DailyInterest) / 100;
+                double sumP = 0;
+                double sumI = 0;
+                double interest = 0;
+                for (int i = 1; i <= Convert.ToDouble(TermDaily); i++)
                 {
-                    while (i <= Convert.ToDouble(InterestOnly))
+                    if (Convert.ToDouble(InterestOnly) > 0)
                     {
-                        i++;
-                        double interest1 = amount * dailyInterest;
-                        sumI += interest1;
-                        amount = Convert.ToDouble(LoanAmount);
+                        while (i <= Convert.ToDouble(InterestOnly))
+                        {
+                            i++;
+                            double interest1 = amount * dailyInterest;
+                            sumI += interest1;
+                            amount = Convert.ToDouble(LoanAmount);
+                        }
                     }
+
+                    interest = amount * dailyInterest;
+                    double principal = Convert.ToDouble(PMTDaily()) - interest;
+                    balance -= principal;
+
+                    amount -= principal;
+                    sumI += interest;
+                    sumP = sumI + Convert.ToDouble(LoanAmount);
+                    OnPropertyChanged(new PropertyChangedEventArgs("ItemsSum"));
                 }
+                ItemsSum.Add(new GridItem()
+                {
+                    InterestSum = Math.Round(sumI, 2, MidpointRounding.AwayFromZero).ToString(),
+                    PeymentSum = Math.Round(sumP, 2, MidpointRounding.AwayFromZero).ToString()
+                });
 
-                interest = amount * dailyInterest;
-                double principal = Convert.ToDouble(PMTDaily()) - interest;
-                balance -= principal;
-
-                amount -= principal;
-                sumI += interest;
-                sumP = sumI + Convert.ToDouble(LoanAmount);
-                OnPropertyChanged(new PropertyChangedEventArgs("ItemsSum"));
             }
-            ItemsSum.Add(new GridItem() { InterestSum = Math.Round(sumI, 2, MidpointRounding.AwayFromZero).ToString(), PeymentSum = Math.Round(sumP, 2, MidpointRounding.AwayFromZero).ToString() });
+            catch (Exception)
+            {
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
         }
 
         public void GraphDaily()
         {
-            Items.Clear();
-            double amount = Convert.ToDouble(LoanAmount);
-            double balance = Convert.ToDouble(LoanAmount);
-            double dailyInterest = Convert.ToDouble(DailyInterest) / 100;
-            Items.Add(new GridItem()
+            try
             {
-                Date = "თარიღი",
-                EndingBalance = "საბოლოო ბალანსი",
-                Interest = "პროცენტი",
-                Payment = "გადასახადი",
-                PaymentNumber = "#",
-                Principal = "ძირი",
-                StartingBalance = "საწყისი ბალანსი"
-            });
-
-            for (int i = 1; i <= Convert.ToDouble(TermDaily); i++)
-            {
-                if (Convert.ToDouble(InterestOnly) > 0)
-                {
-                    while (i <= Convert.ToDouble(InterestOnly))
-                    {
-                        i++;
-                        DateTime dateTime1 = StartDateDaily.AddDays(i);
-                        double interest1 = amount * dailyInterest;
-                        double principal1 = 0.00;
-                        balance = Convert.ToDouble(LoanAmount);
-                        Items.Add(new GridItem()
-                        {
-                            PaymentNumber = i.ToString(),
-                            Date = dateTime1.Date.ToString("dd/MM/yyyy"),
-                            Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
-                            EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
-                            Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
-                            Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
-                            StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
-                        });
-                        amount = Convert.ToDouble(LoanAmount);
-                    }
-                }
-
-                DateTime dateTime = StartDateDaily.AddDays(i);
-                double interest = amount * dailyInterest;
-                double principal = Convert.ToDouble(PMTDaily()) - interest;
-                balance -= principal;
+                Items.Clear();
+                double amount = Convert.ToDouble(LoanAmount);
+                double balance = Convert.ToDouble(LoanAmount);
+                double dailyInterest = Convert.ToDouble(DailyInterest) / 100;
                 Items.Add(new GridItem()
                 {
-                    PaymentNumber = i.ToString(),
-                    Date = dateTime.Date.ToString("dd/MM/yyyy"),
-                    Payment = Math.Round(Convert.ToDouble(DailyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
-                    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
-                    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
-                    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
-                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                    Date = "თარიღი",
+                    EndingBalance = "საბოლოო ბალანსი",
+                    Interest = "პროცენტი",
+                    Payment = "გადასახადი",
+                    PaymentNumber = "#",
+                    Principal = "ძირი",
+                    StartingBalance = "საწყისი ბალანსი"
                 });
-                amount -= principal;
-                OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+
+                for (int i = 1; i <= Convert.ToDouble(TermDaily); i++)
+                {
+                    if (Convert.ToDouble(InterestOnly) > 0)
+                    {
+                        while (i <= Convert.ToDouble(InterestOnly))
+                        {
+                            i++;
+                            DateTime dateTime1 = StartDateDaily.AddDays(i);
+                            double interest1 = amount * dailyInterest;
+                            double principal1 = 0.00;
+                            balance = Convert.ToDouble(LoanAmount);
+                            Items.Add(new GridItem()
+                            {
+                                PaymentNumber = i.ToString(),
+                                Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                                Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                            });
+                            amount = Convert.ToDouble(LoanAmount);
+                        }
+                    }
+
+                    DateTime dateTime = StartDateDaily.AddDays(i);
+                    double interest = amount * dailyInterest;
+                    double principal = Convert.ToDouble(PMTDaily()) - interest;
+                    balance -= principal;
+                    Items.Add(new GridItem()
+                    {
+                        PaymentNumber = i.ToString(),
+                        Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                        Payment = Math.Round(Convert.ToDouble(DailyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
+                        EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                        Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                        Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                        StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                    });
+                    amount -= principal;
+                    OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+                }
             }
+            catch (Exception)
+            {
+
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+
         }
 
         public void SumMonthly()
         {
-            ItemsMonthlySum.Clear();
-            double amount = Convert.ToDouble(LoanAmount);
-            double balance = Convert.ToDouble(LoanAmount);
-            double sumP = 0;
-            double sumI = 0;
-            double monthlyRate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
-            if (monthlyRate == 0)
+            try
             {
-                monthlyRate = Convert.ToDouble(DailyInterest) * Convert.ToInt32(TermFlat) * 30 / (100 * Convert.ToDouble(TermMonthly));
-            }
-            for (int i = 1; i <= Convert.ToDouble(TermMonthly); i++)
-            {
-                if (Convert.ToDouble(InterestOnly) > 0)
+                ItemsMonthlySum.Clear();
+                double amount = Convert.ToDouble(LoanAmount);
+                double balance = Convert.ToDouble(LoanAmount);
+                double sumP = 0;
+                double sumI = 0;
+                double monthlyRate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
+                if (monthlyRate == 0)
                 {
-                    while (i <= Convert.ToDouble(InterestOnly))
-                    {
-                        i++;
-                        double interest1 = amount * monthlyRate;
-                        sumI += interest1;
-                    }
-                    sumP = sumI;
+                    monthlyRate = Convert.ToDouble(DailyInterest) * Convert.ToInt32(TermFlat) * 30 / (100 * Convert.ToDouble(TermMonthly));
                 }
-                double principal = Convert.ToDouble(PMTMonthly()) - amount * monthlyRate;
-                double interest = amount * monthlyRate;
-                sumI += interest;
+                for (int i = 1; i <= Convert.ToDouble(TermMonthly); i++)
+                {
+                    if (Convert.ToDouble(InterestOnly) > 0)
+                    {
+                        while (i <= Convert.ToDouble(InterestOnly))
+                        {
+                            i++;
+                            double interest1 = amount * monthlyRate;
+                            sumI += interest1;
+                        }
+                        sumP = sumI;
+                    }
+                    double principal = Convert.ToDouble(PMTMonthly()) - amount * monthlyRate;
+                    double interest = amount * monthlyRate;
+                    sumI += interest;
 
-                amount -= principal;
-                OnPropertyChanged(new PropertyChangedEventArgs("ItemsMonthly"));
+                    amount -= principal;
+                    OnPropertyChanged(new PropertyChangedEventArgs("ItemsMonthly"));
+                }
+                sumP = sumI + Convert.ToDouble(LoanAmount);
+                ItemsMonthlySum.Add(new GridItem()
+                {
+                    InterestSum = Math.Round(sumI, 2, MidpointRounding.AwayFromZero).ToString(),
+                    PeymentSum = Math.Round(sumP, 2, MidpointRounding.AwayFromZero).ToString()
+                });
             }
-            sumP = sumI + Convert.ToDouble(LoanAmount);
-            ItemsMonthlySum.Add(new GridItem()
+            catch (Exception)
             {
-                InterestSum = Math.Round(sumI, 2, MidpointRounding.AwayFromZero).ToString(),
-                PeymentSum = Math.Round(sumP, 2, MidpointRounding.AwayFromZero).ToString()
-            });
+
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+
         }
 
         public void GraphMonthly()
         {
-            ItemsMonthly.Clear();
-            double amount = Convert.ToDouble(LoanAmount);
-            double balance = Convert.ToDouble(LoanAmount);
-            double monthlyRate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
-            if (monthlyRate == 0)
+            try
             {
-                monthlyRate = Convert.ToDouble(DailyInterest) * Convert.ToInt32(TermFlat) * 30 / (100 * Convert.ToDouble(TermMonthly));
-            }
-            ItemsMonthly.Add(new GridItem()
-            {
-                Date = "თარიღი",
-                EndingBalance = "საბოლოო ბალანსი",
-                Interest = "პროცენტი",
-                Payment = "გადასახადი",
-                PaymentNumber = "#",
-                Principal = "ძირი",
-                StartingBalance = "საწყისი ბალანსი"
-            });
-
-            for (int i = 1; i <= Convert.ToDouble(TermMonthly); i++)
-            {
-                if (Convert.ToDouble(InterestOnly) > 0)
+                ItemsMonthly.Clear();
+                double amount = Convert.ToDouble(LoanAmount);
+                double balance = Convert.ToDouble(LoanAmount);
+                double monthlyRate = Convert.ToDouble(DailyInterest) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
+                if (monthlyRate == 0)
                 {
-                    while (i <= Convert.ToDouble(InterestOnly))
-                    {
-                        i++;
-                        DateTime dateTime1 = StartDateDaily.AddMonths(i);
-                        double interest1 = amount * monthlyRate;
-                        double principal1 = 0.00;
-                        balance = Convert.ToDouble(LoanAmount);
-                        ItemsMonthly.Add(new GridItem()
-                        {
-                            PaymentNumber = i.ToString(),
-                            Date = dateTime1.Date.ToString("dd/MM/yyyy"),
-                            Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
-                            EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
-                            Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
-                            Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
-                            StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
-                        });
-                        amount = Convert.ToDouble(LoanAmount);
-                    }
+                    monthlyRate = Convert.ToDouble(DailyInterest) * Convert.ToInt32(TermFlat) * 30 / (100 * Convert.ToDouble(TermMonthly));
                 }
-                DateTime dateTime = StartDateMonthly.AddMonths(i);
-                double principal = Convert.ToDouble(PMTMonthly()) - amount * monthlyRate;
-                double interest = amount * monthlyRate;
-                balance -= principal;
                 ItemsMonthly.Add(new GridItem()
                 {
-                    PaymentNumber = i.ToString(),
-                    Date = dateTime.Date.ToString("dd/MM/yyyy"),
-                    Payment = Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
-                    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
-                    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
-                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
-                    EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
+                    Date = "თარიღი",
+                    EndingBalance = "საბოლოო ბალანსი",
+                    Interest = "პროცენტი",
+                    Payment = "გადასახადი",
+                    PaymentNumber = "#",
+                    Principal = "ძირი",
+                    StartingBalance = "საწყისი ბალანსი"
                 });
-                amount -= principal;
-                OnPropertyChanged(new PropertyChangedEventArgs("ItemsMonthly"));
+
+                for (int i = 1; i <= Convert.ToDouble(TermMonthly); i++)
+                {
+                    if (Convert.ToDouble(InterestOnly) > 0)
+                    {
+                        while (i <= Convert.ToDouble(InterestOnly))
+                        {
+                            i++;
+                            DateTime dateTime1 = StartDateDaily.AddMonths(i - 1);
+                            double interest1 = amount * monthlyRate;
+                            double principal1 = 0.00;
+                            balance = Convert.ToDouble(LoanAmount);
+                            ItemsMonthly.Add(new GridItem()
+                            {
+                                PaymentNumber = i.ToString(),
+                                Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                                Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                            });
+                            amount = Convert.ToDouble(LoanAmount);
+                        }
+                    }
+                    DateTime dateTime = StartDateMonthly.AddMonths(i - 1);
+                    double principal = Convert.ToDouble(PMTMonthly()) - amount * monthlyRate;
+                    double interest = amount * monthlyRate;
+                    balance -= principal;
+                    ItemsMonthly.Add(new GridItem()
+                    {
+                        PaymentNumber = i.ToString(),
+                        Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                        Payment = Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
+                        Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                        Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                        StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                        EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
+                    });
+                    amount -= principal;
+                    OnPropertyChanged(new PropertyChangedEventArgs("ItemsMonthly"));
+                }
             }
+            catch (Exception)
+            {
+
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+
         }
 
         public void FlatMonthlySum()
         {
-            FlatPercentageItems.Clear();
-            double amount = Convert.ToDouble(LoanAmount);
-            double balance = Convert.ToDouble(LoanAmount);
-            double rate = ((Convert.ToDouble(AnnualInterestForMonthly) / 365) * (CountDaysForFlat()) / 100);
-            if (rate == 0)
+            try
             {
-                rate = Convert.ToDouble(DailyInterest) * Convert.ToDouble(TermFlat) * 30 / 100;
-            }
-            for (int i = 1; i <= Convert.ToDouble(TermFlat); i++)
-            {
-                if (CounterForFlat() > 31)
+                FlatPercentageItemsSum.Clear();
+                double h = CountDaysForFlat();
+                double rate;
+                double principal;
+                double SumI = 0;
+                double SumP = 0;
+                for (int i = 1; i <= Convert.ToDouble(TermFlat) + 1; i++)
                 {
-                    while (i < 2)
+                    if (CounterForFlat() > 31)
                     {
-                        i++;
-                        rate = ((Convert.ToDouble(AnnualInterestForMonthly) / 365) * (CounterForFlat()) / 100);
-                        DateTime dateTime1 = StartDateFlat.AddMonths(i);
-                        double principal1 = Convert.ToDouble(LoanAmount) / Convert.ToDouble(TermFlat);
-                        double interest1 = Convert.ToDouble(LoanAmount) * rate / 100;
-                        balance -= principal1;
-
-                        amount -= principal1;
+                        while (i < 2)
+                        {
+                            rate = ((Convert.ToDouble(AnnualInterestForMonthly) / 365) * CounterForFlat() / 100);
+                            double principal1 = Convert.ToDouble(LoanAmount) / (Convert.ToDouble(TermFlat) + 1);
+                            double interest1 = principal1 * rate;
+                            double peyment = interest1 + principal1;
+                            i++;
+                            SumI = peyment;
+                            SumP = interest1;
+                        }
                     }
+                    rate = (Convert.ToDouble(AnnualInterestForMonthly) / 365) * CountDaysForFlat() / 100;
+                    if (rate == 0)
+                    {
+                        rate = (Convert.ToDouble(AnnualInterestForMonthly) / 365) * Convert.ToDouble(TermFlat) * 30 / 100;
+                    }
+                    if (CounterForFlat() > 31)
+                    {
+                        principal = Convert.ToDouble(LoanAmount) / (Convert.ToDouble(TermFlat) + 1);
+                    }
+                    else principal = Convert.ToDouble(LoanAmount) / Convert.ToDouble(TermFlat);
+                    double interest = principal * rate;
+                    SumI += Convert.ToDouble(FlatMonthly());
+                    SumP += interest;
+
                 }
-                DateTime dateTime = StartDateFlat.AddMonths(i);
-                double principal = Convert.ToDouble(LoanAmount) / Convert.ToDouble(TermFlat);
-                double interest = Convert.ToDouble(LoanAmount) * rate / Convert.ToDouble(TermFlat);
-                amount -= principal;
-                OnPropertyChanged(new PropertyChangedEventArgs("FlatPercentageItemsSum"));
+                FlatPercentageItemsSum.Add(new GridItem()
+                {
+                    InterestSum = Math.Round(SumI, 2, MidpointRounding.AwayFromZero).ToString(),
+                    PeymentSum = Math.Round(SumP, 2, MidpointRounding.AwayFromZero).ToString().ToString()
+                });
             }
+            catch (Exception)
+            {
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+
         }//needs corrections
 
         public void GraphFlatPercentageMonthly()
         {
-            FlatPercentageItems.Clear();
-            double amount = Convert.ToDouble(LoanAmount);
-            double balance = Convert.ToDouble(LoanAmount);
-            double h = CountDaysForFlat();
-            double rate;
-            double principal;
-            FlatPercentageItems.Add(new GridItem()
+            try
             {
-                Date = "თარიღი",
-                EndingBalance = "საბოლოო ბალანსი",
-                Interest = "პროცენტი",
-                Payment = "გადასახადი",
-                PaymentNumber = "#",
-                Principal = "ძირი",
-                StartingBalance = "საწყისი ბალანსი"
-            });
-
-            for (int i = 1; i <= Convert.ToDouble(TermFlat); i++)
-            {
-                if (CounterForFlat() > 31)
-                {
-                    while (i < 2)
-                    {                
-                        rate = ((Convert.ToDouble(AnnualInterestForMonthly) / 365) * CounterForFlat() / 100);
-                        DateTime dateTime1 = StartDateFlat.AddMonths(i-1);
-                        double principal1 = Convert.ToDouble(LoanAmount) / (Convert.ToDouble(TermFlat)+1);
-                        double interest1 = principal1 * rate;
-                        balance -= principal1;
-                        double peyment = interest1 + principal1;
-                        FlatPercentageItems.Add(new GridItem()
-                        {
-                            PaymentNumber = i.ToString(),
-                            Date = dateTime1.Date.ToString("dd/MM/yyyy"),
-                            Payment = Math.Round(peyment, 2, MidpointRounding.AwayFromZero).ToString(),
-                            Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
-                            Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
-                            StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
-                            EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
-                        });
-                        amount -= principal1;
-                        i++;
-                    }
-                }
-                rate = (Convert.ToDouble(AnnualInterestForMonthly) / 365) * CountDaysForFlat() / 100;
-                if (rate == 0)
-                {
-                    rate = (Convert.ToDouble(AnnualInterestForMonthly) / 365) * Convert.ToDouble(TermFlat) * 30 / 100;
-                }
-                DateTime dateTime = StartDateFlat.AddMonths(i-1);
-                if (CounterForFlat()>31)
-                {
-                    principal = Convert.ToDouble(LoanAmount) / (Convert.ToDouble(TermFlat)+1);
-
-                }
-                else principal = Convert.ToDouble(LoanAmount) / Convert.ToDouble(TermFlat);
-                double interest = principal * rate;
-                balance -= principal;
+                FlatPercentageItems.Clear();
+                double amount = Convert.ToDouble(LoanAmount);
+                double balance = Convert.ToDouble(LoanAmount);
+                double h = CountDaysForFlat();
+                double rate;
+                double principal;
                 FlatPercentageItems.Add(new GridItem()
                 {
-                    PaymentNumber = i.ToString(),
-                    Date = dateTime.Date.ToString("dd/MM/yyyy"),
-                    Payment = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString(),
-                    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
-                    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
-                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
-                    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
+                    Date = "თარიღი",
+                    EndingBalance = "საბოლოო ბალანსი",
+                    Interest = "პროცენტი",
+                    Payment = "გადასახადი",
+                    PaymentNumber = "#",
+                    Principal = "ძირი",
+                    StartingBalance = "საწყისი ბალანსი"
                 });
-                amount -= principal;
-                OnPropertyChanged(new PropertyChangedEventArgs("FlatPercentageItems"));
+
+                for (int i = 1; i <= Convert.ToDouble(TermFlat) + 1; i++)
+                {
+                    if (CounterForFlat() > 31)
+                    {
+                        while (i < 2)
+                        {
+                            rate = ((Convert.ToDouble(AnnualInterestForMonthly) / 365) * CounterForFlat() / 100);
+                            DateTime dateTime1 = StartDateFlat.AddMonths(i - 1);
+                            double principal1 = Convert.ToDouble(LoanAmount) / (Convert.ToDouble(TermFlat) + 1);
+                            double interest1 = principal1 * rate;
+                            balance -= principal1;
+                            double peyment = interest1 + principal1;
+                            FlatPercentageItems.Add(new GridItem()
+                            {
+                                PaymentNumber = i.ToString(),
+                                Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                                Payment = Math.Round(peyment, 2, MidpointRounding.AwayFromZero).ToString(),
+                                Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                                EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
+                            });
+                            amount -= principal1;
+                            i++;
+                        }
+                    }
+                    rate = (Convert.ToDouble(AnnualInterestForMonthly) / 365) * CountDaysForFlat() / 100;
+                    if (rate == 0)
+                    {
+                        rate = (Convert.ToDouble(AnnualInterestForMonthly) / 365) * Convert.ToDouble(TermFlat) * 30 / 100;
+                    }
+                    DateTime dateTime = StartDateFlat.AddMonths(i - 1);
+                    if (CounterForFlat() > 31)
+                    {
+                        principal = Convert.ToDouble(LoanAmount) / (Convert.ToDouble(TermFlat) + 1);
+
+                    }
+                    else principal = Convert.ToDouble(LoanAmount) / Convert.ToDouble(TermFlat);
+                    double interest = principal * rate;
+                    balance -= principal;
+                    FlatPercentageItems.Add(new GridItem()
+                    {
+                        PaymentNumber = i.ToString(),
+                        Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                        Payment = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString(),
+                        Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                        Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                        StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                        EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
+                    });
+                    amount -= principal;
+                    OnPropertyChanged(new PropertyChangedEventArgs("FlatPercentageItems"));
+                }
             }
+            catch (Exception)
+            {
+
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+
+            }
+
         }
 
         public void FlatSum()
         {
-            FlatDailyItemsSum.Clear();
-            string sumP = Math.Round((Convert.ToDouble(FlatDaily()) * Convert.ToDouble(TermFlatDaily)), 2, MidpointRounding.AwayFromZero).ToString();
-            double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlatDaily() / 100;
-            string sumI = Math.Round((Convert.ToDouble(DailyPaymentFlat) * rate), 2, MidpointRounding.AwayFromZero).ToString();
-            FlatDailyItemsSum.Add(new GridItem()
+            try
             {
-                InterestSum = sumI,
-                PeymentSum = sumP
-            });
+                FlatDailyItemsSum.Clear();
+                string sumP = Math.Round((Convert.ToDouble(FlatDaily()) * Convert.ToDouble(TermFlatDaily)), 2, MidpointRounding.AwayFromZero).ToString();
+                double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlatDaily() / 100;
+                string sumI = Math.Round((Convert.ToDouble(DailyPaymentFlat) * rate), 2, MidpointRounding.AwayFromZero).ToString();
+                FlatDailyItemsSum.Add(new GridItem()
+                {
+                    InterestSum = sumI,
+                    PeymentSum = sumP
+                });
+            }
+            catch (Exception)
+            {
+
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+
         }
 
         public void GraphFlatPercentageDaily()
         {
-            FlatDailyItems.Clear();
-            double amount = Convert.ToDouble(LoanAmount);
-            double sj = CountDaysForFlatDaily();
-            double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlatDaily() / 100;
-            double balance = Convert.ToDouble(LoanAmount);
-            FlatDailyItems.Add(new GridItem()
+            try
             {
-                Date = "თარიღი",
-                EndingBalance = "საბოლოო ბალანსი",
-                Interest = "პროცენტი",
-                Payment = "გადასახადი",
-                PaymentNumber = "#",
-                Principal = "ძირი",
-                StartingBalance = "საწყისი ბალანსი"
-            });
-            for (int i = 1; i <= Convert.ToDouble(TermFlatDaily); i++)
-            {
-                DateTime dateTime = StartDateFlat.AddDays(i);
-                double principal = Convert.ToDouble(LoanAmount) / Convert.ToDouble(TermFlatDaily);
-                double interest = Convert.ToDouble(DailyPaymentFlat) - principal;
-                balance -= principal;
+                FlatDailyItems.Clear();
+                double amount = Convert.ToDouble(LoanAmount);
+                double sj = CountDaysForFlatDaily();
+                double rate = Convert.ToDouble(DailyInterest) * CountDaysForFlatDaily() / 100;
+                double balance = Convert.ToDouble(LoanAmount);
                 FlatDailyItems.Add(new GridItem()
                 {
-                    PaymentNumber = i.ToString(),
-                    Date = dateTime.Date.ToString("dd/MM/yyyy"),
-                    Payment = FlatDaily(),
-                    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
-                    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
-                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
-                    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
+                    Date = "თარიღი",
+                    EndingBalance = "საბოლოო ბალანსი",
+                    Interest = "პროცენტი",
+                    Payment = "გადასახადი",
+                    PaymentNumber = "#",
+                    Principal = "ძირი",
+                    StartingBalance = "საწყისი ბალანსი"
                 });
-                amount -= principal;
-                OnPropertyChanged(new PropertyChangedEventArgs("FlatDailyItems"));
+                for (int i = 1; i <= Convert.ToDouble(TermFlatDaily); i++)
+                {
+                    DateTime dateTime = StartDateFlat.AddDays(i);
+                    double principal = Convert.ToDouble(LoanAmount) / Convert.ToDouble(TermFlatDaily);
+                    double interest = Convert.ToDouble(DailyPaymentFlat) - principal;
+                    balance -= principal;
+                    FlatDailyItems.Add(new GridItem()
+                    {
+                        PaymentNumber = i.ToString(),
+                        Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                        Payment = FlatDaily(),
+                        Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                        Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                        StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                        EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
+                    });
+                    amount -= principal;
+                    OnPropertyChanged(new PropertyChangedEventArgs("FlatDailyItems"));
+                }
             }
+            catch (Exception)
+            {
+
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+
         }
 
         public ObservableCollection<GridItem> FlatDailyItems { get; set; }

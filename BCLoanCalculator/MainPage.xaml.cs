@@ -12,7 +12,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace BCLoanCalculator
@@ -29,10 +28,15 @@ namespace BCLoanCalculator
         //{
         //    LoanData s = (LoanData)e.Parameter;
         //}
+        //private static void SaveFrameNavigationState(Frame frame)
+        //{
+        //    var frameState = SessionStateForFrame(frame);
+        //    frameState["Navigation"] = frame.GetNavigationState();
+        //}
+       
         public MainPage()
         {
             this.InitializeComponent();
-            //MyFrame.Navigated += MyFrame_Navigated;
             MyFrame.Navigate(typeof(EfficientLoan));
             PMTListBoxItem.IsSelected = true;
             TitleTextBlock.Text = "ყოველდღიური გადახდა";
@@ -57,8 +61,6 @@ namespace BCLoanCalculator
         {
             if (PMTListBoxItem.IsSelected)
             {
-                EfficientLoan el = new EfficientLoan();
-
                 MyFrame.Navigate(typeof(EfficientLoan));
                 TitleTextBlock.Text = "ყოველდღიური გადახდა";
             }

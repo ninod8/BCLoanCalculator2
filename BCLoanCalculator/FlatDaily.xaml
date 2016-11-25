@@ -48,7 +48,7 @@
 
                 <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" Text="{Binding DailyPaymentFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                <TextBlock Name="ErrorTB" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
+                <TextBlock Name="ErrorTB"  Text="{Binding Ex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
 
                 <Button FontSize="13" Margin="10,0" Foreground="#5BEABF" Background="#0F0F0F" HorizontalAlignment="Center">გრაფიკის გამოტანა</Button>
 

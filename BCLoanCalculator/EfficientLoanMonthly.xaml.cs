@@ -34,7 +34,17 @@ namespace BCLoanCalculator
             
             Data.GraphMonthly();
         }
-
+        //protected override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    if (e.Parameter is string)
+        //    {
+        //        LoanAmountTB.Text = e.Parameter.ToString();
+        //    }
+        //    else
+        //    {
+        //        LoanAmountTB.Text = "Hi ";
+        //    }
+        //}
         #region PrivateVariables
         private string _loanAmountValue;
         private DateTime _datePicker1Value;
