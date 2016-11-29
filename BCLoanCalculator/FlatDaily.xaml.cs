@@ -31,7 +31,9 @@ namespace BCLoanCalculator
         {
             try
             {
-                DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToInt32(TermsOfLoanTB.Text));
+
+                App.TermF = TermsOfLoanTB.Text;
+                //DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToInt32(TermsOfLoanTB.Text));
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
@@ -91,5 +93,80 @@ namespace BCLoanCalculator
             set { _paymentValue = PMTTB.Text; }
         }
 
+        private void LoanAmountTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.LoanAmountF = LoanAmountTB.Text;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DatePicker1_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            try
+            {
+                App.StartDateF = DatePicker1.Date.Date;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DatePicker2_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            try
+            {
+                App.EndDateF = DatePicker2.Date.Date;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DailyPercentTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.DailyInterestF = DailyPercentTB.Text;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void AnnualPercentTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.AnnualInterestF = AnnualPercentTB.Text;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void PMTTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.PeymentF = PMTTB.Text;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
     }
 }

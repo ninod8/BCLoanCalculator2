@@ -23,15 +23,15 @@ namespace BCLoanCalculator
     /// </summary>
     public sealed partial class EfficientLoanMonthly : Page
     {
-       
+
         public EfficientLoanMonthly()
         {
-            this.InitializeComponent();           
+            this.InitializeComponent();
         }
         public void Button_Click(object sender, RoutedEventArgs e)
         {
             LoanData Data = new LoanData();
-            
+
             Data.GraphMonthly();
         }
         //protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -99,16 +99,111 @@ namespace BCLoanCalculator
 
         private void TermsOfLoanTB_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
-            int i = Convert.ToInt32(TermsOfLoanTB.Text);
             try
             {
-                DatePicker12.Date = DatePicker11.Date.AddMonths(i-1);
+                App.TermELM = TermsOfLoanTB.Text;
+                //DatePicker12.Date = DatePicker11.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-                throw;
+            }
+        }
+
+        private void LoanAmountTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.LoanAmountELM = LoanAmountTB.Text;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DatePicker0_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            try
+            {
+                App.ReleaseDateELM = DatePicker0.Date.Date;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DatePicker11_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            try
+            {
+                App.StartDateELM = DatePicker11.Date.Date;
+            }
+            catch (Exception)
+            { }
+        }
+
+        private void DatePicker12_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            try
+            {
+                App.EndDateELM = DatePicker12.Date.Date;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DailyPercentTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.MonthlyInterestELM = DailyPercentTB.Text;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void AnnualPercentTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.AnnualInterestELM = AnnualPercentTB.Text;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void PMTTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.PeymentELM = PMTTB.Text;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void InterestOnly_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.InterestOnlyELM = InterestOnly.Text;
+
+            }
+            catch (Exception)
+            {
+
             }
         }
     }

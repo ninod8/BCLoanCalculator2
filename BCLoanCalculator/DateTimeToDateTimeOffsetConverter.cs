@@ -19,7 +19,7 @@ namespace BCLoanCalculator
             }
             catch (Exception ex)
             {
-                return DateTimeOffset.MinValue;
+                return DateTimeOffset.Now;
             }
         }
 
@@ -32,7 +32,7 @@ namespace BCLoanCalculator
             }
             catch (Exception ex)
             {
-                return DateTime.MinValue;
+                return DateTime.Now;
             }
         }
     }

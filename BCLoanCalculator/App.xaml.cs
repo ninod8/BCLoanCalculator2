@@ -22,7 +22,48 @@ namespace BCLoanCalculator
     /// </summary>
     sealed partial class App : Application
     {
-        internal static LoanData data;
+        internal static string LoanAmountEL;
+        internal static string LoanAmountELM;
+        internal static string LoanAmountFM;
+        internal static string LoanAmountF;
+
+        internal static string DailyInterestEL;
+        internal static string DailyInterestF;
+        internal static string MonthlyInterestFM;
+        internal static string MonthlyInterestELM;
+
+        internal static string InterestOnlyEL;
+        internal static string InterestOnlyELM;
+
+        internal static string AnnualInterestEL;
+        internal static string AnnualInterestELM;
+        internal static string AnnualInterestFM;
+        internal static string AnnualInterestF;
+
+        internal static string TermEL;
+        internal static string TermELM;
+        internal static string TermFM;
+        internal static string TermF;
+
+        internal static string PeymentEL;
+        internal static string PeymentELM;
+        internal static string PeymentFM;
+        internal static string PeymentF;
+
+        internal static DateTime StartDateELM;
+        internal static DateTime StartDateEL;
+        internal static DateTime StartDateF;
+        internal static DateTime StartDateFM;
+
+
+        internal static DateTime EndDateEL;
+        internal static DateTime EndDateELM;
+        internal static DateTime EndDateFM;
+        internal static DateTime EndDateF;
+
+        internal static DateTime ReleaseDateELM;
+        internal static DateTime ReleaseDateFM;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -40,12 +81,12 @@ namespace BCLoanCalculator
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-//#if DEBUG
-//            if (System.Diagnostics.Debugger.IsAttached)
-//            {
-//                this.DebugSettings.EnableFrameRateCounter = true;
-//            }
-//#endif
+#if DEBUG
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                this.DebugSettings.EnableFrameRateCounter = true;
+            }
+#endif
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

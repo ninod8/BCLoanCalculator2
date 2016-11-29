@@ -33,7 +33,7 @@ namespace BCLoanCalculator
         //    var frameState = SessionStateForFrame(frame);
         //    frameState["Navigation"] = frame.GetNavigationState();
         //}
-       
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -85,51 +85,47 @@ namespace BCLoanCalculator
         {
             if (PMTListBoxItem.IsSelected || MyFrame.Navigate(typeof(EfficientLoan)) == true)
             {
-                EfficientLoan el = new EfficientLoan();
-                MyFrame.Navigate(typeof(EfficientLoan), el);
-                el.LoanAmountValue = String.Empty;
-                el.DatePickerValue = DateTime.Now;
-                el.DateTimePicker2Value = DateTime.Now;
-                el.TermValue = String.Empty;
-                el.DailyInterestValue = String.Empty;
-                el.AnnualInterest = String.Empty;
-                el.PMTValue = String.Empty;
+                App.LoanAmountEL = String.Empty;
+                App.DailyInterestEL = String.Empty;
+                App.InterestOnlyEL = String.Empty;
+                App.AnnualInterestEL = String.Empty;
+                App.TermEL = String.Empty;
+                App.PeymentEL = String.Empty;
+                App.StartDateEL = DateTime.Today.Date;
+                App.EndDateEL = DateTime.Today.Date;
             }
             if (PMTMonthlyListBoxItem.IsSelected)
             {
-                EfficientLoanMonthly elm = new EfficientLoanMonthly();
-                MyFrame.Navigate(typeof(EfficientLoanMonthly), elm);
-                elm.LoanAmountVlaue = String.Empty;
-                elm.DatePicker1Value = DateTime.Today.Date;
-                elm.DatePicker2Value = DateTime.Today.Date;
-                elm.TermsOfLoan = String.Empty;
-                elm.MonthlyInterestValue = String.Empty;
-                elm.AnnualInterestVlaue = String.Empty;
-                elm.PaymentValue = String.Empty;
+                App.LoanAmountELM = String.Empty;
+                App.MonthlyInterestELM = String.Empty;
+                App.InterestOnlyELM = String.Empty;
+                App.AnnualInterestELM = String.Empty;
+                App.TermELM = String.Empty;
+                App.PeymentELM = String.Empty;
+                App.StartDateELM = DateTime.Today.Date.AddMonths(1);
+                App.EndDateELM = DateTime.Today.Date.AddMonths(1);
+                App.ReleaseDateELM = DateTime.Today.Date;
             }
             if (FlatDailyListBoxItem.IsSelected)
             {
-                FlatDaily fd = new FlatDaily();
-                MyFrame.Navigate(typeof(FlatDaily), fd);
-                fd.LoanAmountValue = String.Empty;
-                fd.Datepicker1Value = DateTime.Today.Date;
-                fd.DatePicker2Value = DateTime.Today.Date;
-                fd.TermsOfLoan = String.Empty;
-                fd.DailyInterestValue = String.Empty;
-                fd.AnnualInterestValue = String.Empty;
-                fd.PaymentValue = String.Empty;
+                App.LoanAmountFM = String.Empty;
+                App.EndDateFM = DateTime.Today.Date.AddMonths(1);
+                App.ReleaseDateFM = DateTime.Today.Date;
+                App.MonthlyInterestFM = String.Empty;
+                App.AnnualInterestFM = String.Empty;
+                App.TermFM = String.Empty;
+                App.PeymentFM = String.Empty;
+                App.StartDateFM = DateTime.Today.Date.AddMonths(1);
             }
             if (FlatPercentageListBoxItem.IsSelected)
             {
-                FlatDaily fm = new FlatDaily();
-                MyFrame.Navigate(typeof(FlatDaily), fm);
-                fm.LoanAmountValue = String.Empty;
-                fm.Datepicker1Value = DateTime.Today.Date;
-                fm.DatePicker2Value = DateTime.Today.Date;
-                fm.TermsOfLoan = String.Empty;
-                fm.DailyInterestValue = String.Empty;
-                fm.AnnualInterestValue = String.Empty;
-                fm.PaymentValue = String.Empty;
+                App.DailyInterestF = String.Empty;
+                App.LoanAmountF = String.Empty;
+                App.AnnualInterestF = String.Empty;
+                App.StartDateF = DateTime.Today.Date;
+                App.TermF = String.Empty;
+                App.EndDateF = DateTime.Today.Date;
+                App.PeymentF = String.Empty;
             }
         }
 

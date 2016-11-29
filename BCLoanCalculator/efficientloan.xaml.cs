@@ -31,9 +31,9 @@ namespace BCLoanCalculator
         //protected override void OnNavigatedTo(NavigationEventArgs e)
         //{
         //    LoanData data = e.Parameter as LoanData;
-        //   // LoanData s = new LoanData() { LoanAmount = Convert.ToDouble(LoanAmountTB.Text)};
-        //    //this.Frame.Navigate(typeof(MainPage), s);
-        //   // LoanAmountTB.Text = data.LoanAmount.ToString();
+        //    LoanData s = new LoanData() { LoanAmount = Convert.ToDouble(LoanAmountTB.Text)};
+        //    this.Frame.Navigate(typeof(MainPage), s);
+        //    LoanAmountTB.Text = data.LoanAmount.ToString();
         //}
 
         //protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -41,7 +41,7 @@ namespace BCLoanCalculator
         //    base.OnNavigatedTo(e);
         //    string id = e.Parameter.ToString();
         //}
-        
+
 
         public EfficientLoan()
         {
@@ -104,22 +104,129 @@ namespace BCLoanCalculator
 
         private void TermsOfLoanTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            try
-            {
-                DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToDouble(TermsOfLoanTB.Text));
-                ErrorTB.Text = String.Empty;
-            }
-            catch (Exception)
-            {
-                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-            }            
+            App.TermEL = TermsOfLoanTB.Text;
         }
-        //LoanData eflo = new LoanData();
-        
+
         public void Graph_Click(object sender, RoutedEventArgs e)
         {
             LoanData data = new LoanData();
             data.GraphDaily();
+        }
+
+        private void LoanAmountTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.LoanAmountEL = LoanAmountTB.Text;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DatePicker1_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            try
+            {
+                App.StartDateEL = DatePicker1.Date.Date;
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        private void DatePicker2_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            try
+            {
+                App.EndDateEL = DatePicker2.Date.Date;
+
+            }
+            catch (Exception)
+            {
+
+            }
+            //App.TermEL = TermsOfLoanTB.Text;
+        }
+
+        private void DailyPercentTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.DailyInterestEL = DailyPercentTB.Text;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void AnnualPercentTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.AnnualInterestEL = AnnualPercentTB.Text;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void PMTTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.PeymentEL = PMTTB.Text;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void InterestOnly_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.InterestOnlyEL = InterestOnly.Text;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void LoanAmountTB_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            try
+            {
+                App.LoanAmountEL = LoanAmountTB.Text;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void TermsOfLoanTB_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            try
+            {
+                // DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToDouble(TermsOfLoanTB.Text));
+                ErrorTB.Text = String.Empty;
+                App.TermEL = TermsOfLoanTB.Text;
+            }
+            catch (Exception)
+            {
+                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+            }
         }
     }
 }

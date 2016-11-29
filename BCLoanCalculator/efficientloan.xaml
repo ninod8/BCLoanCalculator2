@@ -23,35 +23,35 @@
                 <!--Foreground="#5BEABF"-->
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის თანხა</TextBlock>
 
-                <TextBox Margin="10,5" BorderThickness="0" Name="LoanAmountTB" Text="{Binding LoanAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Margin="10,5" BorderThickness="0" Name="LoanAmountTB" TextChanging="LoanAmountTB_TextChanging" TextChanged="LoanAmountTB_TextChanged" Text="{Binding LoanAmountEL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის გაცემის თარიღი</TextBlock>
 
-                <DatePicker Name="DatePicker1" FontSize="11" Margin="10" Date="{Binding StartDateDaily, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker Name="DatePicker1" FontSize="11" Margin="10"  DateChanged="DatePicker1_DateChanged" Date="{Binding StartDateDaily, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის დაფარვის თარიღი</TextBlock>
 
-                <DatePicker Name="DatePicker2" Margin="10" FontSize="11"  Date="{Binding EndDateDaily, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker Name="DatePicker2" Margin="10" FontSize="11" DateChanged="DatePicker2_DateChanged" Date="{Binding EndDateDaily, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0"  VerticalAlignment="Center">სესხის ვადა (დღე)</TextBlock>
 
-                <TextBox BorderThickness="0"  Name="TermsOfLoanTB" TextChanged="TermsOfLoanTB_TextChanged" Margin="10,5" VerticalAlignment="Center" Text="{Binding TermDaily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0"  Name="TermsOfLoanTB" TextChanging="TermsOfLoanTB_TextChanging" TextChanged="TermsOfLoanTB_TextChanged" Margin="10,5" VerticalAlignment="Center" Text="{Binding TermDaily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">ყოველდღიური საპროცენტო განაკვეთი (%)</TextBlock>
 
-                <TextBox BorderThickness="0" Name="DailyPercentTB" Margin="10,5" Text="{Binding DailyInterest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0" Name="DailyPercentTB" Margin="10,5" TextChanged="DailyPercentTB_TextChanged" Text="{Binding DailyInterestEL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock FontSize="11" FontWeight="Bold"  Margin="10,0" VerticalAlignment="Center">წლიური საპროცენტო განაკვეთი (%)</TextBlock>
 
-                <TextBox BorderThickness="0" Name="AnnualPercentTB" Margin="10,5" Text="{Binding AnnualInterest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox BorderThickness="0" Name="AnnualPercentTB" Margin="10,5" TextChanged="AnnualPercentTB_TextChanged" Text="{Binding AnnualInterestEL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველდღიური გადასახადი</TextBlock>
 
-                <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" Text="{Binding DailyPayment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged" Text="{Binding DailyPayment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">საშეღავათო პერიოდი</TextBlock>
 
-                <TextBox BorderThickness="0" Margin="10,5" Name="InterestOnly" Text="{Binding InterestOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0" Margin="10,5" Name="InterestOnly" TextChanged="InterestOnly_TextChanged" Text="{Binding InterestOnlyEL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock Name="ErrorTB" Text="{Binding Ex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
 

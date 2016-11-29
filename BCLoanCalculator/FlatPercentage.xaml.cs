@@ -88,13 +88,103 @@ namespace BCLoanCalculator
         {
             try
             {
+                App.TermFM = TermsOfLoanTB.Text;
                 //DatePicker1.Date = DatePicker0.Date.AddMonths(i);
-                DatePicker2.Date = DatePicker1.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                // DatePicker2.Date = DatePicker1.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+            }
+        }
+
+        private void LoanAmountTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.LoanAmountFM = LoanAmountTB.Text;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DatePicker0_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            try
+            {
+                App.ReleaseDateFM = DatePicker0.Date.Date;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DatePicker1_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            try
+            {
+                App.StartDateFM = DatePicker1.Date.Date;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DatePicker2_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            try
+            {
+                App.EndDateFM = DatePicker2.Date.Date;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DailyPercentTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.MonthlyInterestFM = DailyPercentTB.Text;
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void AnnualPercentTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.AnnualInterestFM = AnnualPercentTB.Text;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void PMTTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                App.PeymentFM = PMTTB.Text;
+            }
+            catch (Exception)
+            {
+
             }
         }
     }
