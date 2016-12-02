@@ -194,15 +194,14 @@ namespace BCLoanCalculator
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
                 OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
             }
         }
 
@@ -223,14 +222,15 @@ namespace BCLoanCalculator
                 {
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+
 
             }
         }
@@ -252,14 +252,15 @@ namespace BCLoanCalculator
                 {
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+
 
             }
         }
@@ -281,15 +282,14 @@ namespace BCLoanCalculator
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
                 OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
             }
         }
 
@@ -312,10 +312,12 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+
 
             }
         }
@@ -337,15 +339,14 @@ namespace BCLoanCalculator
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)"; ;
                 }
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
                 OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
             }
         }
 
@@ -365,14 +366,15 @@ namespace BCLoanCalculator
                 {
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)"; ;
                 }
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+
 
             }
         }
@@ -421,10 +423,12 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+
 
             }
         }
@@ -445,15 +449,14 @@ namespace BCLoanCalculator
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
                 OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
             }
         }
         public string AnnualInterestFM
@@ -472,14 +475,15 @@ namespace BCLoanCalculator
                 {
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+
 
             }
         }
@@ -523,14 +527,15 @@ namespace BCLoanCalculator
                 {
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
-
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+
 
             }
         }
@@ -550,15 +555,14 @@ namespace BCLoanCalculator
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
                 OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
             }
         }
         public string LoanAmountFM
@@ -576,14 +580,15 @@ namespace BCLoanCalculator
                 {
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+
             }
         }
         public string LoanAmountF
@@ -631,10 +636,12 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+
 
             }
         }
@@ -654,15 +661,14 @@ namespace BCLoanCalculator
                 {
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
-
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateEL"));
-
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
             }
         }
 
@@ -674,15 +680,14 @@ namespace BCLoanCalculator
                 _releaseDate = value;
                 _monthlyPayment = PMTMonthly();
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
                 OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
             }
         }
 
@@ -702,15 +707,14 @@ namespace BCLoanCalculator
                 }
                 _monthlyPayment = PMTMonthly();
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
                 OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
             }
         }
 
@@ -724,15 +728,14 @@ namespace BCLoanCalculator
                 TermMonthly = CountMonths().ToString();
                 _monthlyPayment = PMTMonthly();
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
                 OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
             }
         }
 
@@ -755,14 +758,15 @@ namespace BCLoanCalculator
                 _monthlyPaymentFlat = FlatMonthly();
 
                 _startDateFlat = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+
             }
         }
 
@@ -775,14 +779,15 @@ namespace BCLoanCalculator
                 _monthlyPaymentFlat = FlatMonthly();
 
                 TermFlat = CountMonthsForFlat().ToString();
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+
             }
         }
 
@@ -833,15 +838,14 @@ namespace BCLoanCalculator
                 _endDateDaily = _startDateDaily.AddDays(Convert.ToInt32(TermDaily)).Date;
                 _termDaily = value;
                 _dailyPayment = PMTDaily();
-
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateEL"));
-
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
             }
         }
 
@@ -854,15 +858,14 @@ namespace BCLoanCalculator
                 _termMonthly = value;
                 _monthlyPayment = PMTMonthly();
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
                 OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
             }
         }
 
@@ -884,14 +887,15 @@ namespace BCLoanCalculator
                 }
 
                 _monthlyPaymentFlat = FlatMonthly();
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+
 
             }
         }
@@ -946,15 +950,14 @@ namespace BCLoanCalculator
             set
             {
                 _dailyPayment = value;
-
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateEL"));
-
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
             }
         }
 
@@ -967,15 +970,14 @@ namespace BCLoanCalculator
                 //_termMonthly = NperMonthly();
                 GraphMonthly();
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
                 OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
             }
         }
 
@@ -984,16 +986,15 @@ namespace BCLoanCalculator
             get { return _monthlyPaymentFlat; }
             set
             {
-                _monthlyPaymentFlat = value;             
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestFM"));
+                _monthlyPaymentFlat = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("PeymentFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFM"));
-
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
             }
         }
 
