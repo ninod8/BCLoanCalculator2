@@ -30,6 +30,7 @@ namespace BCLoanCalculator
         public FlatPercentage()
         {
             this.InitializeComponent();
+            myButton.Content = "გარფიკი +";
         }
 
         #region PrivateVariables
@@ -89,8 +90,8 @@ namespace BCLoanCalculator
             try
             {
                 App.TermFM = TermsOfLoanTB.Text;
-                //DatePicker1.Date = DatePicker0.Date.AddMonths(i);
-                // DatePicker2.Date = DatePicker1.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+               // DatePicker1.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                DatePicker2.Date = DatePicker1.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
@@ -190,13 +191,16 @@ namespace BCLoanCalculator
         int i = 1;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            myButton.Content = "გრაფიკი -";
             var ld = this.DataContext as LoanData;
             ld.GraphFlatPercentageMonthly();
             ld.FlatMonthlySum();
             i++;
             if (i % 2 == 1)
             {
-                ld.Items.Clear();
+                myButton.Content = "გარფიკი +";
+                ld.FlatPercentageItemsSum.Clear();
+                ld.FlatPercentageItems.Clear();
             }
         }
     }

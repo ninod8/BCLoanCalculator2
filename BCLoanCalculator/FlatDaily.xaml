@@ -50,7 +50,7 @@
                 
                 <TextBlock Name="ErrorTB"  Text="{Binding Ex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
 
-                <Button FontSize="13" Margin="10,0" Foreground="#5BEABF" Click="Button_Click" Background="#0F0F0F" HorizontalAlignment="Center">გრაფიკის გამოტანა</Button>
+                <Button FontSize="13" Margin="10,0" Name="myButton" Foreground="#5BEABF" Click="Button_Click" Background="#0F0F0F" HorizontalAlignment="Center">ა</Button>
 
                 <GridView Name="GridView2"
                           Margin="10,5"

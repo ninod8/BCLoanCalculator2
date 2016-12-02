@@ -25,6 +25,7 @@ namespace BCLoanCalculator
         public FlatDaily()
         {
             this.InitializeComponent();
+            myButton.Content = "გრაფიკი +";
         }
 
         private void TermsOfLoanTB_TextChanged(object sender, TextChangedEventArgs e)
@@ -33,7 +34,7 @@ namespace BCLoanCalculator
             {
 
                 App.TermF = TermsOfLoanTB.Text;
-                //DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToInt32(TermsOfLoanTB.Text));
+                DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToInt32(TermsOfLoanTB.Text));
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
@@ -172,10 +173,13 @@ namespace BCLoanCalculator
             var ld = this.DataContext as LoanData;
             ld.GraphFlatPercentageDaily();
             ld.FlatSum();
+            myButton.Content = "გრაფიკი -";
             i++;
             if (i % 2 == 1)
             {
-                ld.Items.Clear();
+                ld.FlatDailyItems.Clear();
+                ld.FlatDailyItemsSum.Clear();
+                myButton.Content = "გრაფიკი +";
             }
         }
     }

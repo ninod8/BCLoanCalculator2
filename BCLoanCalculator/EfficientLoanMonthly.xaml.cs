@@ -26,7 +26,7 @@ namespace BCLoanCalculator
 
         public EfficientLoanMonthly()
         {
-            this.InitializeComponent();
+            this.InitializeComponent(); myButton.Content = "გრაფიკი +";
         }
         int i = 1;
 
@@ -35,10 +35,13 @@ namespace BCLoanCalculator
             var ld = this.DataContext as LoanData;
             ld.GraphMonthly();
             ld.SumMonthly();
+            myButton.Content = "გრაფიკი -";
             i++;
             if (i % 2 == 1)
             {
-                ld.Items.Clear();
+                myButton.Content = "გრაფიკი +";
+                ld.ItemsMonthly.Clear();
+                ld.ItemsMonthlySum.Clear();
             }
         }
         //protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -109,7 +112,7 @@ namespace BCLoanCalculator
             try
             {
                 App.TermELM = TermsOfLoanTB.Text;
-                //DatePicker12.Date = DatePicker11.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                DatePicker12.Date = DatePicker11.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)

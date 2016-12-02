@@ -23,7 +23,7 @@
                 <!--Foreground="#5BEABF"-->
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის თანხა</TextBlock>
 
-                <TextBox Margin="10,5" BorderThickness="0" Name="LoanAmountTB" TextChanging="LoanAmountTB_TextChanging" TextChanged="LoanAmountTB_TextChanged" Text="{Binding LoanAmountEL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Margin="10,5" BorderThickness="0" Name="LoanAmountTB" TextChanging="LoanAmountTB_TextChanging"  Text="{Binding LoanAmountEL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის გაცემის თარიღი</TextBlock>
 
@@ -35,7 +35,7 @@
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0"  VerticalAlignment="Center">სესხის ვადა (დღე)</TextBlock>
 
-                <TextBox BorderThickness="0"  Name="TermsOfLoanTB" TextChanging="TermsOfLoanTB_TextChanging" TextChanged="TermsOfLoanTB_TextChanged" Margin="10,5" VerticalAlignment="Center" Text="{Binding TermDaily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0"  Name="TermsOfLoanTB" TextChanging="TermsOfLoanTB_TextChanging" Margin="10,5" VerticalAlignment="Center" Text="{Binding TermDaily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">ყოველდღიური საპროცენტო განაკვეთი (%)</TextBlock>
 
@@ -55,7 +55,7 @@
 
                 <TextBlock Name="ErrorTB" Text="{Binding Ex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
 
-                <Button FontSize="13" Margin="10,0" Name="Graph" Foreground="#5BEABF" Background="#0F0F0F" Click="Graph_Click" HorizontalAlignment="Center">გრაფიკის გამოტანა</Button>
+                <Button FontSize="13" Margin="10,0" Name="Graph" Foreground="#5BEABF" Background="#0F0F0F" Click="Graph_Click" HorizontalAlignment="Center"></Button>
 
                 <!--<TextBlock Name="sumPMT" FontSize="11"  Margin="10,0" VerticalAlignment="Center" Text="{Binding SumpPMT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
 

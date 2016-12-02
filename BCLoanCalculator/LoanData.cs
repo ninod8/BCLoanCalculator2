@@ -32,7 +32,6 @@ namespace BCLoanCalculator
             {
                 _endDateFlat = App.EndDateFM;
             }
-
             _releaseDateFlat = DateTime.Today.Date;
             if (App.ReleaseDateFM != DateTime.Today.Date || App.ReleaseDateFM != DateTime.MinValue)
             {
@@ -173,7 +172,18 @@ namespace BCLoanCalculator
         public string Ex
         {
             get { return _ex; }
-            set { _ex = value; }
+            set
+            {
+                _ex = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+            }
         }
 
         public string MonthlyInterestELM
@@ -186,8 +196,7 @@ namespace BCLoanCalculator
                     _monthlyInterestELM = value;
                     _annualInterestForMonthlyELM = Math.Round(Convert.ToDouble(value) * 12, 3, MidpointRounding.AwayFromZero).ToString();
                     _dailyInterestELM = (Convert.ToDouble(_annualInterestForMonthlyELM) / 365).ToString();
-                    _monthlyPayment = PMTMonthly();
-
+                    _monthlyPayment = Math.Round(Convert.ToDouble(PMTMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
                 }
                 catch (Exception)
                 {
@@ -212,8 +221,7 @@ namespace BCLoanCalculator
             {
                 try
                 {
-                    _monthlyPaymentFlat = FlatMonthly();
-
+                    _monthlyPaymentFlat = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
                     _monthlyInterestF = value;
                     _annualInterestForMonthlyF = Math.Round(Convert.ToDouble(value) * 12, 3, MidpointRounding.AwayFromZero).ToString();
                     _dailyInterestF = (Convert.ToDouble(_annualInterestForMonthlyF) / 365).ToString();
@@ -242,8 +250,7 @@ namespace BCLoanCalculator
             {
                 try
                 {
-                    _monthlyPaymentFlat = FlatMonthly();
-
+                    _monthlyPaymentFlat = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
                     _annualInterestForMonthlyF = value;
                     _monthlyInterestF = Math.Round(Convert.ToDouble(value) / 12, 3, MidpointRounding.AwayFromZero).ToString();
                     _dailyInterestF = (Convert.ToDouble(_annualInterestForMonthlyF) / 365).ToString();
@@ -274,7 +281,7 @@ namespace BCLoanCalculator
                     _annualInterestForMonthlyELM = value;
                     _monthlyInterestELM = Math.Round(Convert.ToDouble(value) / 12, 3, MidpointRounding.AwayFromZero).ToString();
                     _dailyInterestELM = (Convert.ToDouble(_annualInterestForMonthlyELM) / 365).ToString();
-                    _monthlyPayment = PMTMonthly();
+                    _monthlyPayment = Math.Round(Convert.ToDouble(PMTMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
 
                 }
                 catch (Exception)
@@ -302,7 +309,7 @@ namespace BCLoanCalculator
                 {
                     _dailyInterestEL = value;
                     _annualInterestEL = Math.Round(Convert.ToDouble(value) * 365, 3, MidpointRounding.AwayFromZero).ToString();
-                    _dailyPayment = PMTDaily();
+                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
                 }
                 catch (Exception)
                 {
@@ -313,12 +320,6 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
-                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
-
-
             }
         }
 
@@ -331,7 +332,7 @@ namespace BCLoanCalculator
                 {
                     _dailyInterestELM = value;
                     _annualInterestELM = Math.Round(Convert.ToDouble(value) * 365, 3, MidpointRounding.AwayFromZero).ToString();
-                    _monthlyPayment = PMTMonthly();
+                    _monthlyPayment = Math.Round(Convert.ToDouble(PMTMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
 
                 }
                 catch (Exception)
@@ -357,7 +358,7 @@ namespace BCLoanCalculator
             {
                 try
                 {
-                    _monthlyPaymentFlat = FlatMonthly();
+                    _monthlyPaymentFlat = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
 
                     _dailyInterestFM = value;
                     _annualInterestFM = Math.Round(Convert.ToDouble(value) * 365, 3, MidpointRounding.AwayFromZero).ToString();
@@ -388,8 +389,7 @@ namespace BCLoanCalculator
                 {
                     _dailyInterestF = value;
                     _annualInterestF = Math.Round(Convert.ToDouble(value) * 365, 3, MidpointRounding.AwayFromZero).ToString();
-                    _dailyPaymentFlat = FlatDaily().ToString();
-
+                    _dailyPaymentFlat = Math.Round(Convert.ToDouble(FlatDaily()), 2, MidpointRounding.AwayFromZero).ToString();
                 }
                 catch (Exception)
                 {
@@ -411,7 +411,7 @@ namespace BCLoanCalculator
             {
                 try
                 {
-                    _dailyPayment = PMTDaily();
+                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
                     _annualInterestEL = value;
                     _dailyInterestEL = Math.Round(Convert.ToDouble(value) / 365, 3, MidpointRounding.AwayFromZero).ToString();
                 }
@@ -441,7 +441,8 @@ namespace BCLoanCalculator
                 {
                     _annualInterestELM = value;
                     _dailyInterestELM = Math.Round(Convert.ToDouble(value) / 365, 3, MidpointRounding.AwayFromZero).ToString();
-                    _monthlyPayment = PMTMonthly();
+                    _monthlyPayment = Math.Round(Convert.ToDouble(PMTMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
+
 
                 }
                 catch (Exception)
@@ -466,7 +467,7 @@ namespace BCLoanCalculator
             {
                 try
                 {
-                    _monthlyPaymentFlat = FlatMonthly();
+                    _monthlyPaymentFlat = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
 
                     _annualInterestFM = value;
                     _dailyInterestFM = Math.Round(Convert.ToDouble(value) / 365, 3, MidpointRounding.AwayFromZero).ToString();
@@ -496,7 +497,7 @@ namespace BCLoanCalculator
                 {
                     _annualInterestF = value;
                     _dailyInterestF = Math.Round(Convert.ToDouble(value) / 365, 3, MidpointRounding.AwayFromZero).ToString();
-                    _dailyPaymentFlat = FlatDaily().ToString();
+                    _dailyPaymentFlat = Math.Round(Convert.ToDouble(FlatDaily()), 2, MidpointRounding.AwayFromZero).ToString();
                 }
                 catch (Exception)
                 {
@@ -520,7 +521,7 @@ namespace BCLoanCalculator
             {
                 try
                 {
-                    _dailyPayment = PMTDaily();
+                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
                     _loanAmountEL = Convert.ToDouble(value).ToString();
                 }
                 catch (Exception)
@@ -547,8 +548,8 @@ namespace BCLoanCalculator
                 try
                 {
                     _loanAmountELM = Convert.ToDouble(value).ToString();
-                    _monthlyPayment = PMTMonthly();
-                    _dailyPayment = PMTDaily();
+                    _monthlyPayment = Math.Round(Convert.ToDouble(PMTMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
+                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
                 }
                 catch (Exception)
                 {
@@ -572,7 +573,8 @@ namespace BCLoanCalculator
             {
                 try
                 {
-                    _monthlyPaymentFlat = FlatMonthly();
+                    _monthlyPaymentFlat = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
+
 
                     _loanAmountFM = Convert.ToDouble(value).ToString();
                 }
@@ -599,9 +601,7 @@ namespace BCLoanCalculator
                 try
                 {
                     _loanAmountF = Convert.ToDouble(value).ToString();
-                     _dailyPaymentFlat = FlatDaily().ToString();
-
-
+                    _dailyPaymentFlat = Math.Round(Convert.ToDouble(FlatDaily()), 2, MidpointRounding.AwayFromZero).ToString();
                 }
                 catch (Exception)
                 {
@@ -625,7 +625,7 @@ namespace BCLoanCalculator
                 try
                 {
                     _startDateDaily = value;
-                    _dailyPayment = PMTDaily();
+                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
                     TermDaily = CountDays().ToString();
                 }
                 catch (Exception)
@@ -654,7 +654,7 @@ namespace BCLoanCalculator
                 try
                 {
                     _endDateDaily = value;
-                    _dailyPayment = PMTDaily();
+                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
                     TermDaily = CountDays().ToString();
                 }
                 catch (Exception)
@@ -677,17 +677,24 @@ namespace BCLoanCalculator
             get { return _releaseDate; }
             set
             {
-                _releaseDate = value;
-                _monthlyPayment = PMTMonthly();
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                try
+                {
+                    _releaseDate = value;
+                    _monthlyPayment = Math.Round(Convert.ToDouble(PMTMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
+                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -705,7 +712,7 @@ namespace BCLoanCalculator
                 {
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
-                _monthlyPayment = PMTMonthly();
+                _monthlyPayment = Math.Round(Convert.ToDouble(PMTMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
                 OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
@@ -723,19 +730,26 @@ namespace BCLoanCalculator
             get { return _endDateMonthly; }
             set
             {
+                try
+                {
 
-                _endDateMonthly = value;
-                TermMonthly = CountMonths().ToString();
-                _monthlyPayment = PMTMonthly();
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                    _endDateMonthly = value;
+                    TermMonthly = CountMonths().ToString();
+                    _monthlyPayment = Math.Round(Convert.ToDouble(PMTMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
+                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -744,9 +758,16 @@ namespace BCLoanCalculator
             get { return _releaseDateFlat; }
             set
             {
-                _monthlyPaymentFlat = FlatMonthly();
+                try
+                {
+                    _monthlyPaymentFlat = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
 
-                _releaseDateFlat = value;
+                    _releaseDateFlat = value;
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -755,18 +776,24 @@ namespace BCLoanCalculator
             get { return _startDateFlat; }
             set
             {
-                _monthlyPaymentFlat = FlatMonthly();
+                try
+                {
+                    _monthlyPaymentFlat = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
 
-                _startDateFlat = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
-
+                    _startDateFlat = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -775,19 +802,25 @@ namespace BCLoanCalculator
             get { return _endDateFlat; }
             set
             {
-                _endDateFlat = value;
-                _monthlyPaymentFlat = FlatMonthly();
+                try
+                {
+                    _endDateFlat = value;
+                    _monthlyPaymentFlat = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
 
-                TermFlat = CountMonthsForFlat().ToString();
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
-
+                    TermFlat = CountMonthsForFlat().ToString();
+                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -796,17 +829,23 @@ namespace BCLoanCalculator
             get { return _startDateFlatDaily; }
             set
             {
-                _startDateFlatDaily = value;
-                TermFlatDaily = CountDaysForFlatDaily().ToString();
-                _dailyPaymentFlat = FlatDaily().ToString();
-
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("DailyPaymentFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartdateFlatDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlatDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestF"));
+                try
+                {
+                    _startDateFlatDaily = value;
+                    TermFlatDaily = CountDaysForFlatDaily().ToString();
+                    _dailyPaymentFlat = Math.Round(Convert.ToDouble(FlatDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("DailyPaymentFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("StartdateFlatDaily"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlatDaily"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestF"));
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -815,18 +854,24 @@ namespace BCLoanCalculator
             get { return _endDateFlatDaily; }
             set
             {
-                _endDateFlatDaily = value;
-                //_dailyPaymentFlat = FlatDaily().ToString();       
-                TermFlatDaily = CountDaysForFlatDaily().ToString();
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("DailyPaymentFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartdateFlatDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlatDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestF"));
+                try
+                {
+                    _endDateFlatDaily = value;
+                    //_dailyPaymentFlat = FlatDaily().ToString();       
+                    _dailyPaymentFlat = Math.Round(Convert.ToDouble(FlatDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("DailyPaymentFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("StartdateFlatDaily"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlatDaily"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestF"));
 
-
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -835,17 +880,19 @@ namespace BCLoanCalculator
             get { return _termDaily; }
             set
             {
-                _endDateDaily = _startDateDaily.AddDays(Convert.ToInt32(TermDaily)).Date;
-                _termDaily = value;
-                _dailyPayment = PMTDaily();
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
-                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+                try
+                {
+
+                    _termDaily = value;
+                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()),2,MidpointRounding.AwayFromZero).ToString();
+                    //_endDateDaily = _startDateDaily.AddDays(Convert.ToInt32(TermDaily)).Date;
+                    OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -854,18 +901,25 @@ namespace BCLoanCalculator
             get { return _termMonthly; }
             set
             {
-                _endDateMonthly = _startDateMonthly.AddMonths(Convert.ToInt32(TermMonthly)).Date;
-                _termMonthly = value;
-                _monthlyPayment = PMTMonthly();
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                try
+                {
+                    //_endDateMonthly = _startDateMonthly.AddMonths(Convert.ToInt32(TermMonthly)).Date;
+                    _termMonthly = value;
+                    _monthlyPayment = Math.Round(Convert.ToDouble(PMTMonthly()),2 ,MidpointRounding.AwayFromZero).ToString();
+                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -876,17 +930,15 @@ namespace BCLoanCalculator
             {
                 try
                 {
-                    _endDateFlat = _startDateFlat.AddMonths(Convert.ToInt32(TermFlatDaily)).Date;
+                    //_endDateFlat = _startDateFlat.AddMonths(Convert.ToInt32(TermFlat)).Date;
                     _termFlat = value;
-                    _monthlyPaymentFlat = FlatMonthly();
+                    _monthlyPaymentFlat = Math.Round(Convert.ToDouble(FlatMonthly()),2,MidpointRounding.AwayFromZero).ToString();
                     // _endDateFlat = StartDateFlat.AddMonths(Convert.ToInt32(TermFlat) - 1);
                 }
                 catch (Exception)
                 {
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5.)";
                 }
-
-                _monthlyPaymentFlat = FlatMonthly();
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
@@ -908,8 +960,8 @@ namespace BCLoanCalculator
                 try
                 {
                     _termFlatDaily = value;
-                    _dailyPaymentFlat = FlatDaily().ToString();
-                    _endDateFlatDaily = _startDateFlatDaily.AddDays(Convert.ToInt32(TermFlatDaily));
+                    _dailyPaymentFlat = Math.Round(Convert.ToDouble(FlatDaily()),2,MidpointRounding.AwayFromZero).ToString();
+                    //_endDateFlatDaily = _startDateFlatDaily.AddDays(Convert.ToInt32(TermFlatDaily));
 
                     //  _endDateFlatDaily = _startDateFlatDaily.AddDays(Convert.ToInt32(TermFlatDaily)).Date;
                 }
@@ -917,7 +969,7 @@ namespace BCLoanCalculator
                 {
                     _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
                 }
-                
+
                 OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyPaymentFlat"));
                 OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountF"));
@@ -933,15 +985,21 @@ namespace BCLoanCalculator
             get { return _dailyPaymentFlat; }
             set
             {
-
-                _dailyPaymentFlat = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("DailyPaymentFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartdateFlatDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlatDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestF"));
+                try
+                {
+                    _dailyPaymentFlat = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("TermFlatDaily"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("DailyPaymentFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("StartdateFlatDaily"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlatDaily"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestF"));
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
         public string DailyPayment
@@ -949,15 +1007,22 @@ namespace BCLoanCalculator
             get { return _dailyPayment; }
             set
             {
-                _dailyPayment = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
-                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+                try
+                {
+                    _dailyPayment = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -966,18 +1031,25 @@ namespace BCLoanCalculator
             get { return _monthlyPayment; }
             set
             {
-                _monthlyPayment = value;
-                //_termMonthly = NperMonthly();
-                GraphMonthly();
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                try
+                {
+                    _monthlyPayment = value;
+                    //_termMonthly = NperMonthly();
+                    GraphMonthly();
+                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -986,15 +1058,22 @@ namespace BCLoanCalculator
             get { return _monthlyPaymentFlat; }
             set
             {
-                _monthlyPaymentFlat = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
-                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
-                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
-                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+                try
+                {
+                    _monthlyPaymentFlat = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountFM"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("TermFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("StartDateFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlat"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDateFlat"));
+                }
+                catch (Exception)
+                {
+                    _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+                }
             }
         }
 
@@ -1043,6 +1122,7 @@ namespace BCLoanCalculator
         {
             try
             {
+             
                 double rate = Convert.ToDouble(DailyInterestEL) / 100;
                 double pmt = Convert.ToDouble(LoanAmountEL) * Convert.ToDouble(rate) / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Convert.ToDouble(TermDaily) - Convert.ToDouble(InterestOnlyEL)))));
                 string peyment = pmt.ToString();
