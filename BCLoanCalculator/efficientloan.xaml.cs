@@ -106,11 +106,17 @@ namespace BCLoanCalculator
         {
             App.TermEL = TermsOfLoanTB.Text;
         }
-
+        int i = 1;
         public void Graph_Click(object sender, RoutedEventArgs e)
         {
-            LoanData data = new LoanData();
-            data.GraphDaily();
+            var ld = this.DataContext as LoanData;
+            ld.GraphDaily();
+            ld.SumDaily();
+            i++;
+            if (i%2==1)
+            {
+                ld.Items.Clear();
+            }
         }
 
         private void LoanAmountTB_TextChanged(object sender, TextChangedEventArgs e)
@@ -228,5 +234,6 @@ namespace BCLoanCalculator
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
             }
         }
+
     }
 }

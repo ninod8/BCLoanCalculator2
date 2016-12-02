@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,6 +23,8 @@ namespace BCLoanCalculator
     /// </summary>
     sealed partial class App : Application
     {
+        //internal static LoanData data;
+
         internal static string LoanAmountEL;
         internal static string LoanAmountELM;
         internal static string LoanAmountFM;
@@ -50,19 +53,19 @@ namespace BCLoanCalculator
         internal static string PeymentFM;
         internal static string PeymentF;
 
-        internal static DateTime StartDateELM;
-        internal static DateTime StartDateEL;
-        internal static DateTime StartDateF;
-        internal static DateTime StartDateFM;
+        internal static DateTime StartDateELM = DateTime.Today.Date;
+        internal static DateTime StartDateEL = DateTime.Today.Date;
+        internal static DateTime StartDateF = DateTime.Today.Date;
+        internal static DateTime StartDateFM = DateTime.Today.Date;
 
 
-        internal static DateTime EndDateEL;
-        internal static DateTime EndDateELM;
-        internal static DateTime EndDateFM;
-        internal static DateTime EndDateF;
+        internal static DateTime EndDateEL = DateTime.Today.Date;
+        internal static DateTime EndDateELM = DateTime.Today.Date;
+        internal static DateTime EndDateFM = DateTime.Today.Date;
+        internal static DateTime EndDateF = DateTime.Today.Date;
 
-        internal static DateTime ReleaseDateELM;
-        internal static DateTime ReleaseDateFM;
+        internal static DateTime ReleaseDateELM = DateTime.Today.Date;
+        internal static DateTime ReleaseDateFM = DateTime.Today.Date;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code

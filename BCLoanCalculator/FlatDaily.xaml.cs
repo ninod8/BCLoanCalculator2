@@ -161,11 +161,21 @@ namespace BCLoanCalculator
             try
             {
                 App.PeymentF = PMTTB.Text;
-
             }
             catch (Exception)
             {
-
+            }
+        }
+        int i = 1;
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var ld = this.DataContext as LoanData;
+            ld.GraphFlatPercentageDaily();
+            ld.FlatSum();
+            i++;
+            if (i % 2 == 1)
+            {
+                ld.Items.Clear();
             }
         }
     }

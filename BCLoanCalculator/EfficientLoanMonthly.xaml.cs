@@ -28,11 +28,18 @@ namespace BCLoanCalculator
         {
             this.InitializeComponent();
         }
+        int i = 1;
+
         public void Button_Click(object sender, RoutedEventArgs e)
         {
-            LoanData Data = new LoanData();
-
-            Data.GraphMonthly();
+            var ld = this.DataContext as LoanData;
+            ld.GraphMonthly();
+            ld.SumMonthly();
+            i++;
+            if (i % 2 == 1)
+            {
+                ld.Items.Clear();
+            }
         }
         //protected override void OnNavigatedTo(NavigationEventArgs e)
         //{
@@ -119,7 +126,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-
+                
             }
         }
 
@@ -131,7 +138,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-
+                
             }
         }
 

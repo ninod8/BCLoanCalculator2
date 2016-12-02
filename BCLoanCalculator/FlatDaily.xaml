@@ -45,12 +45,12 @@
                 <TextBox BorderThickness="0" Name="AnnualPercentTB" Margin="10,5" TextChanged="AnnualPercentTB_TextChanged" Text="{Binding AnnualInterestF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველდღიური გადასახადი</TextBlock>
-
-                <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged" Text="{Binding DailyPaymentFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-
+                
+                <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged" Text="{Binding  DailyPaymentFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                
                 <TextBlock Name="ErrorTB"  Text="{Binding Ex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
 
-                <Button FontSize="13" Margin="10,0" Foreground="#5BEABF" Background="#0F0F0F" HorizontalAlignment="Center">გრაფიკის გამოტანა</Button>
+                <Button FontSize="13" Margin="10,0" Foreground="#5BEABF" Click="Button_Click" Background="#0F0F0F" HorizontalAlignment="Center">გრაფიკის გამოტანა</Button>
 
                 <GridView Name="GridView2"
                           Margin="10,5"

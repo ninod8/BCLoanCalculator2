@@ -187,6 +187,18 @@ namespace BCLoanCalculator
 
             }
         }
+        int i = 1;
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var ld = this.DataContext as LoanData;
+            ld.GraphFlatPercentageMonthly();
+            ld.FlatMonthlySum();
+            i++;
+            if (i % 2 == 1)
+            {
+                ld.Items.Clear();
+            }
+        }
     }
 
 }
