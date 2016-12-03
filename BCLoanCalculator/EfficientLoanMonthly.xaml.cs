@@ -26,7 +26,8 @@ namespace BCLoanCalculator
 
         public EfficientLoanMonthly()
         {
-            this.InitializeComponent(); myButton.Content = "გრაფიკი +";
+            this.InitializeComponent();
+            myButton.Content = "გრაფიკი +";
         }
         int i = 1;
 

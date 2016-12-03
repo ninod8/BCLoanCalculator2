@@ -85,7 +85,7 @@ namespace BCLoanCalculator
             if (PMTListBoxItem.IsSelected || MyFrame.Navigate(typeof(EfficientLoan)) == true)
             {
                 try
-                {
+                {                    
                     App.LoanAmountEL = String.Empty;
                     App.DailyInterestEL = String.Empty;
                     App.InterestOnlyEL = String.Empty;
@@ -107,7 +107,6 @@ namespace BCLoanCalculator
                 }
                 catch (Exception)
                 {
-                    throw;
                 }
             }
             if (PMTMonthlyListBoxItem.IsSelected)

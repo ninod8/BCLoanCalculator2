@@ -26,7 +26,7 @@
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">გაცემის თარიღი</TextBlock>
 
-                <DatePicker Name="DatePicker0" FontSize="11"  Margin="10" DateChanged="DatePicker0_DateChanged" Date="{Binding ReleaseDate, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+                <DatePicker Name="DatePicker0" FontSize="11"  Margin="10" DateChanged="DatePicker0_DateChanged" Date="{Binding ReleaseDateFlat, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">პირველი გადახდის თარიღი</TextBlock>
 

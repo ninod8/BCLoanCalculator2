@@ -23,7 +23,7 @@
                 <!--Foreground="#5BEABF"-->
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის თანხა</TextBlock>
 
-                <TextBox Margin="10,5" BorderThickness="0" Name="LoanAmountTB" TextChanging="LoanAmountTB_TextChanging"  Text="{Binding LoanAmountEL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Margin="10,5" BorderThickness="0" Name="LoanAmountTB" TextChanged="LoanAmountTB_TextChanged"   Text="{Binding LoanAmountEL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის გაცემის თარიღი</TextBlock>
 
@@ -35,7 +35,7 @@
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0"  VerticalAlignment="Center">სესხის ვადა (დღე)</TextBlock>
 
-                <TextBox BorderThickness="0"  Name="TermsOfLoanTB" TextChanging="TermsOfLoanTB_TextChanging" Margin="10,5" VerticalAlignment="Center" Text="{Binding TermDaily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0"  Name="TermsOfLoanTB" TextChanged="TermsOfLoanTB_TextChanged" Margin="10,5" VerticalAlignment="Center" Text="{Binding TermDaily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">ყოველდღიური საპროცენტო განაკვეთი (%)</TextBlock>
 

@@ -56,9 +56,7 @@ namespace BCLoanCalculator
         {
             get { return _loanAmountValue; }
             set
-            {
-                _loanAmountValue = LoanAmountTB.Text;
-            }
+            { _loanAmountValue = LoanAmountTB.Text; }
         }
         private DateTime _datePickerValue;
 
@@ -110,8 +108,8 @@ namespace BCLoanCalculator
             ld.GraphDaily();
             ld.SumDaily();
             i++;
-           Graph.Content = "გრაფიკი -";
-            if (i%2==1)
+            Graph.Content = "გრაფიკი -";
+            if (i % 2 == 1)
             {
                 ld.Items.Clear();
                 ld.ItemsSum.Clear();
@@ -128,9 +126,7 @@ namespace BCLoanCalculator
             catch (Exception)
             {
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-
             }
-
         }
 
         private void DatePicker2_DateChanged(object sender, DatePickerValueChangedEventArgs e)
@@ -145,28 +141,17 @@ namespace BCLoanCalculator
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
 
             }
-            //App.TermEL = TermsOfLoanTB.Text;
         }
 
         private void DailyPercentTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
-                double n;
-                bool isNumeric = double.TryParse(DailyPercentTB.Text, out n);
                 App.DailyInterestEL = DailyPercentTB.Text;
-                if (isNumeric==false)
-                {
-                    App.DailyInterestEL = String.Empty;
-                    ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-
-                }
             }
             catch (Exception)
             {
-                App.DailyInterestEL = String.Empty;
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-
             }
         }
 
@@ -174,20 +159,11 @@ namespace BCLoanCalculator
         {
             try
             {
-                double n;
-                bool isNumeric = double.TryParse(AnnualPercentTB.Text, out n);
                 App.AnnualInterestEL = AnnualPercentTB.Text;
-                if (isNumeric == false)
-                {
-                    App.AnnualInterestEL = String.Empty;
-                    ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-                }
             }
             catch (Exception)
             {
-                App.AnnualInterestEL = String.Empty;
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-
             }
         }
 
@@ -195,21 +171,11 @@ namespace BCLoanCalculator
         {
             try
             {
-                double n;
-                bool isNumeric = double.TryParse(PMTTB.Text, out n);
                 App.PeymentEL = PMTTB.Text;
-                if (isNumeric == false)
-                {
-                    App.PeymentEL = String.Empty;
-                    ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-                }
             }
             catch (Exception)
             {
-                App.PeymentEL = String.Empty;
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-
-
             }
         }
 
@@ -217,67 +183,38 @@ namespace BCLoanCalculator
         {
             try
             {
-                double n;
-                bool isNumeric = double.TryParse(InterestOnly.Text, out n);
                 App.InterestOnlyEL = InterestOnly.Text;
-                if (isNumeric == false)
-                {
-                    App.InterestOnlyEL = String.Empty;
-                    ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-                }
             }
             catch (Exception)
             {
-                App.InterestOnlyEL = String.Empty;
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-
             }
         }
 
-        private void LoanAmountTB_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        private void LoanAmountTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
-                double n;
-                bool isNumeric = double.TryParse(LoanAmountTB.Text, out n);
                 App.LoanAmountEL = LoanAmountTB.Text;
-                if (isNumeric == false)
-                {
-                    App.LoanAmountEL = String.Empty;
-                    ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-                }
-
             }
             catch (Exception)
             {
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-
-                App.LoanAmountEL = String.Empty;
             }
         }
 
-        private void TermsOfLoanTB_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        private void TermsOfLoanTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
-                double n;
-                bool isNumeric = double.TryParse(TermsOfLoanTB.Text, out n);
-                // DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToDouble(TermsOfLoanTB.Text));
-               // ErrorTB.Text = String.Empty;
+                DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToDouble(TermsOfLoanTB.Text));
+                // ErrorTB.Text = String.Empty;
                 App.TermEL = TermsOfLoanTB.Text;
-                if (isNumeric == false)
-                {
-                    App.TermEL = String.Empty;
-                    ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-                }
             }
             catch (Exception)
             {
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-                App.TermEL = String.Empty;
-
             }
         }
-
     }
 }
