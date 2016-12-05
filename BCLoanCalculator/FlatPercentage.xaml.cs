@@ -194,7 +194,6 @@ namespace BCLoanCalculator
             myButton.Content = "გრაფიკი -";
             var ld = this.DataContext as LoanData;
             ld.GraphFlatPercentageMonthly();
-            ld.FlatMonthlySum();
             i++;
             if (i % 2 == 1)
             {

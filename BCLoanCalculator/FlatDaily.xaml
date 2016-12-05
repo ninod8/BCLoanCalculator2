@@ -36,7 +36,7 @@
 
                 <TextBox BorderThickness="0"  Name="TermsOfLoanTB" TextChanged="TermsOfLoanTB_TextChanged" Margin="10,5"  VerticalAlignment="Center" Text="{Binding TermFlatDaily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველთვიური საპროცენტო განაკვეთი (%)</TextBlock>
+                <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველდღიური საპროცენტო განაკვეთი (%)</TextBlock>
 
                 <TextBox BorderThickness="0" Name="DailyPercentTB" Margin="10,5" TextChanged="DailyPercentTB_TextChanged" Text="{Binding DailyInterestF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 

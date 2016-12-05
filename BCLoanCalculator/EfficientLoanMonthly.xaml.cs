@@ -35,7 +35,6 @@ namespace BCLoanCalculator
         {
             var ld = this.DataContext as LoanData;
             ld.GraphMonthly();
-            ld.SumMonthly();
             myButton.Content = "გრაფიკი -";
             i++;
             if (i % 2 == 1)

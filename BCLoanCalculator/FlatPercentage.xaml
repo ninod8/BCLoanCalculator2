@@ -80,8 +80,8 @@
                                     <RowDefinition Height="30"/>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Margin="7" FontSize ="10" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Text="გადახდების ჯამი"/>
-                                <TextBlock Margin="7" FontSize ="10" FontWeight="Bold" Grid.Column="0" Grid.Row="1" Text="პროცენტის ჯამი"/>
+                                <TextBlock Margin="7" FontSize ="10" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Text="{Binding PaymentSumText}"/>
+                                <TextBlock Margin="7" FontSize ="10" FontWeight="Bold" Grid.Column="0" Grid.Row="1" Text="{Binding InterestSumText}"/>
                                 <TextBlock Margin="7" FontSize ="10"  Grid.Column="1" Grid.Row="0" Text="{Binding PeymentSum}"/>
                                 <TextBlock Margin="7" FontSize ="10"  Grid.Column="1" Grid.Row="1" Text="{Binding InterestSum}"/>
                             </Grid>
