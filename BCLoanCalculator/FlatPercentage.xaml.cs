@@ -30,7 +30,7 @@ namespace BCLoanCalculator
         public FlatPercentage()
         {
             this.InitializeComponent();
-            myButton.Content = "გარფიკი +";        
+            myButton.Content = "გარფიკის გადათვლა +";        
         }
 
         #region PrivateVariables
@@ -191,13 +191,13 @@ namespace BCLoanCalculator
         int i = 1;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            myButton.Content = "გრაფიკი -";
+            myButton.Content = "გრაფიკის გადათვლა -";
             var ld = this.DataContext as LoanData;
             ld.GraphFlatPercentageMonthly();
             i++;
             if (i % 2 == 1)
             {
-                myButton.Content = "გარფიკი +";
+                myButton.Content = "გარფიკის გადათვლა +";
                 ld.FlatPercentageItemsSum.Clear();
                 ld.FlatPercentageItems.Clear();
             }

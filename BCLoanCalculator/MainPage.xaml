@@ -71,31 +71,7 @@
                             <TextBlock FontSize="11" 
                                        TextWrapping="Wrap" 
                                        Foreground= "#5BEABF" 
-                                       Margin="20,0,0,0">ყოველდღიური გადახდა</TextBlock>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="PMTMonthlyListBoxItem" >
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe UI" 
-                                       FontSize="16" 
-                                       Foreground= "#5BEABF" 
-                                       Text=" &#x13BE;" />
-                            <TextBlock FontSize="11" 
-                                       TextWrapping="Wrap" 
-                                       Foreground= "#5BEABF" 
-                                       Margin="20,0,0,0">ყოველთვიური გადახდა</TextBlock>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="FlatPercentageListBoxItem">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe UI" 
-                                       FontSize="16" 
-                                       Foreground= "#5BEABF" 
-                                       Text=" &#x17BE;" />
-                            <TextBlock FontSize="11" 
-                                       TextWrapping="Wrap" 
-                                       Foreground= "#5BEABF" 
-                                       Margin="20,0,0,0">ყოველთვიური ბრტყელი პროცნეტი</TextBlock>
+                                       Margin="20,0,0,0">ყოველდღიური ანუიტეტი</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
                     <ListBoxItem Name="FlatDailyListBoxItem">
@@ -110,6 +86,31 @@
                                        Margin="20,0,0,0">ყოველდღიური ბრტყელი პროცნეტი</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
+                    <ListBoxItem Name="PMTMonthlyListBoxItem" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe UI" 
+                                       FontSize="16" 
+                                       Foreground= "#5BEABF" 
+                                       Text=" &#x13BE;" />
+                            <TextBlock FontSize="11" 
+                                       TextWrapping="Wrap" 
+                                       Foreground= "#5BEABF" 
+                                       Margin="20,0,0,0">ყოველთვიური ანუიტეტი</TextBlock>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Name="FlatPercentageListBoxItem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe UI" 
+                                       FontSize="16" 
+                                       Foreground= "#5BEABF" 
+                                       Text=" &#x17BE;" />
+                            <TextBlock FontSize="11" 
+                                       TextWrapping="Wrap" 
+                                       Foreground= "#5BEABF" 
+                                       Margin="20,0,0,0">ყოველთვიური ბრტყელი პროცნეტი</TextBlock>
+                        </StackPanel>
+                    </ListBoxItem>
+                  
 
                 </ListBox>
             </SplitView.Pane>

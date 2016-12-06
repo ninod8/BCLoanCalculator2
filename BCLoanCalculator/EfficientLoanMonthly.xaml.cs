@@ -27,7 +27,7 @@ namespace BCLoanCalculator
         public EfficientLoanMonthly()
         {
             this.InitializeComponent();
-            myButton.Content = "გრაფიკი +";
+            myButton.Content = "გრაფიკის გადათვლა +";
         }
         int i = 1;
 
@@ -35,11 +35,11 @@ namespace BCLoanCalculator
         {
             var ld = this.DataContext as LoanData;
             ld.GraphMonthly();
-            myButton.Content = "გრაფიკი -";
+            myButton.Content = "გრაფიკის გადათვლა -";
             i++;
             if (i % 2 == 1)
             {
-                myButton.Content = "გრაფიკი +";
+                myButton.Content = "გრაფიკის გადათვლა +";
                 ld.ItemsMonthly.Clear();
                 ld.ItemsMonthlySum.Clear();
             }

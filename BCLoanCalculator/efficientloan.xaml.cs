@@ -9,6 +9,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.Globalization;
 using Microsoft.VisualBasic;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
@@ -46,8 +47,8 @@ namespace BCLoanCalculator
         public EfficientLoan()
         {
             this.InitializeComponent();
-            Graph.Content = "გრაფიკი +";
-            //EfficientLoan elfo = new EfficientLoan();
+            Graph.Content = "გრაფიკის გადათვლა +";
+                //EfficientLoan elfo = new EfficientLoan();
             //this.Frame.Navigate(typeof(EfficientLoanMonthly), elfo.LoanAmountTB);
         }
         private string _loanAmountValue;
@@ -108,12 +109,12 @@ namespace BCLoanCalculator
             ld.GraphDaily();
             ld.SumDaily();
             i++;
-            Graph.Content = "გრაფიკი -";
+            Graph.Content = "გრაფიკის გადათვლა -";
             if (i % 2 == 1)
             {
                 ld.Items.Clear();
                 ld.ItemsSum.Clear();
-                Graph.Content = "გრაფიკი +";
+                Graph.Content = "გრაფიკის გადათვლა +";
             }
         }
 

@@ -25,7 +25,7 @@ namespace BCLoanCalculator
         public FlatDaily()
         {
             this.InitializeComponent();
-            myButton.Content = "გრაფიკი +";
+            myButton.Content = "გრაფიკის გადათვლა +";
         }
 
         private void TermsOfLoanTB_TextChanged(object sender, TextChangedEventArgs e)
@@ -173,13 +173,13 @@ namespace BCLoanCalculator
             var ld = this.DataContext as LoanData;
             ld.GraphFlatPercentageDaily();
             ld.FlatSum();
-            myButton.Content = "გრაფიკი -";
+            myButton.Content = "გრაფიკის გადათვლა -";
             i++;
             if (i % 2 == 1)
             {
                 ld.FlatDailyItems.Clear();
                 ld.FlatDailyItemsSum.Clear();
-                myButton.Content = "გრაფიკი +";
+                myButton.Content = "გრაფიკის გადათვლა +";
             }
         }
     }
