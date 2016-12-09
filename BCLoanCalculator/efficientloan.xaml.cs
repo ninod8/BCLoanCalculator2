@@ -18,7 +18,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
 using Windows.UI.Popups;
-
+using Windows.Graphics.Printing;
+using Windows.UI.Xaml.Printing;
+using Windows.Graphics.Printing.OptionDetails;
+using System.Xml;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace BCLoanCalculator
@@ -42,7 +45,80 @@ namespace BCLoanCalculator
         //    base.OnNavigatedTo(e);
         //    string id = e.Parameter.ToString();
         //}
+        //void registerForPrinting()
+        //{
+        //    PrintManager PrintManager = PrintManager.GetForCurrentView();
+        //    PrintManager.PrintTaskRequested +=
+        //        PrintManager_PrintTaskRequested;
 
+        //    this.Document = new PrintDocument();
+        //    this.Document.Paginate += Paginate;
+        //    this.Document.GetPreviewPage += GetPreviewPage;
+
+        //}
+        //void GetPreviewPage(object sender, GetPreviewPageEventArgs e)
+        //{
+        //    int zeroBasedPageNumber = e.PageNumber - 1;
+        //    this.Document.SetPreviewPage(e.PageNumber, this.Pages[zeroBasedPageNumber].Image as UIElement);
+        //}
+        //void Paginate(object sender, PaginateEventArgs e)
+        //{
+        //    this.Document.SetPreviewPageCount(this.Page.Count, PreviewPageCountType.Final);
+        //}
+        // void PrintManager_PrintTaskRequested(PrintManager sender, PrintTaskRequestedEventArgs args)
+        //{
+        //    PrintTask printTask = args.Request.CreatePrintTask("PrintJobTitle", PrintTaskSourceRequested);
+        //    printTask.Completed += PrintTaskCompleted;
+        //    configurePrintTaskOptionDetails(printTask);
+        //}
+
+        //private void PrintTaskSourceRequested(PrintTaskSourceRequestedArgs args)
+        //{
+        //    args.SetSource(this.Document.DocumetSource);
+        //}
+        //void details_OptionChanged(PrintTaskOptionDetails sender, PrintTaskOptionChangedEventArgs args)
+        //{
+        //    if (args.OptionId != null && args.OptionId.ToString()=="Fit")
+        //    {
+        //        IPrintCustomOptionDetails fit = sender.Options[args.OptionId.ToString()];
+        //        switch(fit.Value.ToString())
+        //        {
+
+        //        }
+        //    }
+        //}
+        //async void AddPages(object sender, AddPagesEventArgs e)
+        //{
+        //    for (int pageNum = 0; pageNum < this.AddPages.Count; pageNum++)
+        //    {
+        //        var pageDesc = e.PrintTaskOptions.GetPageDescription((uint)pageNum);
+        //        var currentPage = this.Pages[pageNum];
+        //        this.Document.AddPage(await
+        //            currentPage.GetPageInTargetResolutioin(
+        //            (pageDesc.ImageableRect.Width * DpiX) / 96), 
+        //            (pageDesc.ImageableRect.Height * DpiY) / 96);
+        //    }
+        //this.Document.AddPagesComplete();
+        //}
+        //void PrintTaskCompleted(PrintTask sender, PrintTaskCompletedEventArgs args)
+        //{
+        //    if (args.Completion == PrintTaskCompletion.Failed)
+        //    {
+        //        Windows.UI.Popups.MessageDialog md = new Windows.UI.Popups.MessageDialog("Priting failed.");
+        //        md.ShowAsync();
+        //    }
+        //}
+
+        //void configurePrintTaskOptionDetails(PrintTask printTask)
+        //{
+        //    PrintTaskOptionDetails details = PrintTaskOptionDetails.GetFromPrintTaskOptions(printTask.Options);
+        //    IList<string> dispayedOptions = details.DisplayedOptions;
+        //    PrintCustomItemListOptionDetails fit = details.CreateItemListOption("Fit", "Fit to Page");
+        //    fit.AddItem("Scale", "Scale to Fit");
+        //    fit.AddItem("Crop", "Crop to Fit");
+        //    dispayedOptions.Add("Fit");
+        //    details.OptionChanged += details_OptionChanged;
+        //}
 
         public EfficientLoan()
         {
@@ -104,7 +180,7 @@ namespace BCLoanCalculator
 
         int i = 1;
         public void Graph_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             var ld = this.DataContext as LoanData;
             ld.GraphDaily();
             ld.SumDaily();

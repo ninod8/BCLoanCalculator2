@@ -218,7 +218,6 @@ namespace BCLoanCalculator
             {
                 try
                 {
-
                     _monthlyInterestF = value;
                     _annualInterestForMonthlyF = Math.Round(Convert.ToDouble(value) * 12, 3, MidpointRounding.AwayFromZero).ToString();
                     _dailyInterestF = (Convert.ToDouble(value) / 365).ToString();
@@ -1321,6 +1320,8 @@ namespace BCLoanCalculator
             try
             {
                 Items.Clear();
+                CultureInfo ci = new CultureInfo("en-US");
+
                 double amount = Convert.ToDouble(LoanAmountEL);
                 double balance = Convert.ToDouble(LoanAmountEL);
                 double dailyInterest = Convert.ToDouble(DailyInterestEL) / 100;
@@ -1355,7 +1356,7 @@ namespace BCLoanCalculator
                             {
                                 PaymentNumber = i.ToString(),
                                 Date = dateTime1.Date.ToString("dd/MM/yyyy"),
-                                Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString("N", ci),
                                 EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
                                 Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
                                 Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
@@ -1857,11 +1858,8 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-
                 _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
-
             }
-
         }
 
         public void FlatSum()
@@ -1880,10 +1878,8 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-
                 _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
             }
-
         }
 
         public void GraphFlatPercentageDaily()
