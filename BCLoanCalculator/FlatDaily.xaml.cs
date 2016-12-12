@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Threading.Tasks;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -168,8 +170,15 @@ namespace BCLoanCalculator
             }
         }
         int i = 1;
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                MyProgRing.Visibility = Visibility.Visible; // Progress ring name is Waiter.
+            });
+            await Task.Delay(1000);
+
             var ld = this.DataContext as LoanData;
             ld.GraphFlatPercentageDaily();
             ld.FlatSum();
@@ -181,6 +190,11 @@ namespace BCLoanCalculator
                 ld.FlatDailyItemsSum.Clear();
                 myButton.Content = "გრაფიკის გადათვლა +";
             }
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                MyProgRing.Visibility = Visibility.Collapsed;
+            });
+
         }
     }
 }

@@ -17,6 +17,8 @@ using Windows.Storage;
 using MyToolkit.Resources;
 using Microsoft.VisualBasic;
 using Windows.UI.ViewManagement;
+using System.Threading.Tasks;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -189,8 +191,15 @@ namespace BCLoanCalculator
             }
         }
         int i = 1;
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                MyProgRing.Visibility = Visibility.Visible; // Progress ring name is Waiter.
+            });
+            await Task.Delay(1000);
+
             myButton.Content = "გრაფიკის გადათვლა -";
             var ld = this.DataContext as LoanData;
             ld.GraphFlatPercentageMonthly();
@@ -201,6 +210,11 @@ namespace BCLoanCalculator
                 ld.FlatPercentageItemsSum.Clear();
                 ld.FlatPercentageItems.Clear();
             }
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                MyProgRing.Visibility = Visibility.Collapsed;
+            });
+
         }
     }
 

@@ -137,7 +137,6 @@ namespace BCLoanCalculator
                 catch (Exception)
                 {
                 }
-
             }
             if (FlatDailyListBoxItem.IsSelected)
             {
@@ -165,7 +164,6 @@ namespace BCLoanCalculator
                 {
 
                 }
-
             }
             if (FlatPercentageListBoxItem.IsSelected)
             {
@@ -194,7 +192,6 @@ namespace BCLoanCalculator
                 {
 
                 }
-
             }
         }
 

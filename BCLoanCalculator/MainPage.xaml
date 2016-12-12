@@ -46,7 +46,7 @@
                     Height="45"
                 />
         </RelativePanel>
-        
+
         <SplitView Grid.Row="1" 
                    Background="#0F0F0F"
                    Name="MySplitView"
@@ -110,16 +110,15 @@
                                        Margin="20,0,0,0">ყოველთვიური ბრტყელი პროცნეტი</TextBlock>
                         </StackPanel>
                     </ListBoxItem>
-                  
-
                 </ListBox>
             </SplitView.Pane>
             <SplitView.Content>
                 <Frame Name="MyFrame" ></Frame>
             </SplitView.Content>
-            
+
 
         </SplitView>
-        
+
     </Grid>
+
 </Page>

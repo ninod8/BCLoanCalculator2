@@ -22,6 +22,8 @@ using Windows.Graphics.Printing;
 using Windows.UI.Xaml.Printing;
 using Windows.Graphics.Printing.OptionDetails;
 using System.Xml;
+using System.Threading.Tasks;
+using Windows.UI.Core;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace BCLoanCalculator
@@ -124,8 +126,9 @@ namespace BCLoanCalculator
         {
             this.InitializeComponent();
             Graph.Content = "გრაფიკის გადათვლა +";
-                //EfficientLoan elfo = new EfficientLoan();
+            //EfficientLoan elfo = new EfficientLoan();
             //this.Frame.Navigate(typeof(EfficientLoanMonthly), elfo.LoanAmountTB);
+            MyProgRing.Visibility = Visibility.Collapsed;
         }
         private string _loanAmountValue;
 
@@ -179,8 +182,15 @@ namespace BCLoanCalculator
         }
 
         int i = 1;
-        public void Graph_Click(object sender, RoutedEventArgs e)
-        { 
+        public async void Graph_Click(object sender, RoutedEventArgs e)
+        {
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                MyProgRing.Visibility = Visibility.Visible; // Progress ring name is Waiter.
+            });
+            await Task.Delay(1000);
+
             var ld = this.DataContext as LoanData;
             ld.GraphDaily();
             ld.SumDaily();
@@ -192,6 +202,10 @@ namespace BCLoanCalculator
                 ld.ItemsSum.Clear();
                 Graph.Content = "გრაფიკის გადათვლა +";
             }
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                MyProgRing.Visibility = Visibility.Collapsed; 
+            });
         }
 
         private void DatePicker1_DateChanged(object sender, DatePickerValueChangedEventArgs e)

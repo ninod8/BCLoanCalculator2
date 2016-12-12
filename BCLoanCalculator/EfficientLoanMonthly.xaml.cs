@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Globalization;
+using System.Threading.Tasks;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -31,8 +33,14 @@ namespace BCLoanCalculator
         }
         int i = 1;
 
-        public void Button_Click(object sender, RoutedEventArgs e)
+        public async void Button_Click(object sender, RoutedEventArgs e)
         {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                MyProgRing.Visibility = Visibility.Visible; // Progress ring name is Waiter.
+            });
+            await Task.Delay(1000);
+
             var ld = this.DataContext as LoanData;
             ld.GraphMonthly();
             myButton.Content = "გრაფიკის გადათვლა -";
@@ -43,6 +51,11 @@ namespace BCLoanCalculator
                 ld.ItemsMonthly.Clear();
                 ld.ItemsMonthlySum.Clear();
             }
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                MyProgRing.Visibility = Visibility.Collapsed;
+            });
+
         }
         //protected override void OnNavigatedTo(NavigationEventArgs e)
         //{

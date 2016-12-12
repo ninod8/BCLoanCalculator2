@@ -57,7 +57,7 @@
                 <TextBlock Name="ErrorTB" Text="{Binding Ex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
 
                 <Button FontSize="13" Margin="10,0" Name="Graph" Foreground="#5BEABF" Background="#0F0F0F" Click="Graph_Click" HorizontalAlignment="Center"></Button>
-                
+                <ProgressRing Width="30" Height="30" Name="MyProgRing" IsActive="True" Foreground="#0F0F0F" Margin="10,10"> </ProgressRing>
 
                 <!--<TextBlock Name="sumPMT" FontSize="11"  Margin="10,0" VerticalAlignment="Center" Text="{Binding SumpPMT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
 
