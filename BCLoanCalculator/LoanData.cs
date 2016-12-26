@@ -1410,7 +1410,7 @@ namespace BCLoanCalculator
                                 }
                                 DateTime dateTime = StartDateDaily.AddDays(i + 1);
                                 double interest = amount * dailyInterest;
-                                double principal = Convert.ToDouble(DailyPayment) - interest;
+                                double principal = Convert.ToDouble(DailyPayment) - Math.Round(interest, 2, MidpointRounding.AwayFromZero);
                                 balance -= principal;
                                 Items.Add(new GridItem()
                                 {
@@ -1475,7 +1475,7 @@ namespace BCLoanCalculator
                                     }
                                     DateTime dateTime = StartDateDaily.AddDays(i + 1);
                                     double interest = amount * dailyInterest;
-                                    double principal = Convert.ToDouble(DailyPayment) - interest;
+                                    double principal = Convert.ToDouble(DailyPayment) - Math.Round(interest, 2, MidpointRounding.AwayFromZero);
                                     balance -= principal;
                                     Items.Add(new GridItem()
                                     {
