@@ -13,12 +13,12 @@
     <Page.DataContext>
         <local:LoanData/>
     </Page.DataContext>
-    
+
     <Grid Background="#D6D6D6" >
-        
+
         <ScrollViewer HorizontalScrollBarVisibility="Hidden"
                       VerticalScrollBarVisibility="Hidden">
-            
+
             <StackPanel Margin="0,10">
 
                 <!--Foreground="#5BEABF"-->
@@ -36,8 +36,8 @@
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0"  VerticalAlignment="Center">სესხის ვადა (დღე)</TextBlock>
 
-                <TextBox BorderThickness="0"  Name="TermsOfLoanTB" TextChanged="TermsOfLoanTB_TextChanged" Margin="10,5" VerticalAlignment="Center" Text="{Binding TermDaily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-               
+                <TextBox BorderThickness="0"  Name="TermsOfLoanTB" TextChanged="TermsOfLoanTB_TextChanged" Margin="10,5" VerticalAlignment="Center" Text="{Binding TermDaily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" RequestedTheme="Light"></TextBox>
+
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">ყოველდღიური საპროცენტო განაკვეთი (%)</TextBlock>
 
                 <TextBox BorderThickness="0" Name="DailyPercentTB" Margin="10,5" TextChanged="DailyPercentTB_TextChanged" Text="{Binding DailyInterestEL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
@@ -49,15 +49,16 @@
                 <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">საშეღავათო პერიოდი</TextBlock>
 
                 <TextBox BorderThickness="0" Margin="10,5" Name="InterestOnly" TextChanged="InterestOnly_TextChanged" Text="{Binding InterestOnlyEL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <ToggleSwitch Name="ToggleSwitch1"  Margin="10,0"  FontSize="11"  OnContent="რეგულარული გადასახადი" OffContent="ყოველდღიური გადასახადი" FontWeight="Bold" Toggled="ToggleSwitch1_Toggled" IsOn="False"/>
 
-                <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველდღიური გადასახადი</TextBlock>
+                <!--<TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center"  >ყოველდღიური გადასახადი</TextBlock>-->
 
                 <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged" Text="{Binding DailyPayment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock Name="ErrorTB" Text="{Binding Ex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
 
                 <Button FontSize="13" Margin="10,0" Name="Graph" Foreground="#5BEABF" Background="#0F0F0F" Click="Graph_Click" HorizontalAlignment="Center"></Button>
-                <ProgressRing Width="30" Height="30" Name="MyProgRing" IsActive="True" Foreground="#0F0F0F" Margin="10,10"> </ProgressRing>
+                <ProgressRing Width="30" Height="30" Name="MyProgRing" IsActive="True" Foreground="#0F0F0F" Margin="10,10"></ProgressRing>
 
                 <!--<TextBlock Name="sumPMT" FontSize="11"  Margin="10,0" VerticalAlignment="Center" Text="{Binding SumpPMT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
 

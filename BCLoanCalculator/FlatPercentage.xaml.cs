@@ -32,7 +32,9 @@ namespace BCLoanCalculator
         public FlatPercentage()
         {
             this.InitializeComponent();
-            myButton.Content = "გარფიკის გადათვლა +";        
+            myButton.Content = "გარფიკის გადათვლა +";
+            MyProgRing.Visibility = Visibility.Collapsed;
+
         }
 
         #region PrivateVariables

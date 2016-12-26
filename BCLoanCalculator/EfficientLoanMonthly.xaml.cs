@@ -30,6 +30,8 @@ namespace BCLoanCalculator
         {
             this.InitializeComponent();
             myButton.Content = "გრაფიკის გადათვლა +";
+            MyProgRing.Visibility = Visibility.Collapsed;
+
         }
         int i = 1;
 

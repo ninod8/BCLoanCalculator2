@@ -11,5 +11,14 @@
             <Setter Property="FontFamily" Value="MV Boli"/>
             <Setter Property="FontSize" Value="22"/>
         </Style>-->
+
+            <ResourceDictionary>
+                <ResourceDictionary.ThemeDictionaries>
+                    <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="#0F0F0F"/>
+                    </ResourceDictionary>
+                </ResourceDictionary.ThemeDictionaries>
+            </ResourceDictionary>
+
     </Application.Resources>
 </Application>

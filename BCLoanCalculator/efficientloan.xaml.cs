@@ -204,7 +204,7 @@ namespace BCLoanCalculator
             }
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                MyProgRing.Visibility = Visibility.Collapsed; 
+                MyProgRing.Visibility = Visibility.Collapsed;
             });
         }
 
@@ -305,6 +305,22 @@ namespace BCLoanCalculator
             catch (Exception)
             {
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+            }
+        }
+
+        private void ToggleSwitch1_Toggled(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ToggleSwitch1.IsOn)
+                {
+                    App.Toggle1 = true;
+                }
+                else { App.Toggle1 = false; }
+            }
+            catch (Exception)
+            {
+
             }
         }
     }

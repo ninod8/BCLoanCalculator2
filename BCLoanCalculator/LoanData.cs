@@ -293,7 +293,10 @@ namespace BCLoanCalculator
                 {
                     _dailyInterestEL = value;
                     _annualInterestEL = Math.Round(Convert.ToDouble(value) * 365, 3, MidpointRounding.AwayFromZero).ToString();
-                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    if (App.Toggle1 != true)
+                    {
+                        _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    }
                 }
                 catch (Exception)
                 {
@@ -392,7 +395,10 @@ namespace BCLoanCalculator
 
                     _annualInterestEL = value;
                     _dailyInterestEL = Math.Round(Convert.ToDouble(value) / 365, 3, MidpointRounding.AwayFromZero).ToString();
-                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    if (App.Toggle1 != true)
+                    {
+                        _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    }
                 }
                 catch (Exception)
                 {
@@ -486,7 +492,10 @@ namespace BCLoanCalculator
                 try
                 {
                     _loanAmountEL = value;
-                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    if (App.Toggle1 != true)
+                    {
+                        _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    }
                 }
                 catch (Exception)
                 {
@@ -568,9 +577,11 @@ namespace BCLoanCalculator
                 try
                 {
                     _startDateDaily = value;
-
-                    _termDaily = CountDays().ToString();
-                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    if (App.Toggle1 != true)
+                    {
+                        _termDaily = CountDays().ToString();
+                        _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    }
                 }
                 catch (Exception)
                 {
@@ -589,9 +600,11 @@ namespace BCLoanCalculator
                 try
                 {
                     _endDateDaily = value;
-
-                    _termDaily = CountDays().ToString();
-                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    if (App.Toggle1 != true)
+                    {
+                        _termDaily = CountDays().ToString();
+                        _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                    }
                 }
                 catch (Exception)
                 {
@@ -810,11 +823,23 @@ namespace BCLoanCalculator
             {
                 try
                 {
-                    _termDaily = value;
-                    _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
-                    OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
-                    OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
-                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+                    if (App.Toggle1 != true)
+                    {
+                        if (Convert.ToDouble(_dailyPayment) > 0)
+                        {
+                            _termDaily = NperDaily();
+                        }
+                        else
+                        {
+                            _termDaily = value;
+                            DailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
+                        }
+                        OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
+                        OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
+                        OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+                        OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                    }
+                    else _termDaily = value;
                 }
                 catch (Exception)
                 {
@@ -929,14 +954,23 @@ namespace BCLoanCalculator
                 try
                 {
                     _dailyPayment = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
-                    OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
-                    OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
-                    OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
-                    OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
-                    OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
-                    OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
-                    OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+
+                    if (App.Toggle1 != true)
+                    {
+                        if (Convert.ToDouble(_dailyPayment) > 0)
+                        {
+                            TermDaily = NperDaily();
+                        }
+                        OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountEL"));
+                        OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
+                        OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
+                        OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                        OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyEL"));
+                        OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
+                        OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
+                        OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+                    }
+
                 }
                 catch (Exception)
                 {
@@ -1073,7 +1107,7 @@ namespace BCLoanCalculator
                 }
                 else interestonly = Convert.ToInt32(InterestOnlyELM);
                 double pmt;
-                double rate = Convert.ToDouble(DailyInterestELM) * CountDaysForMonthly()/ (100 * Convert.ToDouble(TermMonthly));
+                double rate = Convert.ToDouble(DailyInterestELM) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
                 if (rate == 0)
                 {
                     rate = Convert.ToDouble(DailyInterestELM) * Convert.ToDouble(TermMonthly) * 30 / (100 * Convert.ToDouble(TermMonthly));
@@ -1102,7 +1136,7 @@ namespace BCLoanCalculator
             try
             {
                 double flatPayment;
-              double  rate = (Convert.ToDouble(AnnualInterestForMonthlyF) / 365) * CountDaysForFlat() / (100 * Convert.ToDouble(TermFlat));
+                double rate = (Convert.ToDouble(AnnualInterestForMonthlyF) / 365) * CountDaysForFlat() / (100 * Convert.ToDouble(TermFlat));
 
                 if (rate == 0)
                 {
@@ -1110,10 +1144,10 @@ namespace BCLoanCalculator
                 }
                 if (CounterForFlat() > 0)
                 {
-                    rate = (Convert.ToDouble(AnnualInterestForMonthlyF) / 365) * CountDaysForFlat() / (100 * (Convert.ToDouble(TermFlat)+1));
+                    rate = (Convert.ToDouble(AnnualInterestForMonthlyF) / 365) * CountDaysForFlat() / (100 * (Convert.ToDouble(TermFlat) + 1));
                     flatPayment = (Convert.ToDouble(LoanAmountFM) + (rate * Convert.ToDouble(LoanAmountFM))) / (Convert.ToDouble(TermFlat) + 1);
                 }
-               else flatPayment = (Convert.ToDouble(LoanAmountFM) + (rate * Convert.ToDouble(LoanAmountFM))) / Convert.ToDouble(TermFlat);
+                else flatPayment = (Convert.ToDouble(LoanAmountFM) + (rate * Convert.ToDouble(LoanAmountFM))) / Convert.ToDouble(TermFlat);
                 string peyment = flatPayment.ToString();
                 if (!Double.IsNaN(flatPayment) && !Double.IsInfinity(flatPayment) && flatPayment != 0)
                 {
@@ -1148,20 +1182,21 @@ namespace BCLoanCalculator
             return "";
         }
 
-        //public string NperDaily()
-        //{
-        //    try
-        //    {
-        //        double rate = Convert.ToDouble(DailyInterestEL) / 100;
-        //        double nper = -Math.Log((1 - rate * Convert.ToDouble(LoanAmountEL) / Convert.ToDouble(DailyPayment)), Math.E) / Math.Log((1 + rate), Math.E);
-        //        return nper.ToString();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
-        //    }
-        //    return "";
-        //}
+        public string NperDaily()
+        {
+            double nper = 0;
+            try
+            {
+                double rate = Convert.ToDouble(DailyInterestEL) / 100;
+                nper = -Math.Log((1 - (rate * Convert.ToDouble(LoanAmountEL) / Convert.ToDouble(DailyPayment))), Math.E) / Math.Log((1 + rate), Math.E);
+            }
+            catch (Exception)
+            {
+                _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
+            }
+            return nper.ToString();
+            //  return "";
+        }
 
         //public string NperMonthly()
         //{
@@ -1320,11 +1355,12 @@ namespace BCLoanCalculator
             try
             {
                 Items.Clear();
-                CultureInfo ci = new CultureInfo("en-US");
+                // CultureInfo ci = new CultureInfo("en-US");
 
                 double amount = Convert.ToDouble(LoanAmountEL);
                 double balance = Convert.ToDouble(LoanAmountEL);
                 double dailyInterest = Convert.ToDouble(DailyInterestEL) / 100;
+                int term = Convert.ToInt32(TermDaily) - 1;
                 Items.Add(new GridItem()
                 {
                     Date = "თარიღი",
@@ -1341,47 +1377,223 @@ namespace BCLoanCalculator
                     interestonly = 0;
                 }
                 else interestonly = Convert.ToInt32(InterestOnlyEL);
-                for (int i = 0; i < Convert.ToDouble(TermDaily); i++)
+
+                for (int i = 0; i < Convert.ToInt32(TermDaily); i++)
                 {
-                    if (Convert.ToDouble(interestonly) > 0)
+                    if (App.Toggle1 == true)
                     {
-                        while (i < Convert.ToDouble(interestonly))
+                        if (Convert.ToDouble(PMTDaily()) < Convert.ToDouble(DailyPayment))
                         {
-                            i++;
-                            DateTime dateTime1 = StartDateDaily.AddDays(i);
+                            do
+                            {
+                                if (Convert.ToDouble(interestonly) > 0)
+                                {
+                                    while (i < Convert.ToDouble(interestonly))
+                                    {
+                                        i++;
+                                        DateTime dateTime10 = StartDateDaily.AddDays(i);
+                                        double interest10 = amount * dailyInterest;
+                                        double principal10 = 0.00;
+                                        balance = Convert.ToDouble(LoanAmountEL);
+                                        Items.Add(new GridItem()
+                                        {
+                                            PaymentNumber = i.ToString(),
+                                            Date = dateTime10.Date.ToString("dd/MM/yyyy"),
+                                            Payment = Math.Round(interest10, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            Principal = Math.Round(principal10, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            Interest = Math.Round(interest10, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                        });
+                                        amount = Convert.ToDouble(LoanAmountEL);
+                                    }
+                                }
+                                DateTime dateTime = StartDateDaily.AddDays(i + 1);
+                                double interest = amount * dailyInterest;
+                                double principal = Convert.ToDouble(DailyPayment) - interest;
+                                balance -= principal;
+                                Items.Add(new GridItem()
+                                {
+                                    PaymentNumber = (i + 1).ToString(),
+                                    Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                                    Payment = Math.Round(Convert.ToDouble(DailyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
+                                    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                });
+                                amount -= principal;
+                                OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+                                i++;
+                            }
+                            while ((balance - Convert.ToDouble(DailyPayment)) > 0);
+                            DateTime dateTime1 = StartDateDaily.AddDays(i + 1);
                             double interest1 = amount * dailyInterest;
-                            double principal1 = 0.00;
-                            balance = Convert.ToDouble(LoanAmountEL);
+                            double principal1 = balance;
+                            balance -= principal1;
                             Items.Add(new GridItem()
                             {
-                                PaymentNumber = i.ToString(),
+                                PaymentNumber = (i + 1).ToString(),
                                 Date = dateTime1.Date.ToString("dd/MM/yyyy"),
-                                Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString("N", ci),
+                                Payment = Math.Round((interest1 + amount), 2, MidpointRounding.AwayFromZero).ToString(),
                                 EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
                                 Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
                                 Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
                             });
-                            amount = Convert.ToDouble(LoanAmountEL);
+                            amount -= principal1;
+                            i = Convert.ToInt32(TermDaily);
+                            OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+                        }
+                        else
+                        {
+                            if ((Convert.ToDouble(PMTDaily()) > Convert.ToDouble(DailyPayment)))
+                            {
+                                while (i < term)
+                                {
+                                    if (Convert.ToDouble(interestonly) > 0)
+                                    {
+                                        while (i < Convert.ToDouble(interestonly))
+                                        {
+                                            i++;
+                                            DateTime dateTime12 = StartDateDaily.AddDays(i);
+                                            double interest12 = amount * dailyInterest;
+                                            double principal12 = 0.00;
+                                            balance = Convert.ToDouble(LoanAmountEL);
+                                            Items.Add(new GridItem()
+                                            {
+                                                PaymentNumber = i.ToString(),
+                                                Date = dateTime12.Date.ToString("dd/MM/yyyy"),
+                                                Payment = Math.Round(interest12, 2, MidpointRounding.AwayFromZero).ToString(),
+                                                EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                                Principal = Math.Round(principal12, 2, MidpointRounding.AwayFromZero).ToString(),
+                                                Interest = Math.Round(interest12, 2, MidpointRounding.AwayFromZero).ToString(),
+                                                StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                            });
+                                            amount = Convert.ToDouble(LoanAmountEL);
+                                        }
+                                    }
+                                    DateTime dateTime = StartDateDaily.AddDays(i + 1);
+                                    double interest = amount * dailyInterest;
+                                    double principal = Convert.ToDouble(DailyPayment) - interest;
+                                    balance -= principal;
+                                    Items.Add(new GridItem()
+                                    {
+                                        PaymentNumber = (i + 1).ToString(),
+                                        Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                                        Payment = Math.Round(Convert.ToDouble(DailyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
+                                        EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                    });
+                                    amount -= principal;
+                                    OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+                                    i++;
+                                }
+                                DateTime dateTime1 = StartDateDaily.AddDays(i + 1);
+                                double interest1 = amount * dailyInterest;
+                                double principal1 = amount;
+                                balance -= principal1;
+                                Items.Add(new GridItem()
+                                {
+                                    PaymentNumber = (i + 1).ToString(),
+                                    Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                                    Payment = Math.Round(interest1 + amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                });
+                                amount -= principal1;
+                                OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+                            }
+                            else
+                            {
+                                if (Convert.ToDouble(interestonly) > 0)
+                                {
+                                    while (i < Convert.ToDouble(interestonly))
+                                    {
+                                        i++;
+                                        DateTime dateTime1 = StartDateDaily.AddDays(i);
+                                        double interest1 = amount * dailyInterest;
+                                        double principal1 = 0.00;
+                                        balance = Convert.ToDouble(LoanAmountEL);
+                                        Items.Add(new GridItem()
+                                        {
+                                            PaymentNumber = i.ToString(),
+                                            Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                                            Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                        });
+                                        amount = Convert.ToDouble(LoanAmountEL);
+                                    }
+                                }
+
+                                DateTime dateTime = StartDateDaily.AddDays(i + 1);
+                                double interest = amount * dailyInterest;
+                                double principal = Convert.ToDouble(PMTDaily()) - interest;
+                                balance -= principal;
+                                Items.Add(new GridItem()
+                                {
+                                    PaymentNumber = (i + 1).ToString(),
+                                    Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                                    Payment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString(),
+                                    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                });
+                                amount -= principal;
+                                OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+                            }
                         }
                     }
-
-                    DateTime dateTime = StartDateDaily.AddDays(i + 1);
-                    double interest = amount * dailyInterest;
-                    double principal = Convert.ToDouble(PMTDaily()) - interest;
-                    balance -= principal;
-                    Items.Add(new GridItem()
+                    else
                     {
-                        PaymentNumber = (i + 1).ToString(),
-                        Date = dateTime.Date.ToString("dd/MM/yyyy"),
-                        Payment = Math.Round(Convert.ToDouble(DailyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
-                        EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
-                        Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
-                        Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
-                        StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
-                    });
-                    amount -= principal;
-                    OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+                        if (Convert.ToDouble(interestonly) > 0)
+                        {
+                            while (i < Convert.ToDouble(interestonly))
+                            {
+                                i++;
+                                DateTime dateTime1 = StartDateDaily.AddDays(i);
+                                double interest1 = amount * dailyInterest;
+                                double principal1 = 0.00;
+                                balance = Convert.ToDouble(LoanAmountEL);
+                                Items.Add(new GridItem()
+                                {
+                                    PaymentNumber = i.ToString(),
+                                    Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                                    Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                });
+                                amount = Convert.ToDouble(LoanAmountEL);
+                            }
+                        }
+
+                        DateTime dateTime = StartDateDaily.AddDays(i + 1);
+                        double interest = amount * dailyInterest;
+                        double principal = Convert.ToDouble(PMTDaily()) - interest;
+                        balance -= principal;
+                        Items.Add(new GridItem()
+                        {
+                            PaymentNumber = (i + 1).ToString(),
+                            Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                            Payment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString(),
+                            EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                            Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                            Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                            StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                        });
+                        amount -= principal;
+                        OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+                    }
                 }
             }
             catch (Exception)
@@ -1785,16 +1997,16 @@ namespace BCLoanCalculator
                             rate = (Convert.ToDouble(AnnualInterestForMonthlyF) / 365) * Convert.ToDouble(TermFlat) * 30 / 100;
                         }
                         DateTime dateTime = StartDateFlat.AddMonths(i - 1);
-                     //  double interest = Convert.ToDouble(LoanAmountFM) * rate / (Convert.ToDouble(TermFlat));
+                        //  double interest = Convert.ToDouble(LoanAmountFM) * rate / (Convert.ToDouble(TermFlat));
                         if (CounterForFlat() > 0)
                         {
                             principal = Convert.ToDouble(LoanAmountFM) / (Convert.ToDouble(TermFlat) + 1);
-                           //interest  = Convert.ToDouble(LoanAmountFM) * rate / (Convert.ToDouble(TermFlat));
+                            //interest  = Convert.ToDouble(LoanAmountFM) * rate / (Convert.ToDouble(TermFlat));
                         }
                         else
                         {
                             principal = Convert.ToDouble(LoanAmountFM) / Convert.ToDouble(TermFlat);
-                           // interest = Convert.ToDouble(LoanAmountFM) * rate / (Convert.ToDouble(TermFlat));
+                            // interest = Convert.ToDouble(LoanAmountFM) * rate / (Convert.ToDouble(TermFlat));
                         }
                         balance -= principal;
                         FlatPercentageItems.Add(new GridItem()
@@ -1803,7 +2015,7 @@ namespace BCLoanCalculator
                             Date = dateTime.Date.ToString("dd/MM/yyyy"),
                             Payment = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString(),
                             Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
-                            Interest = Math.Round((Convert.ToDouble(FlatMonthly())- principal), 2, MidpointRounding.AwayFromZero).ToString(),
+                            Interest = Math.Round((Convert.ToDouble(FlatMonthly()) - principal), 2, MidpointRounding.AwayFromZero).ToString(),
                             StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                             EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
                         });

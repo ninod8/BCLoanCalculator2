@@ -24,7 +24,7 @@ namespace BCLoanCalculator
     sealed partial class App : Application
     {
         //internal static LoanData data;
-
+        internal static bool Toggle1;
         internal static string LoanAmountEL;
         internal static string LoanAmountELM;
         internal static string LoanAmountFM;

@@ -28,13 +28,13 @@ namespace BCLoanCalculator
         {
             this.InitializeComponent();
             myButton.Content = "გრაფიკის გადათვლა +";
+            MyProgRing.Visibility = Visibility.Collapsed;
         }
 
         private void TermsOfLoanTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
-
                 App.TermF = TermsOfLoanTB.Text;
                 DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToInt32(TermsOfLoanTB.Text));
                 ErrorTB.Text = String.Empty;
