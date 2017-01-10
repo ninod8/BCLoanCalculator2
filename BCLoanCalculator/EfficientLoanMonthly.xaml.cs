@@ -31,7 +31,8 @@ namespace BCLoanCalculator
             this.InitializeComponent();
             myButton.Content = "გრაფიკის გადათვლა +";
             MyProgRing.Visibility = Visibility.Collapsed;
-
+            DatePicker11.Date = DatePicker0.Date.AddMonths(1);
+            DatePicker12.Date = DatePicker0.Date.AddMonths(1);
         }
         int i = 1;
 
@@ -122,12 +123,16 @@ namespace BCLoanCalculator
             set { _paymentValue = PMTTB.Text; }
         }
 
-        private void TermsOfLoanTB_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        private void TermsOfLoanTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
                 App.TermELM = TermsOfLoanTB.Text;
-                DatePicker12.Date = DatePicker11.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+
+                //if (Convert.ToInt32(TermsOfLoanTB.Text)>0)
+                //{
+                DatePicker12.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                //}
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
@@ -135,7 +140,6 @@ namespace BCLoanCalculator
                 ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
             }
         }
-
         private void LoanAmountTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -144,7 +148,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                
+
             }
         }
 
@@ -156,7 +160,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                
+
             }
         }
 
@@ -211,7 +215,18 @@ namespace BCLoanCalculator
             try
             {
                 App.PeymentELM = PMTTB.Text;
-
+                try
+                {
+                    //if (Convert.ToInt32(TermsOfLoanTB.Text)>0)
+                    //{
+                    DatePicker12.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                    //}
+                    ErrorTB.Text = String.Empty;
+                }
+                catch (Exception)
+                {
+                    ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                }
             }
             catch (Exception)
             {
@@ -231,5 +246,23 @@ namespace BCLoanCalculator
 
             }
         }
+
+        private void ToggleSwitch2_Toggled(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ToggleSwitch2.IsOn)
+                {
+                    App.Toggle2 = true;
+                }
+                else { App.Toggle2 = false; }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+
     }
 }

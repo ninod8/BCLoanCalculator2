@@ -25,6 +25,8 @@ namespace BCLoanCalculator
     {
         //internal static LoanData data;
         internal static bool Toggle1;
+        internal static bool Toggle2;
+
         internal static string LoanAmountEL;
         internal static string LoanAmountELM;
         internal static string LoanAmountFM;
@@ -53,15 +55,14 @@ namespace BCLoanCalculator
         internal static string PeymentFM;
         internal static string PeymentF;
 
-        internal static DateTime StartDateELM = DateTime.Today.Date;
+        internal static DateTime StartDateELM = DateTime.Today.Date.AddMonths(1);
         internal static DateTime StartDateEL = DateTime.Today.Date;
         internal static DateTime StartDateF = DateTime.Today.Date;
-        internal static DateTime StartDateFM = DateTime.Today.Date;
-
+        internal static DateTime StartDateFM = DateTime.Today.Date.AddMonths(1);
 
         internal static DateTime EndDateEL = DateTime.Today.Date;
-        internal static DateTime EndDateELM = DateTime.Today.Date;
-        internal static DateTime EndDateFM = DateTime.Today.Date;
+        internal static DateTime EndDateELM = DateTime.Today.Date.AddMonths(1);
+        internal static DateTime EndDateFM = DateTime.Today.Date.AddMonths(1);
         internal static DateTime EndDateF = DateTime.Today.Date;
 
         internal static DateTime ReleaseDateELM = DateTime.Today.Date;

@@ -320,7 +320,6 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-
             }
         }
     }

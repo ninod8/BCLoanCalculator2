@@ -116,7 +116,6 @@
                 <Frame Name="MyFrame" ></Frame>
             </SplitView.Content>
 
-
         </SplitView>
 
     </Grid>
