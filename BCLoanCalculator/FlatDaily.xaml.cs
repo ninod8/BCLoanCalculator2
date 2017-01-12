@@ -181,7 +181,7 @@ namespace BCLoanCalculator
 
             var ld = this.DataContext as LoanData;
             ld.GraphFlatPercentageDaily();
-            ld.FlatSum();
+           // ld.FlatSum();
             myButton.Content = "გრაფიკის გადათვლა -";
             i++;
             if (i % 2 == 1)
@@ -195,6 +195,22 @@ namespace BCLoanCalculator
                 MyProgRing.Visibility = Visibility.Collapsed;
             });
 
+        }
+
+        private void ToggleSwitch11_Toggled(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ToggleSwitch11.IsOn)
+                {
+                    App.Toggle11 = true;
+                }
+                else { App.Toggle11 = false; }
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

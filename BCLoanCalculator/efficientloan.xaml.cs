@@ -193,7 +193,7 @@ namespace BCLoanCalculator
 
             var ld = this.DataContext as LoanData;
             ld.GraphDaily();
-            ld.SumDaily();
+         //   ld.SumDaily();
             i++;
             Graph.Content = "გრაფიკის გადათვლა -";
             if (i % 2 == 1)

@@ -95,7 +95,7 @@ namespace BCLoanCalculator
             {
                 App.TermFM = TermsOfLoanTB.Text;
                // DatePicker1.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
-                DatePicker2.Date = DatePicker1.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                DatePicker2.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
@@ -109,11 +109,9 @@ namespace BCLoanCalculator
             try
             {
                 App.LoanAmountFM = LoanAmountTB.Text;
-
             }
             catch (Exception)
             {
-
             }
         }
 
@@ -217,6 +215,22 @@ namespace BCLoanCalculator
                 MyProgRing.Visibility = Visibility.Collapsed;
             });
 
+        }
+
+        private void ToggleSwitch22_Toggled(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ToggleSwitch22.IsOn)
+                {
+                    App.Toggle22 = true;
+                }
+                else { App.Toggle22 = false; }
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 

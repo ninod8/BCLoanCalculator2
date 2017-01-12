@@ -44,13 +44,16 @@
 
                 <TextBox BorderThickness="0" Name="AnnualPercentTB" Margin="10,5" TextChanged="AnnualPercentTB_TextChanged" Text="{Binding AnnualInterestF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველდღიური გადასახადი</TextBlock>
+                <!--<TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველდღიური გადასახადი</TextBlock>-->
                 
+                <ToggleSwitch Name="ToggleSwitch11"  Margin="10,0"  FontSize="11" Toggled="ToggleSwitch11_Toggled" OnContent="რეგულარული გადასახადი" OffContent="ყოველდღიური გადასახადი" FontWeight="Bold" IsOn="False"/>
+
                 <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged" Text="{Binding  DailyPaymentFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 
                 <TextBlock Name="ErrorTB"  Text="{Binding Ex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
 
                 <Button FontSize="13" Margin="10,0" Name="myButton" Foreground="#5BEABF" Click="Button_Click" Background="#0F0F0F" HorizontalAlignment="Center"></Button>
+                
                 <ProgressRing Width="30" Height="30" Name="MyProgRing" IsActive="True" Foreground="#0F0F0F" Margin="10,10"></ProgressRing>
 
                 <GridView Name="GridView2"

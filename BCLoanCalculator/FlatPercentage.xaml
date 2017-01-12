@@ -48,7 +48,8 @@
 
                 <TextBox BorderThickness="0" Name="AnnualPercentTB" Margin="10,5" TextChanged="AnnualPercentTB_TextChanged" Text="{Binding AnnualInterestForMonthlyF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველთვიური გადასახადი</TextBlock>
+                <!--<TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველთვიური გადასახადი</TextBlock>-->
+                <ToggleSwitch Name="ToggleSwitch22"  Margin="10,0"  FontSize="11" Toggled="ToggleSwitch22_Toggled" OnContent="რეგულარული გადასახადი" OffContent="ყოველდღიური გადასახადი" FontWeight="Bold"  IsOn="False"/>
 
                 <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged" Text="{Binding MonthlyPaymentFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 

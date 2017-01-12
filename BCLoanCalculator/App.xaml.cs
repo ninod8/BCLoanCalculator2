@@ -26,6 +26,8 @@ namespace BCLoanCalculator
         //internal static LoanData data;
         internal static bool Toggle1;
         internal static bool Toggle2;
+        internal static bool Toggle11;
+        internal static bool Toggle22;
 
         internal static string LoanAmountEL;
         internal static string LoanAmountELM;
