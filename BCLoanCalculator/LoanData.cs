@@ -2119,10 +2119,10 @@ namespace BCLoanCalculator
                         while (i < 2)
                         {
                             rate = ((Convert.ToDouble(AnnualInterestForMonthlyF) / 365) * CounterForFlat()) / 100;
-                            DateTime dateTime1 = StartDateFlat.AddMonths(i - 1);
+                            DateTime dateTime1 = StartDateFlat;
                             double principal1 = Convert.ToDouble(LoanAmountFM) / CountMonthsForFlatStartEnd();
                             double interest1 = principal1 * rate;
-                            balance -= principal1;
+                            balance -= principal1; 
                             double peyment = interest1 + principal1;
                             FlatPercentageItems.Add(new GridItem()
                             {
