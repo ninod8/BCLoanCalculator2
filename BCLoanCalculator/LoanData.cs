@@ -163,8 +163,51 @@ namespace BCLoanCalculator
         private string _loanAmountFM;
         private string _loanAmountF;
         private string _ex;
+        private string _effectiveRate;
+        private string _effectiveRateD;
+
+
         #endregion
 
+
+        public string EffectiveRate
+        {
+            get { return _effectiveRate; }
+            set
+            {
+                _effectiveRate = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EffectiveRate"));
+
+            }
+        }
+        public string EffectiveRateD
+        {
+            get { return _effectiveRateD; }
+            set
+            {
+                _effectiveRateD = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("LoanAmountELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("TermMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("InterestOnlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyELM"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
+                OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EffectiveRateD"));
+
+            }
+        }
 
         public string Ex
         {
@@ -192,11 +235,15 @@ namespace BCLoanCalculator
                 {
                     _monthlyInterestELM = value;
                     _annualInterestForMonthlyELM = Math.Round(Convert.ToDouble(value) * 12, 3, MidpointRounding.AwayFromZero).ToString();
+                    _effectiveRate = Math.Round((Math.Pow((1 + Convert.ToDouble(AnnualInterestForMonthlyELM) / 12), 12) - 1) * 100, 3, MidpointRounding.AwayFromZero).ToString();
+
                     _dailyInterestELM = (Convert.ToDouble(_annualInterestForMonthlyELM) / 365).ToString();
                     if (App.Toggle2 == false)
                     {
                         _monthlyPayment = Math.Round(Convert.ToDouble(PMTMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
                     }
+
+
                 }
                 catch (Exception)
                 {
@@ -211,6 +258,8 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EffectiveRate"));
+
             }
         }
 
@@ -257,6 +306,7 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestForMonthlyF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("MonthlyPaymentFlat"));
+
             }
         }
         public string AnnualInterestForMonthlyELM
@@ -269,6 +319,8 @@ namespace BCLoanCalculator
                     _annualInterestForMonthlyELM = value;
                     _monthlyInterestELM = Math.Round(Convert.ToDouble(value) / 12, 3, MidpointRounding.AwayFromZero).ToString();
                     _dailyInterestELM = (Convert.ToDouble(_annualInterestForMonthlyELM) / 365).ToString();
+                    _effectiveRate = Math.Round((Math.Pow((1 + Convert.ToDouble(AnnualInterestForMonthlyELM) / 12), 12) - 1) * 100, 3, MidpointRounding.AwayFromZero).ToString();
+
                     if (App.Toggle2 == false)
                     {
                         _monthlyPayment = Math.Round(Convert.ToDouble(PMTMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
@@ -287,6 +339,8 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("StartDateMonthly"));
                 OnPropertyChanged(new PropertyChangedEventArgs("ReleaseDate"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EffectiveRate"));
+
             }
         }
 
@@ -299,10 +353,13 @@ namespace BCLoanCalculator
                 {
                     _dailyInterestEL = value;
                     _annualInterestEL = Math.Round(Convert.ToDouble(value) * 365, 3, MidpointRounding.AwayFromZero).ToString();
+                    _effectiveRateD = ((Math.Pow((1 + Convert.ToDouble(AnnualInterestForMonthlyELM) / 36500), 365) - 1) * 100).ToString();
+
                     if (App.Toggle1 != true)
                     {
                         _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
                     }
+
                 }
                 catch (Exception)
                 {
@@ -311,6 +368,8 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestEL"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyPayment"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EffectiveRateD"));
+
             }
         }
 
@@ -401,9 +460,9 @@ namespace BCLoanCalculator
             {
                 try
                 {
-
                     _annualInterestEL = value;
                     _dailyInterestEL = Math.Round(Convert.ToDouble(value) / 365, 3, MidpointRounding.AwayFromZero).ToString();
+                    _effectiveRateD = ((Math.Pow((1 + Convert.ToDouble(AnnualInterestForMonthlyELM) / 36500), 365) - 1) * 100).ToString();
                     if (App.Toggle1 != true)
                     {
                         _dailyPayment = Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero).ToString();
@@ -420,6 +479,8 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("TermDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("StartDateDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateDaily"));
+                OnPropertyChanged(new PropertyChangedEventArgs("EffectiveRateD"));
+
             }
         }
         public string AnnualInterestELM
@@ -459,7 +520,6 @@ namespace BCLoanCalculator
                 try
                 {
                     //_monthlyPaymentFlat = Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero).ToString();
-
                     _annualInterestFM = value;
                     _dailyInterestFM = Math.Round(Convert.ToDouble(value) / 365, 3, MidpointRounding.AwayFromZero).ToString();
                 }
@@ -492,7 +552,6 @@ namespace BCLoanCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("EndDateFlatDaily"));
                 OnPropertyChanged(new PropertyChangedEventArgs("DailyInterestF"));
                 OnPropertyChanged(new PropertyChangedEventArgs("AnnualInterestF"));
-
             }
         }
 
@@ -1112,7 +1171,6 @@ namespace BCLoanCalculator
         {
             return (EndDateMonthly.Month - StartDateMonthly.Month) + 12 * (EndDateMonthly.Year - StartDateMonthly.Year) + 1;
         }
-
         public int CountMonthsForFlat()
         {
             return (EndDateFlat.Month - ReleaseDateFlat.Month) + 12 * (EndDateFlat.Year - ReleaseDateFlat.Year);
@@ -1432,7 +1490,8 @@ namespace BCLoanCalculator
             {
                 Items.Clear();
                 // CultureInfo ci = new CultureInfo("en-US");
-
+                double sumI = 0;
+                double sumP = 0;
                 double amount = Convert.ToDouble(LoanAmountEL);
                 double balance = Convert.ToDouble(LoanAmountEL);
                 double dailyInterest = Convert.ToDouble(DailyInterestEL) / 100;
@@ -1482,6 +1541,8 @@ namespace BCLoanCalculator
                                             StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
                                         });
                                         amount = Convert.ToDouble(LoanAmountEL);
+                                        sumI += Math.Round(interest10, 2, MidpointRounding.AwayFromZero);
+                                        sumP += Math.Round(interest10, 2, MidpointRounding.AwayFromZero);
                                     }
                                 }
                                 DateTime dateTime = StartDateDaily.AddDays(i + 1);
@@ -1501,6 +1562,8 @@ namespace BCLoanCalculator
                                 amount -= principal;
                                 OnPropertyChanged(new PropertyChangedEventArgs("Items"));
                                 i++;
+                                sumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                                sumP += Convert.ToDouble(DailyPayment);
                             }
                             while ((balance - Convert.ToDouble(DailyPayment)) > 0);
                             DateTime dateTime1 = StartDateDaily.AddDays(i + 1);
@@ -1518,6 +1581,8 @@ namespace BCLoanCalculator
                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
                             });
                             amount -= principal1;
+                            sumP += Math.Round((interest1 + amount), 2, MidpointRounding.AwayFromZero);
+                            sumI += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
                             i = Convert.ToInt32(TermDaily);
                             OnPropertyChanged(new PropertyChangedEventArgs("Items"));
 
@@ -1548,6 +1613,9 @@ namespace BCLoanCalculator
                                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
                                             });
                                             amount = Convert.ToDouble(LoanAmountEL);
+                                            sumI += Math.Round(interest12, 2, MidpointRounding.AwayFromZero);
+                                            sumP += Math.Round(interest12, 2, MidpointRounding.AwayFromZero);
+
                                         }
                                     }
                                     DateTime dateTime = StartDateDaily.AddDays(i + 1);
@@ -1567,6 +1635,8 @@ namespace BCLoanCalculator
                                     amount -= principal;
                                     OnPropertyChanged(new PropertyChangedEventArgs("Items"));
                                     i++;
+                                    sumP += Math.Round(Convert.ToDouble(DailyPayment), 2, MidpointRounding.AwayFromZero);
+                                    sumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
                                 }
                                 DateTime dateTime1 = StartDateDaily.AddDays(i + 1);
                                 double interest1 = amount * dailyInterest;
@@ -1583,6 +1653,8 @@ namespace BCLoanCalculator
                                     StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
                                 });
                                 amount -= principal1;
+                                sumI += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
+                                sumP += Math.Round(interest1 + amount, 2, MidpointRounding.AwayFromZero);
                                 OnPropertyChanged(new PropertyChangedEventArgs("Items"));
                             }
                             else
@@ -1607,6 +1679,8 @@ namespace BCLoanCalculator
                                             StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
                                         });
                                         amount = Convert.ToDouble(LoanAmountEL);
+                                        sumP += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
+                                        sumI += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
                                     }
                                 }
 
@@ -1626,6 +1700,8 @@ namespace BCLoanCalculator
                                 });
                                 amount -= principal;
                                 OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+                                sumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                                sumP += Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero);
                             }
                         }
                     }
@@ -1651,6 +1727,8 @@ namespace BCLoanCalculator
                                     StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
                                 });
                                 amount = Convert.ToDouble(LoanAmountEL);
+                                sumP += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
+                                sumI += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
                             }
                         }
 
@@ -1670,8 +1748,16 @@ namespace BCLoanCalculator
                         });
                         amount -= principal;
                         OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+                        sumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                        sumP += Math.Round(Convert.ToDouble(PMTDaily()), 2, MidpointRounding.AwayFromZero);
                     }
                 }
+                ItemsSum.Add(new GridItem()
+                {
+                    InterestSum = Math.Round(sumI, 2, MidpointRounding.AwayFromZero).ToString(),
+                    PeymentSum = Math.Round(sumP, 2, MidpointRounding.AwayFromZero).ToString(),
+                    sumSum = Math.Round(sumP / sumI, 2, MidpointRounding.AwayFromZero).ToString()
+                });
             }
             catch (Exception)
             {
@@ -1789,6 +1875,8 @@ namespace BCLoanCalculator
                                                 Interest = Math.Round(interest11, 2, MidpointRounding.AwayFromZero).ToString(),
                                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
                                             });
+                                            SumI += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
+                                            SumP += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
                                             amount -= principal11;
                                             i++;
                                         }
@@ -1807,8 +1895,8 @@ namespace BCLoanCalculator
                                         StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                         EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                     });
-                                    SumI = +interest;
-                                    SumP += Convert.ToDouble(MonthlyPayment);
+                                    SumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                                    SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                                     amount -= principal;
                                     i++;
                                 }
@@ -1829,6 +1917,8 @@ namespace BCLoanCalculator
                                     EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                 });
                                 i = Convert.ToInt32(TermMonthly);
+                                SumP += Math.Round((interest22 + amount), 2, MidpointRounding.AwayFromZero);
+                                SumI += Math.Round(interest22, 2, MidpointRounding.AwayFromZero);
                             }
                             //else
                             //{
@@ -1856,6 +1946,8 @@ namespace BCLoanCalculator
                                             });
                                             amount -= principal11;
                                             i++;
+                                            SumI += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
+                                            SumP += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
                                         }
                                     }
                                     DateTime dateTime22 = StartDateMonthly.AddMonths(i);
@@ -1873,6 +1965,8 @@ namespace BCLoanCalculator
                                         EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                     });
                                     i++;
+                                    SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
+                                    SumI += Math.Round(interest22, 2, MidpointRounding.AwayFromZero);
                                 }
                                 DateTime dateTime = StartDateMonthly.AddMonths(i);
                                 double principal = balance;
@@ -1888,6 +1982,8 @@ namespace BCLoanCalculator
                                     StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                     EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                 });
+                                SumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                                SumP += Math.Round((interest + amount), 2, MidpointRounding.AwayFromZero);
                             }
 
                             else
@@ -1916,6 +2012,8 @@ namespace BCLoanCalculator
                                             });
                                             amount -= principal11;
                                             i++;
+                                            SumP += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
+                                            SumI += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
                                         }
                                     }
                                     DateTime dateTime = ReleaseDate.AddMonths(i);
@@ -1932,8 +2030,8 @@ namespace BCLoanCalculator
                                         StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                         EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                     });
-                                    SumI = +interest;
-                                    SumP += Convert.ToDouble(MonthlyPayment);
+                                    SumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                                    SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                                     amount -= principal;
                                 }
                             }
@@ -1962,6 +2060,9 @@ namespace BCLoanCalculator
                                     });
                                     amount -= principal11;
                                     i++;
+                                    SumI += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
+                                    SumP += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
+
                                 }
                             }
                             DateTime dateTime = StartDateMonthly.AddMonths(i);
@@ -1978,8 +2079,8 @@ namespace BCLoanCalculator
                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                 EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                             });
-                            SumI = +interest;
-                            SumP += Convert.ToDouble(MonthlyPayment);
+                            SumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                            SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                             amount -= principal;
                             //}
                         }
@@ -2019,6 +2120,8 @@ namespace BCLoanCalculator
                                             EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                         });
                                         i++;
+                                        SumP += Math.Round(interesetIpayment, 2, MidpointRounding.AwayFromZero);
+                                        SumI += Math.Round(interesetIpayment, 2, MidpointRounding.AwayFromZero);
 
                                         if (Convert.ToDouble(interestonly) > 0)
                                         {
@@ -2038,8 +2141,8 @@ namespace BCLoanCalculator
                                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                                 EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                             });
-                                            SumI = +interest21;
-                                            SumP += Convert.ToDouble(MonthlyPayment);
+                                            SumI += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
+                                            SumP += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
                                             // amount -= principal21;
                                             i++;
 
@@ -2061,6 +2164,8 @@ namespace BCLoanCalculator
                                                 });
                                                 amount -= principal11;
                                                 i++;
+                                                SumI += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
+                                                SumP += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
                                             }
                                         }
                                         else
@@ -2081,8 +2186,8 @@ namespace BCLoanCalculator
                                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                                 EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                             });
-                                            SumI = +interest21;
-                                            SumP += Convert.ToDouble(MonthlyPayment);
+                                            SumI += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
+                                            SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                                             amount -= principal21;
                                             i++;
                                         }
@@ -2106,6 +2211,8 @@ namespace BCLoanCalculator
                                         });
                                         amount -= principal2;
                                         i++;
+                                        SumI += Math.Round(interest2, 2, MidpointRounding.AwayFromZero);
+                                        SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                                     }
                                     while ((amount - Convert.ToDouble(MonthlyPayment)) > 0);
 
@@ -2124,8 +2231,8 @@ namespace BCLoanCalculator
                                         StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                         EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                     });
-                                    SumI = +interest3;
-                                    SumP += Convert.ToDouble(MonthlyPayment);
+                                    SumI += Math.Round(interest3, 2, MidpointRounding.AwayFromZero);
+                                    SumP += Math.Round(interest3 + amount, 2, MidpointRounding.AwayFromZero);
                                     amount -= principal3;
                                     i = x;
                                 }
@@ -2152,6 +2259,8 @@ namespace BCLoanCalculator
                                             EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                         });
                                         i++;
+                                        SumI += Math.Round(interesetIpayment, 2, MidpointRounding.AwayFromZero);
+                                        SumP += Math.Round(interesetIpayment, 2, MidpointRounding.AwayFromZero);
 
                                         if (Convert.ToDouble(interestonly) > 0)
                                         {
@@ -2171,8 +2280,8 @@ namespace BCLoanCalculator
                                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                                 EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                             });
-                                            SumI = +interest21;
-                                            SumP += Convert.ToDouble(MonthlyPayment);
+                                            SumI += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
+                                            SumP += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
                                             // amount -= principal21;
                                             i++;
 
@@ -2194,6 +2303,8 @@ namespace BCLoanCalculator
                                                 });
                                                 amount -= principal11;
                                                 i++;
+                                                SumP += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
+                                                SumI += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
                                             }
                                         }
                                         else
@@ -2214,8 +2325,8 @@ namespace BCLoanCalculator
                                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                                 EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                             });
-                                            SumI = +interest21;
-                                            SumP += Convert.ToDouble(MonthlyPayment);
+                                            SumI += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
+                                            SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                                             amount -= principal21;
                                             i++;
                                         }
@@ -2238,8 +2349,8 @@ namespace BCLoanCalculator
                                             StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                             EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                         });
-                                        //SumI = +interest3;
-                                        //SumP += Convert.ToDouble(MonthlyPayment);
+                                        SumI += Math.Round(interest3, 2, MidpointRounding.AwayFromZero);
+                                        SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                                         amount -= principal3;
                                         i++;
                                     } while (i < CountMonthsEndRelease());
@@ -2258,8 +2369,8 @@ namespace BCLoanCalculator
                                         StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                         EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                     });
-                                    //SumI = +interest4;
-                                    //SumP += Convert.ToDouble(MonthlyPayment);
+                                    SumI += Math.Round(interest4, 2, MidpointRounding.AwayFromZero);
+                                    SumP += Math.Round(amount + interest4, 2, MidpointRounding.AwayFromZero);
                                     amount -= principal4;
                                     i = x;
                                 }
@@ -2291,7 +2402,8 @@ namespace BCLoanCalculator
                                             EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                         });
                                         i++;
-
+                                        SumI += Math.Round(interesetIpayment, 2, MidpointRounding.AwayFromZero);
+                                        SumP += Math.Round(interesetIpayment, 2, MidpointRounding.AwayFromZero);
                                         if (Convert.ToDouble(interestonly) > 0)
                                         {
                                             double rate = Convert.ToDouble(AnnualInterestForMonthlyELM) / 36500 * CountDaysFromStartDateToNextPayment();
@@ -2310,8 +2422,8 @@ namespace BCLoanCalculator
                                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                                 EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                             });
-                                            SumI = +interest21;
-                                            SumP += Convert.ToDouble(MonthlyPayment);
+                                            SumI += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
+                                            SumP += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
                                             // amount -= principal21;
                                             i++;
 
@@ -2333,6 +2445,8 @@ namespace BCLoanCalculator
                                                 });
                                                 amount -= principal11;
                                                 i++;
+                                                SumI += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
+                                                SumP += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
                                             }
                                         }
                                         else
@@ -2353,8 +2467,8 @@ namespace BCLoanCalculator
                                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                                 EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                             });
-                                            SumI = +interest21;
-                                            SumP += Convert.ToDouble(MonthlyPayment);
+                                            SumI += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
+                                            SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                                             amount -= principal21;
                                             i++;
                                         }
@@ -2378,6 +2492,9 @@ namespace BCLoanCalculator
                                         });
                                         amount -= principal2;
                                         i++;
+                                        SumI += Math.Round(interest2, 2, MidpointRounding.AwayFromZero);
+                                        SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
+
                                     }
                                     while ((amount - Convert.ToDouble(MonthlyPayment)) > 0);
 
@@ -2396,8 +2513,8 @@ namespace BCLoanCalculator
                                         StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                         EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                     });
-                                    SumI = +interest3;
-                                    SumP += Convert.ToDouble(MonthlyPayment);
+                                    SumI += Math.Round(interest3, 2, MidpointRounding.AwayFromZero);
+                                    SumP += Math.Round(interest3 + amount, 2, MidpointRounding.AwayFromZero);
                                     amount -= principal3;
                                     i = x;
                                 }
@@ -2422,7 +2539,8 @@ namespace BCLoanCalculator
                                             EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                         });
                                         i++;
-
+                                        SumP += Math.Round(interesetIpayment, 2, MidpointRounding.AwayFromZero);
+                                        SumI += Math.Round(interesetIpayment, 2, MidpointRounding.AwayFromZero);
                                         if (Convert.ToDouble(interestonly) > 0)
                                         {
                                             double rate = Convert.ToDouble(AnnualInterestForMonthlyELM) / 36500 * CountDaysFromStartDateToNextPayment();
@@ -2441,8 +2559,8 @@ namespace BCLoanCalculator
                                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                                 EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                             });
-                                            SumI = +interest21;
-                                            SumP += Convert.ToDouble(MonthlyPayment);
+                                            SumI += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
+                                            SumP += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
                                             // amount -= principal21;
                                             i++;
 
@@ -2464,6 +2582,8 @@ namespace BCLoanCalculator
                                                 });
                                                 amount -= principal11;
                                                 i++;
+                                                SumI += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
+                                                SumP += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
                                             }
                                         }
                                         else
@@ -2484,8 +2604,8 @@ namespace BCLoanCalculator
                                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                                 EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                             });
-                                            SumI = +interest21;
-                                            SumP += Convert.ToDouble(MonthlyPayment);
+                                            SumI += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
+                                            SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                                             amount -= principal21;
                                             i++;
                                         }
@@ -2508,8 +2628,8 @@ namespace BCLoanCalculator
                                             StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                             EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                         });
-                                        //SumI = +interest3;
-                                        //SumP += Convert.ToDouble(MonthlyPayment);
+                                        SumI += Math.Round(interest3, 2, MidpointRounding.AwayFromZero);
+                                        SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                                         amount -= principal3;
                                         i++;
                                     } while (i < CountMonthsEndRelease());
@@ -2528,8 +2648,8 @@ namespace BCLoanCalculator
                                         StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                         EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                     });
-                                    //SumI = +interest4;
-                                    //SumP += Convert.ToDouble(MonthlyPayment);
+                                    SumI += Math.Round(interest4, 2, MidpointRounding.AwayFromZero);
+                                    SumP += Math.Round(amount + interest4, 2, MidpointRounding.AwayFromZero);
                                     amount -= principal4;
                                     i = x;
                                 }
@@ -2643,6 +2763,8 @@ namespace BCLoanCalculator
                                 });
                                 amount -= principal0;
                                 i++;
+                                SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
+                                SumI += Math.Round(interesetIpayment, 2, MidpointRounding.AwayFromZero);
 
                                 if (Convert.ToDouble(interestonly) > 0)
                                 {
@@ -2665,8 +2787,8 @@ namespace BCLoanCalculator
                                         StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                         EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                     });
-                                    SumI = +interest21;
-                                    SumP += Convert.ToDouble(MonthlyPayment);
+                                    SumI += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
+                                    SumP += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
                                     amount -= principal21;
                                     i++;
 
@@ -2688,6 +2810,8 @@ namespace BCLoanCalculator
                                         });
                                         amount -= principal11;
                                         i++;
+                                        SumI += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
+                                        SumP += Math.Round(interest11, 2, MidpointRounding.AwayFromZero);
                                     }
                                 }
                                 else
@@ -2708,8 +2832,8 @@ namespace BCLoanCalculator
                                         StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                         EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                     });
-                                    SumI = +interest21;
-                                    SumP += Convert.ToDouble(MonthlyPayment);
+                                    SumI += Math.Round(interest21, 2, MidpointRounding.AwayFromZero);
+                                    SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                                     amount -= principal21;
                                     i++;
                                 }
@@ -2730,8 +2854,8 @@ namespace BCLoanCalculator
                                     StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                     EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                 });
-                                SumI = +interest4;
-                                SumP += Convert.ToDouble(MonthlyPayment);
+                                SumI += Math.Round(interest4, 2, MidpointRounding.AwayFromZero);
+                                SumP += Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero);
                                 amount -= principal4;
                                 i++;
                             } while (i < y);
@@ -2750,8 +2874,8 @@ namespace BCLoanCalculator
                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                 EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                             });
-                            SumI = +interest;
-                            SumP += Convert.ToDouble(MonthlyPayment);
+                            SumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                            SumP += Math.Round((amount + interest), 2, MidpointRounding.AwayFromZero);
                             amount -= principal;
                         }
                         #endregion
@@ -2759,6 +2883,12 @@ namespace BCLoanCalculator
                         #endregion
                     }
                 }
+                ItemsMonthlySum.Add(new GridItem()
+                {
+                    InterestSum = Math.Round(SumI, 2, MidpointRounding.AwayFromZero).ToString(),
+                    PeymentSum = Math.Round(SumP, 2, MidpointRounding.AwayFromZero).ToString(),
+                    sumSum = Math.Round(SumP / SumI, 2, MidpointRounding.AwayFromZero).ToString()
+                });
             }
             catch (Exception)
             {
@@ -2823,7 +2953,9 @@ namespace BCLoanCalculator
         {
             try
             {
-              
+                double SumI = 0;
+                double SumP = 0;
+
                 FlatPercentageItems.Clear();
                 double amount = Convert.ToDouble(LoanAmountFM);
                 double balance = Convert.ToDouble(LoanAmountFM);
@@ -2868,6 +3000,8 @@ namespace BCLoanCalculator
                                     });
                                     amount -= principal;
                                     i++;
+                                    SumI += Math.Round(interest0, 2, MidpointRounding.AwayFromZero);
+                                    SumP += Math.Round(Convert.ToDouble(MonthlyPaymentFlat), 2, MidpointRounding.AwayFromZero);
                                 } while (Convert.ToDouble(TermFlat) > i);
 
                                 DateTime dateTime = ReleaseDateFlat.AddMonths(i);
@@ -2888,6 +3022,8 @@ namespace BCLoanCalculator
                                 });
                                 amount -= principal;
                                 i++;
+                                SumI += Math.Round(interest0, 2, MidpointRounding.AwayFromZero);
+                                SumP += Math.Round((amount + interest0), 2, MidpointRounding.AwayFromZero);
                             }
                             else
                             {
@@ -2913,6 +3049,8 @@ namespace BCLoanCalculator
                                 EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
                             });
                             amount -= principal;
+                            SumI += Math.Round(rate, 2, MidpointRounding.AwayFromZero);
+                            SumP += Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero);
                         }
                     }
                 }
@@ -2948,6 +3086,8 @@ namespace BCLoanCalculator
                             });
                             amount -= principal1;
                             i++;
+                            SumI += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
+                            SumP += Math.Round(principal1 + interest1, 2, MidpointRounding.AwayFromZero);
 
                             DateTime dateTime12 = ReleaseDateFlat.Date.AddMonths(CountMonthsFromStartToReleaseFlat() + 1);
                             int N = (dateTime12 - StartDateFlat).Days;
@@ -2968,20 +3108,22 @@ namespace BCLoanCalculator
                             });
                             amount -= principal1;
                             i++;
+                            SumI += Math.Round(interest12, 2, MidpointRounding.AwayFromZero);
+                            SumP += Math.Round(principal12 + interest12, 2, MidpointRounding.AwayFromZero);
                         }
                         if (App.Toggle22 == true)
                         {
-                          
+
                             do
                             {
                                 rate = Convert.ToDouble(MonthlyInterestF) / 100;
                                 DateTime dateTime111 = StartDateFlat.AddMonths(i - 1);
                                 principal = Convert.ToDouble(MonthlyPaymentFlat) - rate * Convert.ToDouble(LoanAmountFM);
-                                if (rate* Convert.ToDouble(LoanAmountFM)>Convert.ToDouble(FlatMonthly()))
+                                if (rate * Convert.ToDouble(LoanAmountFM) > Convert.ToDouble(FlatMonthly()))
                                 {
                                     principal = 0;
                                 }
-                                
+
                                 balance -= principal;
                                 FlatPercentageItems.Add(new GridItem()
                                 {
@@ -2995,6 +3137,8 @@ namespace BCLoanCalculator
                                 });
                                 amount -= principal;
                                 i++;
+                                SumI += Math.Round(Convert.ToDouble(MonthlyPaymentFlat) - principal);
+                                SumP += Math.Round(Convert.ToDouble(MonthlyPaymentFlat), 2, MidpointRounding.AwayFromZero);
                             }
                             while (i < CountMonthsForFlatStartEnd());
 
@@ -3016,6 +3160,8 @@ namespace BCLoanCalculator
                             });
                             amount -= principal;
                             i++;
+                            SumI += Math.Round(interesetii, 2, MidpointRounding.AwayFromZero);
+                            SumP += Math.Round(interesetii + amount, 2, MidpointRounding.AwayFromZero);
                         }
                         else
                         {
@@ -3035,6 +3181,8 @@ namespace BCLoanCalculator
                                 EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
                             });
                             amount -= principal;
+                            SumP += Math.Round(Convert.ToDouble(FlatMonthly()), 2, MidpointRounding.AwayFromZero);
+                            SumI += Math.Round((Convert.ToDouble(FlatMonthly()) - principal), 2, MidpointRounding.AwayFromZero);
                         }
                     }
                     if (Convert.ToDouble(MonthlyPaymentFlat) > Convert.ToDouble(FlatMonthly()))
@@ -3043,6 +3191,12 @@ namespace BCLoanCalculator
                         _ex = "სწორად შეავსეთ ველები";
                     }
                 }
+                FlatPercentageItemsSum.Add(new GridItem()
+                {
+                    InterestSum = Math.Round(SumI, 2, MidpointRounding.AwayFromZero).ToString(),
+                    PeymentSum = Math.Round(SumP, 2, MidpointRounding.AwayFromZero).ToString(),
+                    sumSum = Math.Round(SumP / SumI, 2, MidpointRounding.AwayFromZero).ToString()
+                });
             }
             catch (Exception)
             {
@@ -3075,6 +3229,8 @@ namespace BCLoanCalculator
         {
             try
             {
+                double sumI = 0;
+                double sump = 0;
                 FlatDailyItems.Clear();
                 double amount = Convert.ToDouble(LoanAmountF);
                 double rate = Convert.ToDouble(DailyInterestF) * CountDaysForFlatDaily() / 100;
@@ -3114,6 +3270,9 @@ namespace BCLoanCalculator
                                 });
                                 amount -= principal1;
                                 i++;
+                                sumI += Math.Round(interest0, 2, MidpointRounding.AwayFromZero);
+                                sump += Math.Round(Convert.ToDouble(DailyPaymentFlat), 2, MidpointRounding.AwayFromZero);
+
                             } while (i < Convert.ToDouble(TermFlatDaily));
 
                             DateTime dateTime = StartDateFlat.AddDays(i);
@@ -3132,6 +3291,9 @@ namespace BCLoanCalculator
                             });
                             amount -= principal;
                             i++;
+                            sumI += Math.Round(interest0, 2, MidpointRounding.AwayFromZero);
+                            sump += Math.Round(amount + interest0, 2, MidpointRounding.AwayFromZero);
+
                         }
                         else
                         {
@@ -3155,16 +3317,24 @@ namespace BCLoanCalculator
                             EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
                         });
                         amount -= principal;
+                        sumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                        sump += Math.Round(Convert.ToDouble(FlatDaily()), 2, MidpointRounding.AwayFromZero);
                     }
                     OnPropertyChanged(new PropertyChangedEventArgs("FlatDailyItems"));
                 }
+                FlatDailyItemsSum.Add(new GridItem()
+                {
+                    InterestSum = Math.Round(sumI, 2, MidpointRounding.AwayFromZero).ToString(),
+                    PeymentSum = Math.Round(sump, 2, MidpointRounding.AwayFromZero).ToString(),
+                    sumSum = Math.Round(sump / sumI, 2, MidpointRounding.AwayFromZero).ToString()
+                });
             }
             catch (Exception)
             {
 
                 _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
             }
-
+                
         }
 
         public ObservableCollection<GridItem> FlatDailyItems { get; set; }

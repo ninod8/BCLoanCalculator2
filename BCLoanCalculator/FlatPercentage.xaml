@@ -54,12 +54,6 @@
                 <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged" Text="{Binding MonthlyPaymentFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock Name="ErrorTB"  Text="{Binding Ex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
-
-                <Button FontSize="13" Margin="10,0" Name="myButton" Foreground="#5BEABF" Background="#0F0F0F" Click="Button_Click" HorizontalAlignment="Center"></Button>
-                <ProgressRing Width="30" Height="30" Name="MyProgRing" IsActive="True" Foreground="#0F0F0F" Margin="10,10"></ProgressRing>
-
-                <!--<TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Text="{Binding SumPMT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>-->
-
                 <GridView Name="GridView2"
                           Margin="10,5"
                           FontSize="13"
@@ -75,21 +69,33 @@
                         <DataTemplate >
                             <Grid >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="180"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
                                     <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Margin="7" FontSize ="10" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Text="{Binding PaymentSumText}"/>
-                                <TextBlock Margin="7" FontSize ="10" FontWeight="Bold" Grid.Column="0" Grid.Row="1" Text="{Binding InterestSumText}"/>
+                                <TextBlock Margin="7" FontSize ="10" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Text="გადახდების ჯამი"/>
+                                <TextBlock Margin="7" FontSize ="10" FontWeight="Bold" Grid.Column="0" Grid.Row="1" Text="პროცენტის ჯამი"/>
+                                <TextBlock Margin="7" FontSize ="10" FontWeight="Bold" Grid.Column="0" Grid.Row="2" Text="თვეში ფინანსური ხარჯი"/>
+                                
                                 <TextBlock Margin="7" FontSize ="10"  Grid.Column="1" Grid.Row="0" Text="{Binding PeymentSum}"/>
                                 <TextBlock Margin="7" FontSize ="10"  Grid.Column="1" Grid.Row="1" Text="{Binding InterestSum}"/>
+                                <TextBlock Margin="7" FontSize ="10"  Grid.Column="1" Grid.Row="2" Text="{Binding sumSum}"/>
+
                             </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
                 </GridView>
+                <Button FontSize="13" Margin="10,0" Name="myButton" Foreground="#5BEABF" Background="#0F0F0F" Click="Button_Click" HorizontalAlignment="Center"></Button>
+                <ProgressRing Width="30" Height="30" Name="MyProgRing" IsActive="True" Foreground="#0F0F0F" Margin="10,10"></ProgressRing>
+
+                <!--<TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Text="{Binding SumPMT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>-->
+
+
                 <GridView Name="GridView"
                           Margin="10,5"
                           FontSize="13"

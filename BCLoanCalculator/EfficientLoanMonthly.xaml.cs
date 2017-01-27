@@ -191,6 +191,8 @@ namespace BCLoanCalculator
             try
             {
                 App.MonthlyInterestELM = DailyPercentTB.Text;
+              //  EffectiveTB.Text = (Math.Pow((1 + Convert.ToDouble(AnnualPercentTB) / 365), 365) - 1).ToString();
+
             }
             catch (Exception)
             {
@@ -203,6 +205,8 @@ namespace BCLoanCalculator
             try
             {
                 App.AnnualInterestELM = AnnualPercentTB.Text;
+                //EffectiveTB.Text = (Math.Pow((1 + Convert.ToDouble(AnnualPercentTB) / 365), 365) - 1).ToString();
+
             }
             catch (Exception)
             {
@@ -263,6 +267,9 @@ namespace BCLoanCalculator
             }
         }
 
-
+        //private void EffectiveTB_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //  //  EffectiveTB.Text= (Math.Pow((1 + Convert.ToDouble(AnnualPercentTB) / 365), 365) - 1).ToString();
+        //}
     }
 }

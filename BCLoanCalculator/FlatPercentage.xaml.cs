@@ -94,13 +94,15 @@ namespace BCLoanCalculator
             try
             {
                 App.TermFM = TermsOfLoanTB.Text;
-               // DatePicker1.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                // DatePicker1.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                Convert.ToDouble(TermsOfLoanTB.Text);
                 DatePicker2.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
-                ErrorTB.Text = String.Empty;
+                ErrorTB.Text = String.Empty; 
+
             }
             catch (Exception)
             {
-                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
             }
         }
 
@@ -109,10 +111,16 @@ namespace BCLoanCalculator
             try
             {
                 App.LoanAmountFM = LoanAmountTB.Text;
+                Convert.ToDouble(LoanAmountTB.Text); ErrorTB.Text = String.Empty;
+
+
             }
             catch (Exception)
             {
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+
             }
+
         }
 
         private void DatePicker0_DateChanged(object sender, DatePickerValueChangedEventArgs e)
@@ -121,9 +129,13 @@ namespace BCLoanCalculator
             {
                 App.ReleaseDateFM = DatePicker0.Date.Date;
 
+
             }
             catch (Exception)
             {
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+
+
 
             }
         }
@@ -137,6 +149,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
 
             }
         }
@@ -150,8 +163,9 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
             }
+
         }
 
         private void DailyPercentTB_TextChanged(object sender, TextChangedEventArgs e)
@@ -159,22 +173,30 @@ namespace BCLoanCalculator
             try
             {
                 App.MonthlyInterestFM = DailyPercentTB.Text;
+                Convert.ToDouble(DailyPercentTB.Text);
+                ErrorTB.Text = String.Empty;
 
             }
             catch (Exception)
             {
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
 
             }
+
         }
+
 
         private void AnnualPercentTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
                 App.AnnualInterestFM = AnnualPercentTB.Text;
+                Convert.ToDouble(AnnualPercentTB.Text);
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
 
             }
         }
@@ -183,10 +205,12 @@ namespace BCLoanCalculator
         {
             try
             {
-                App.PeymentFM = PMTTB.Text;
+                App.PeymentFM = PMTTB.Text; Convert.ToDouble(PMTTB.Text);
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
 
             }
         }

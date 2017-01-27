@@ -24,6 +24,8 @@ using Windows.Graphics.Printing.OptionDetails;
 using System.Xml;
 using System.Threading.Tasks;
 using Windows.UI.Core;
+using Windows.ApplicationModel.DataTransfer;
+using System.Reflection;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace BCLoanCalculator
@@ -193,7 +195,7 @@ namespace BCLoanCalculator
 
             var ld = this.DataContext as LoanData;
             ld.GraphDaily();
-         //   ld.SumDaily();
+            //   ld.SumDaily();
             i++;
             Graph.Content = "გრაფიკის გადათვლა -";
             if (i % 2 == 1)
@@ -321,6 +323,71 @@ namespace BCLoanCalculator
             catch (Exception)
             {
             }
+        }
+
+        private void Grafph_Click(object sender, RoutedEventArgs e)
+        {
+            DataTransferManager d = DataTransferManager.GetForCurrentView();
+            d.DataRequested += D_DataRequested;
+            DataTransferManager.ShowShareUI();
+
+        }
+
+        private void D_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            string html = @"<table>";
+
+
+
+            DataRequest req = args.Request;
+            var data = (this.DataContext as LoanData).Items;
+
+            var type = data.FirstOrDefault().GetType();
+
+            var first = true;
+
+            foreach (var d in data)
+            {
+                if (first)
+                {
+                    html += "<tr>";
+
+                    foreach (var prop in type.GetProperties())
+                    {
+                        html += $"<th>{ prop.GetValue(d) }</th>";
+                    }
+
+                    html += "</tr>";
+
+                    first = false;
+                }
+                else
+                {
+
+                    html += "<tr>";
+
+                    foreach (var prop in type.GetProperties())
+                    {
+                        if (true)
+                        {
+
+                        }
+
+                        html += $"<th>{ prop.GetValue(d) }</th>";
+                    }
+
+                    html += "</tr>";
+                }
+            }
+
+
+            html += "</table>";
+
+            var datadef = req.GetDeferral();
+
+            req.Data.SetHtmlFormat(HtmlFormatHelper.CreateHtmlFormat(html));
+            req.Data.Properties.Title = "gverdi";
+            datadef.Complete();
         }
     }
 }

@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.UI.Core;
+using Windows.ApplicationModel.DataTransfer;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -104,6 +105,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
 
             }
         }
@@ -143,6 +145,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
 
             }
         }
@@ -155,6 +158,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
 
             }
         }
@@ -167,6 +171,8 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+
             }
         }
         int i = 1;
