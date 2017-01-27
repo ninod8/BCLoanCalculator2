@@ -1094,7 +1094,7 @@ namespace BCLoanCalculator
         }
         public int CountDaysFromStartDateToNextPayment()
         {
-            return (StartDateMonthly.Date.AddMonths(CountMonthsFromStartToRelease()) - ReleaseDate).Days;
+            return ((StartDateMonthly.Date.AddMonths(CountMonthsFromStartToRelease() - 1) - ReleaseDate).Days);
         }
         public int CountMonthsFromStartToRelease()
         {
@@ -1106,7 +1106,7 @@ namespace BCLoanCalculator
         }
         public int CountMonthsEndRelease()
         {
-            return (EndDateMonthly.Month - StartDateMonthly.Month) + 12 * (EndDateMonthly.Year - StartDateMonthly.Year)+1;
+            return (EndDateMonthly.Month - StartDateMonthly.Month) + 12 * (EndDateMonthly.Year - StartDateMonthly.Year) + 1;
         }
 
         public int CountMonthsForFlat()
@@ -2616,15 +2616,15 @@ namespace BCLoanCalculator
                         {
                             while (i < 3)
                             {
-                                 DateTime dateTime1 = ReleaseDate.AddMonths(i);
-                                 double principal0 = Convert.ToDouble(PMTMonthly()) - interesetIpayment;
-                              //  double interest0 = amount * monthlyRate;
+                                DateTime dateTime1 = ReleaseDate.AddMonths(i);
+                                double principal0 = Convert.ToDouble(PMTMonthly()) - interesetIpayment;
+                                //  double interest0 = amount * monthlyRate;
                                 balance -= principal0;
                                 ItemsMonthly.Add(new GridItem()
                                 {
                                     PaymentNumber = (i).ToString(),
                                     Date = StartDateMonthly.Date.ToString("dd/MM/yyyy"),
-                                    Payment = Math.Round(Convert.ToDouble(PMTMonthly()), 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Payment = Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
                                     Principal = Math.Round(principal0, 2, MidpointRounding.AwayFromZero).ToString(),
                                     Interest = Math.Round(interesetIpayment, 2, MidpointRounding.AwayFromZero).ToString(),
                                     StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
@@ -2635,11 +2635,13 @@ namespace BCLoanCalculator
 
                                 if (Convert.ToDouble(interestonly) > 0)
                                 {
-                                    double rate = Convert.ToDouble(AnnualInterestForMonthlyELM) / 36500 * CountDaysFromStartDateToNextPayment();
 
                                     DateTime dateTime21 = DT.AddMonths(i - 1);
+                                    int N = (dateTime21 - StartDateMonthly).Days;
+                                    double rate = Convert.ToDouble(AnnualInterestForMonthlyELM) / 36500 * N;
+
                                     double interest21 = amount * rate;
-                                    double principal21 = Convert.ToDouble(MonthlyPayment) - interest21;
+                                    double principal21 = 0;
 
                                     balance -= principal21;
                                     ItemsMonthly.Add(new GridItem()
@@ -2647,14 +2649,14 @@ namespace BCLoanCalculator
                                         PaymentNumber = (i).ToString(),
                                         Date = dateTime21.Date.ToString("dd/MM/yyyy"),
                                         Payment = Math.Round(interest21, 2, MidpointRounding.AwayFromZero).ToString(),
-                                        Principal = Math.Round(principal21, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        Principal = "0",
                                         Interest = Math.Round(interest21, 2, MidpointRounding.AwayFromZero).ToString(),
                                         StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
                                         EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
                                     });
                                     SumI = +interest21;
                                     SumP += Convert.ToDouble(MonthlyPayment);
-                                     amount -= principal21;
+                                    amount -= principal21;
                                     i++;
 
                                     while (i <= (interestonly + 1))
@@ -2679,9 +2681,9 @@ namespace BCLoanCalculator
                                 }
                                 else
                                 {
-                                    double rate = Convert.ToDouble(AnnualInterestForMonthlyELM) / 36500 * CountDaysFromStartDateToNextPayment();
-
                                     DateTime dateTime21 = DT.AddMonths(i - 1);
+                                    int N = (dateTime21 - StartDateMonthly).Days;
+                                    double rate = Convert.ToDouble(AnnualInterestForMonthlyELM) / 36500 * N;
                                     double principal21 = Convert.ToDouble(MonthlyPayment) - amount * rate;
                                     double interest21 = amount * rate;
                                     balance -= principal21;
@@ -2701,15 +2703,37 @@ namespace BCLoanCalculator
                                     i++;
                                 }
                             }
-                                DateTime dateTime = DT.AddMonths(i);
+                            do
+                            {
+                                DateTime dateTime4 = DT.AddMonths(i);
+                                double principal4 = Convert.ToDouble(PMTMonthly()) - amount * monthlyRate;
+                                double interest4 = amount * monthlyRate;
+                                balance -= principal4;
+                                ItemsMonthly.Add(new GridItem()
+                                {
+                                    PaymentNumber = (i).ToString(),
+                                    Date = dateTime4.Date.ToString("dd/MM/yyyy"),
+                                    Payment = Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Principal = Math.Round(principal4, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Interest = Math.Round(interest4, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    EndingBalance = (Math.Round(balance, 2, MidpointRounding.AwayFromZero)).ToString()
+                                });
+                                SumI = +interest4;
+                                SumP += Convert.ToDouble(MonthlyPayment);
+                                amount -= principal4;
+                                i++;
+                            } while (i < y);
+
+                            DateTime dateTime = DT.AddMonths(i);
                             double principal = Convert.ToDouble(PMTMonthly()) - amount * monthlyRate;
                             double interest = amount * monthlyRate;
-                            balance -= principal;
+                            balance -= amount;
                             ItemsMonthly.Add(new GridItem()
                             {
                                 PaymentNumber = (i).ToString(),
                                 Date = dateTime.Date.ToString("dd/MM/yyyy"),
-                                Payment = Math.Round(Convert.ToDouble(MonthlyPayment), 2, MidpointRounding.AwayFromZero).ToString(),
+                                Payment = Math.Round((amount+interest), 2, MidpointRounding.AwayFromZero).ToString(),
                                 Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
                                 Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
                                 StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
@@ -2718,7 +2742,6 @@ namespace BCLoanCalculator
                             SumI = +interest;
                             SumP += Convert.ToDouble(MonthlyPayment);
                             amount -= principal;
-
                         }
                         #endregion
 
