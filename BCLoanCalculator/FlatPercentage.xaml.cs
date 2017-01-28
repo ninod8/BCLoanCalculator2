@@ -19,6 +19,8 @@ using Microsoft.VisualBasic;
 using Windows.UI.ViewManagement;
 using System.Threading.Tasks;
 using Windows.UI.Core;
+using Windows.ApplicationModel.DataTransfer;
+using System.Reflection;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,8 +35,9 @@ namespace BCLoanCalculator
         {
             this.InitializeComponent();
             myButton.Content = "გარფიკის გადათვლა +";
+            Grafph.Content = "გრაფიკის გაზიარება";
             MyProgRing.Visibility = Visibility.Collapsed;
-
+            Grafph.Visibility = Visibility.Collapsed;
         }
 
         #region PrivateVariables
@@ -98,7 +101,6 @@ namespace BCLoanCalculator
                 Convert.ToDouble(TermsOfLoanTB.Text);
                 DatePicker2.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
                 ErrorTB.Text = String.Empty; 
-
             }
             catch (Exception)
             {
@@ -111,16 +113,13 @@ namespace BCLoanCalculator
             try
             {
                 App.LoanAmountFM = LoanAmountTB.Text;
-                Convert.ToDouble(LoanAmountTB.Text); ErrorTB.Text = String.Empty;
-
-
+                Convert.ToDouble(LoanAmountTB.Text);
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
                 ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
-
             }
-
         }
 
         private void DatePicker0_DateChanged(object sender, DatePickerValueChangedEventArgs e)
@@ -175,16 +174,12 @@ namespace BCLoanCalculator
                 App.MonthlyInterestFM = DailyPercentTB.Text;
                 Convert.ToDouble(DailyPercentTB.Text);
                 ErrorTB.Text = String.Empty;
-
             }
             catch (Exception)
             {
                 ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
-
             }
-
         }
-
 
         private void AnnualPercentTB_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -227,9 +222,12 @@ namespace BCLoanCalculator
             myButton.Content = "გრაფიკის გადათვლა -";
             var ld = this.DataContext as LoanData;
             ld.GraphFlatPercentageMonthly();
-            i++;
+            i++; Grafph.Visibility = Visibility.Visible;
+
             if (i % 2 == 1)
             {
+                Grafph.Visibility = Visibility.Collapsed;
+
                 myButton.Content = "გარფიკის გადათვლა +";
                 ld.FlatPercentageItemsSum.Clear();
                 ld.FlatPercentageItems.Clear();
@@ -255,6 +253,69 @@ namespace BCLoanCalculator
             {
 
             }
+        }
+
+        private void Grafph_Click(object sender, RoutedEventArgs e)
+        {
+            DataTransferManager d = DataTransferManager.GetForCurrentView();
+            d.DataRequested += D_DataRequested;
+            DataTransferManager.ShowShareUI();
+        }
+        private void D_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            string html = @"<table>";
+
+
+
+            DataRequest req = args.Request;
+            var data = (this.DataContext as LoanData).FlatPercentageItems;
+
+            var type = data.FirstOrDefault().GetType();
+
+            var first = true;
+
+            foreach (var d in data)
+            {
+                if (first)
+                {
+                    html += "<tr>";
+
+                    foreach (var prop in type.GetProperties())
+                    {
+                        html += $"<th>{ prop.GetValue(d) }</th>";
+                    }
+
+                    html += "</tr>";
+
+                    first = false;
+                }
+                else
+                {
+
+                    html += "<tr>";
+
+                    foreach (var prop in type.GetProperties())
+                    {
+                        if (true)
+                        {
+
+                        }
+
+                        html += $"<th>{ prop.GetValue(d) }</th>";
+                    }
+
+                    html += "</tr>";
+                }
+            }
+
+
+            html += "</table>";
+
+            var datadef = req.GetDeferral();
+
+            req.Data.SetHtmlFormat(HtmlFormatHelper.CreateHtmlFormat(html));
+            req.Data.Properties.Title = "გრაფიკი";
+            datadef.Complete();
         }
     }
 

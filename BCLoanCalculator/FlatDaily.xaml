@@ -92,6 +92,7 @@
                 <Button FontSize="13" Margin="10,0" Name="myButton" Foreground="#5BEABF" Click="Button_Click" Background="#0F0F0F" HorizontalAlignment="Center"></Button>
 
                 <ProgressRing Width="30" Height="30" Name="MyProgRing" IsActive="True" Foreground="#0F0F0F" Margin="10,10"></ProgressRing>
+                <Button FontSize="13" Margin="10,10" Name="Grafph" Foreground="#5BEABF" Background="#0F0F0F" Click="Grafph_Click" HorizontalAlignment="Center"></Button>
 
 
                 <GridView Name="GridView"

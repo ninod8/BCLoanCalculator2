@@ -128,6 +128,8 @@ namespace BCLoanCalculator
         {
             this.InitializeComponent();
             Graph.Content = "გრაფიკის გადათვლა +";
+            Grafph.Content = "გრაფიკის გაზიარება";
+            Grafph.Visibility = Visibility.Collapsed;  
             //EfficientLoan elfo = new EfficientLoan();
             //this.Frame.Navigate(typeof(EfficientLoanMonthly), elfo.LoanAmountTB);
             MyProgRing.Visibility = Visibility.Collapsed;
@@ -185,8 +187,7 @@ namespace BCLoanCalculator
 
         int i = 1;
         public async void Graph_Click(object sender, RoutedEventArgs e)
-        {
-
+        {         
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 MyProgRing.Visibility = Visibility.Visible; // Progress ring name is Waiter.
@@ -198,11 +199,13 @@ namespace BCLoanCalculator
             //   ld.SumDaily();
             i++;
             Graph.Content = "გრაფიკის გადათვლა -";
+            Grafph.Visibility = Visibility.Visible;
             if (i % 2 == 1)
             {
                 ld.Items.Clear();
                 ld.ItemsSum.Clear();
                 Graph.Content = "გრაფიკის გადათვლა +";
+                Grafph.Visibility = Visibility.Collapsed;
             }
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
@@ -253,10 +256,12 @@ namespace BCLoanCalculator
             try
             {
                 App.AnnualInterestEL = AnnualPercentTB.Text;
+                Convert.ToDouble(AnnualPercentTB.Text);
+                ErrorTB.Text = String.Empty; 
             }
             catch (Exception)
             {
-                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
             }
         }
 
@@ -265,10 +270,12 @@ namespace BCLoanCalculator
             try
             {
                 App.PeymentEL = PMTTB.Text;
+                Convert.ToDouble(PMTTB.Text);
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
             }
         }
 
@@ -277,10 +284,12 @@ namespace BCLoanCalculator
             try
             {
                 App.InterestOnlyEL = InterestOnly.Text;
+                Convert.ToDouble(InterestOnly.Text);
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
             }
         }
 
@@ -289,10 +298,12 @@ namespace BCLoanCalculator
             try
             {
                 App.LoanAmountEL = LoanAmountTB.Text;
+                Convert.ToDouble(LoanAmountTB.Text);
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
             }
         }
 
@@ -303,10 +314,12 @@ namespace BCLoanCalculator
                 DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToDouble(TermsOfLoanTB.Text));
                 // ErrorTB.Text = String.Empty;
                 App.TermEL = TermsOfLoanTB.Text;
+                Convert.ToDouble(TermsOfLoanTB.Text);
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
             }
         }
 
@@ -386,7 +399,7 @@ namespace BCLoanCalculator
             var datadef = req.GetDeferral();
 
             req.Data.SetHtmlFormat(HtmlFormatHelper.CreateHtmlFormat(html));
-            req.Data.Properties.Title = "gverdi";
+            req.Data.Properties.Title = "გრაფიკი";
             datadef.Complete();
         }
     }

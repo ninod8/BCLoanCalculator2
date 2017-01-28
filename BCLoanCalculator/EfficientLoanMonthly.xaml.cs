@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Navigation;
 using System.Globalization;
 using System.Threading.Tasks;
 using Windows.UI.Core;
+using Windows.ApplicationModel.DataTransfer;
+using System.Reflection;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,6 +32,9 @@ namespace BCLoanCalculator
         {
             this.InitializeComponent();
             myButton.Content = "გრაფიკის გადათვლა +";
+            Grafph.Content = "გრაფიკის გაზიარება";
+            Grafph.Visibility = Visibility.Collapsed;
+
             MyProgRing.Visibility = Visibility.Collapsed;
             DatePicker11.Date = DatePicker0.Date.AddMonths(1);
             DatePicker12.Date = DatePicker0.Date.AddMonths(1);
@@ -48,8 +53,12 @@ namespace BCLoanCalculator
             ld.GraphMonthly();
             myButton.Content = "გრაფიკის გადათვლა -";
             i++;
+            Grafph.Visibility = Visibility.Visible;
+
             if (i % 2 == 1)
             {
+                Grafph.Visibility = Visibility.Collapsed;
+
                 myButton.Content = "გრაფიკის გადათვლა +";
                 ld.ItemsMonthly.Clear();
                 ld.ItemsMonthlySum.Clear();
@@ -133,11 +142,12 @@ namespace BCLoanCalculator
                 //{
                 DatePicker12.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
                 //}
+                Convert.ToDouble(TermsOfLoanTB.Text);
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
             }
         }
         private void LoanAmountTB_TextChanged(object sender, TextChangedEventArgs e)
@@ -145,9 +155,11 @@ namespace BCLoanCalculator
             try
             {
                 App.LoanAmountELM = LoanAmountTB.Text;
+                Convert.ToDouble(LoanAmountTB.Text);
             }
             catch (Exception)
             {
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
 
             }
         }
@@ -191,12 +203,13 @@ namespace BCLoanCalculator
             try
             {
                 App.MonthlyInterestELM = DailyPercentTB.Text;
-              //  EffectiveTB.Text = (Math.Pow((1 + Convert.ToDouble(AnnualPercentTB) / 365), 365) - 1).ToString();
-
+                Convert.ToDouble(DailyPercentTB.Text);
+                ErrorTB.Text = String.Empty;
+                //  EffectiveTB.Text = (Math.Pow((1 + Convert.ToDouble(AnnualPercentTB) / 365), 365) - 1).ToString();
             }
             catch (Exception)
             {
-
+                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
             }
         }
 
@@ -206,11 +219,12 @@ namespace BCLoanCalculator
             {
                 App.AnnualInterestELM = AnnualPercentTB.Text;
                 //EffectiveTB.Text = (Math.Pow((1 + Convert.ToDouble(AnnualPercentTB) / 365), 365) - 1).ToString();
-
+                Convert.ToDouble(AnnualPercentTB.Text);
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
             }
         }
 
@@ -219,22 +233,13 @@ namespace BCLoanCalculator
             try
             {
                 App.PeymentELM = PMTTB.Text;
-                try
-                {
-                    //if (Convert.ToInt32(TermsOfLoanTB.Text)>0)
-                    //{
-                    DatePicker12.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
-                    //}
-                    ErrorTB.Text = String.Empty;
-                }
-                catch (Exception)
-                {
-                    ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
-                }
+                Convert.ToDouble(PMTTB.Text);
+                DatePicker12.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
             }
         }
 
@@ -243,11 +248,12 @@ namespace BCLoanCalculator
             try
             {
                 App.InterestOnlyELM = InterestOnly.Text;
-
+                Convert.ToDouble(InterestOnly.Text);
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
             }
         }
 
@@ -267,6 +273,68 @@ namespace BCLoanCalculator
             }
         }
 
+        private void Grafph_Click(object sender, RoutedEventArgs e)
+        {
+            DataTransferManager d = DataTransferManager.GetForCurrentView();
+            d.DataRequested += D_DataRequested;
+            DataTransferManager.ShowShareUI();
+        }
+        private void D_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            string html = @"<table>";
+
+
+
+            DataRequest req = args.Request;
+            var data = (this.DataContext as LoanData).ItemsMonthly;
+
+            var type = data.FirstOrDefault().GetType();
+
+            var first = true;
+
+            foreach (var d in data)
+            {
+                if (first)
+                {
+                    html += "<tr>";
+
+                    foreach (var prop in type.GetProperties())
+                    {
+                        html += $"<th>{ prop.GetValue(d) }</th>";
+                    }
+
+                    html += "</tr>";
+
+                    first = false;
+                }
+                else
+                {
+
+                    html += "<tr>";
+
+                    foreach (var prop in type.GetProperties())
+                    {
+                        if (true)
+                        {
+
+                        }
+
+                        html += $"<th>{ prop.GetValue(d) }</th>";
+                    }
+
+                    html += "</tr>";
+                }
+            }
+
+
+            html += "</table>";
+
+            var datadef = req.GetDeferral();
+
+            req.Data.SetHtmlFormat(HtmlFormatHelper.CreateHtmlFormat(html));
+            req.Data.Properties.Title = "გრაფიკი";
+            datadef.Complete();
+        }
         //private void EffectiveTB_TextChanged(object sender, TextChangedEventArgs e)
         //{
         //  //  EffectiveTB.Text= (Math.Pow((1 + Convert.ToDouble(AnnualPercentTB) / 365), 365) - 1).ToString();

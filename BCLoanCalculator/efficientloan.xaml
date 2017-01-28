@@ -104,7 +104,7 @@
                 <!--<TextBlock Name="sumPMT" FontSize="11"  Margin="10,0" VerticalAlignment="Center" Text="{Binding SumpPMT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
 
                 <!--<TextBlock Name="sumInterest" FontSize="11"  Margin="10,0" VerticalAlignment="Center" Text="{Binding SumDaily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
-                <Button FontSize="13" Margin="10,0" Name="Grafph" Foreground="#5BEABF" Background="#0F0F0F" Click="Grafph_Click" HorizontalAlignment="Center"></Button>
+                <Button FontSize="13" Margin="10,10" Name="Grafph" Foreground="#5BEABF" Background="#0F0F0F" Click="Grafph_Click" HorizontalAlignment="Center"></Button>
 
 
 
