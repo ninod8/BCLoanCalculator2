@@ -147,7 +147,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "ჩაწერეთ მხოლოდ მთელი რიცხვი";
             }
         }
         private void LoanAmountTB_TextChanged(object sender, TextChangedEventArgs e)
@@ -159,7 +159,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
 
             }
         }
@@ -209,7 +209,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 
@@ -224,7 +224,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 
@@ -239,7 +239,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 
@@ -253,7 +253,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 

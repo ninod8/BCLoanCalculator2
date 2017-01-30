@@ -22,36 +22,36 @@
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის თანხა</TextBlock>
 
-                <TextBox Margin="10,5" BorderThickness="0" Name="LoanAmountTB" TextChanged="LoanAmountTB_TextChanged" Text="{Binding LoanAmountFM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox InputScope="Number" Margin="10,5" BorderThickness="0" Name="LoanAmountTB" TextChanged="LoanAmountTB_TextChanged" Text="{Binding LoanAmountFM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">გაცემის თარიღი</TextBlock>
 
-                <DatePicker Name="DatePicker0" YearFormat="{}{year.full(4)}" FontSize="11"  Margin="10" DateChanged="DatePicker0_DateChanged" Date="{Binding ReleaseDateFlat, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+                <DatePicker Name="DatePicker0" YearFormat="{}{year.full(4)}" MonthFormat="{}{month.integer(2)}" FontSize="11"  Margin="10" DateChanged="DatePicker0_DateChanged" Date="{Binding ReleaseDateFlat, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
 
-                <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">პირველი გადახდის თარიღი</TextBlock>
+                <TextBlock  FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">პირველი გადახდის თარიღი</TextBlock>
 
-                <DatePicker Name="DatePicker1" YearFormat="{}{year.full(4)}" FontSize="11" Margin="10" DateChanged="DatePicker1_DateChanged" Date="{Binding StartDateFlat, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker Name="DatePicker1" MonthFormat="{}{month.integer(2)}" MaxWidth="100" Width="100" YearFormat="{}{year.full(4)}" FontSize="11" Margin="10" DateChanged="DatePicker1_DateChanged" Date="{Binding StartDateFlat, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock FontSize="11"  FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის დაფარვის თარიღი</TextBlock>
 
-                <DatePicker Name="DatePicker2" YearFormat="{}{year.full(4)}" Margin="10" FontSize="11" DateChanged="DatePicker2_DateChanged" Date="{Binding EndDateFlat, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker Name="DatePicker2" MonthFormat="{}{month.integer(2)}" YearFormat="{}{year.full(4)}" Margin="10" FontSize="11" DateChanged="DatePicker2_DateChanged" Date="{Binding EndDateFlat, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">სესხის ვადა (თვე)</TextBlock>
 
-                <TextBox BorderThickness="0"  Name="TermsOfLoanTB"  Margin="10,5" TextChanging="TermsOfLoanTB_TextChanging"  VerticalAlignment="Center" Text="{Binding TermFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0" InputScope="Number" Name="TermsOfLoanTB"  Margin="10,5" TextChanging="TermsOfLoanTB_TextChanging"  VerticalAlignment="Center" Text="{Binding TermFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველთვიური საპროცენტო განაკვეთი (%)</TextBlock>
 
-                <TextBox BorderThickness="0" Name="DailyPercentTB" Margin="10,5" TextChanged="DailyPercentTB_TextChanged" Text="{Binding MonthlyInterestF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0" InputScope="Number" Name="DailyPercentTB" Margin="10,5" TextChanged="DailyPercentTB_TextChanged" Text="{Binding MonthlyInterestF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">წლიური საპროცენტო განაკვეთი (%)</TextBlock>
 
-                <TextBox BorderThickness="0" Name="AnnualPercentTB" Margin="10,5" TextChanged="AnnualPercentTB_TextChanged" Text="{Binding AnnualInterestForMonthlyF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox BorderThickness="0" InputScope="Number" Name="AnnualPercentTB" Margin="10,5" TextChanged="AnnualPercentTB_TextChanged" Text="{Binding AnnualInterestForMonthlyF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <!--<TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველთვიური გადასახადი</TextBlock>-->
                 <ToggleSwitch Name="ToggleSwitch22"  Margin="10,0"  FontSize="11" Toggled="ToggleSwitch22_Toggled" OnContent="რეგულარული გადასახადი" OffContent="ყოველდღიური გადასახადი" FontWeight="Bold"  IsOn="False"/>
 
-                <TextBox BorderThickness="0" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged" Text="{Binding MonthlyPaymentFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0" InputScope="Number" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged" Text="{Binding MonthlyPaymentFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock Name="ErrorTB"  Text="{Binding Ex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" Foreground="Crimson" Margin="10,0" VerticalAlignment="Center"/>
                 <GridView Name="GridView2"

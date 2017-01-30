@@ -65,7 +65,7 @@
                     <ListBoxItem Name="PMTListBoxItem" >
                         <StackPanel Orientation="Horizontal" >
                             <TextBlock FontFamily="Segoe UI" 
-                                       FontSize="16" 
+                                       FontSize="17" 
                                        Foreground= "#5BEABF" 
                                        Text=" &#x20BE;" />
                             <TextBlock FontSize="11" 
@@ -76,10 +76,10 @@
                     </ListBoxItem>
                     <ListBoxItem Name="FlatDailyListBoxItem">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe UI" 
+                            <TextBlock FontFamily="HoloLens MDL2 Assets" 
                                        FontSize="16" 
                                        Foreground= "#5BEABF" 
-                                       Text=" &#x178E;" />
+                                       Text=" " />
                             <TextBlock FontSize="11" 
                                        TextWrapping="Wrap" 
                                        Foreground= "#5BEABF" 
@@ -88,10 +88,10 @@
                     </ListBoxItem>
                     <ListBoxItem Name="PMTMonthlyListBoxItem" >
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe UI" 
+                            <TextBlock FontFamily="HoloLens MDL2 Assets" 
                                        FontSize="16" 
                                        Foreground= "#5BEABF" 
-                                       Text=" &#x13BE;" />
+                                       Text=" " />
                             <TextBlock FontSize="11" 
                                        TextWrapping="Wrap" 
                                        Foreground= "#5BEABF" 
@@ -100,10 +100,10 @@
                     </ListBoxItem>
                     <ListBoxItem Name="FlatPercentageListBoxItem">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe UI" 
+                            <TextBlock FontFamily="HoloLens MDL2 Assets" 
                                        FontSize="16" 
                                        Foreground= "#5BEABF" 
-                                       Text=" &#x17BE;" />
+                                       Text=" " />
                             <TextBlock FontSize="11" 
                                        TextWrapping="Wrap" 
                                        Foreground= "#5BEABF" 

@@ -261,7 +261,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 
@@ -275,7 +275,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 
@@ -289,7 +289,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 
@@ -303,7 +303,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 
@@ -319,7 +319,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 

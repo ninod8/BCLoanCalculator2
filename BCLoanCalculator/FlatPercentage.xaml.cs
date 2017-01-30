@@ -18,9 +18,11 @@ using MyToolkit.Resources;
 using Microsoft.VisualBasic;
 using Windows.UI.ViewManagement;
 using System.Threading.Tasks;
+using System.Globalization;
 using Windows.UI.Core;
 using Windows.ApplicationModel.DataTransfer;
 using System.Reflection;
+using Windows.Globalization;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -38,6 +40,9 @@ namespace BCLoanCalculator
             Grafph.Content = "გრაფიკის გაზიარება";
             MyProgRing.Visibility = Visibility.Collapsed;
             Grafph.Visibility = Visibility.Collapsed;
+            ApplicationLanguages.PrimaryLanguageOverride = "en-us";
+            //this.Frame.Navigate(this.GetType());
+            //DatePicker0.Width = 60;
         }
 
         #region PrivateVariables
@@ -100,11 +105,11 @@ namespace BCLoanCalculator
                 // DatePicker1.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
                 Convert.ToDouble(TermsOfLoanTB.Text);
                 DatePicker2.Date = DatePicker0.Date.AddMonths(Convert.ToInt32(TermsOfLoanTB.Text));
-                ErrorTB.Text = String.Empty; 
+                ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 
@@ -118,7 +123,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 
@@ -177,7 +182,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
 
@@ -191,7 +196,7 @@ namespace BCLoanCalculator
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
 
             }
         }
@@ -201,11 +206,12 @@ namespace BCLoanCalculator
             try
             {
                 App.PeymentFM = PMTTB.Text; Convert.ToDouble(PMTTB.Text);
+                Convert.ToDouble(PMTTB.Text);
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
 
             }
         }
@@ -246,8 +252,15 @@ namespace BCLoanCalculator
                 if (ToggleSwitch22.IsOn)
                 {
                     App.Toggle22 = true;
+                    //ApplicationLanguages.PrimaryLanguageOverride /*=*/ "ka-ge";
+                   
                 }
-                else { App.Toggle22 = false; }
+                else
+                {
+                    App.Toggle22 = false;
+                    //ApplicationLanguages.PrimaryLanguageOverride = "en-us";
+                    //Frame.Navigate(this.GetType());
+                } 
             }
             catch (Exception)
             {

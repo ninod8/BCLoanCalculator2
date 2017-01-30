@@ -43,11 +43,12 @@ namespace BCLoanCalculator
             {
                 App.TermF = TermsOfLoanTB.Text;
                 DatePicker2.Date = DatePicker1.Date.AddDays(Convert.ToInt32(TermsOfLoanTB.Text));
+                Convert.ToInt32(Convert.ToInt32(TermsOfLoanTB.Text));
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-                ErrorTB.Text = "შეიყვანეთ მხოლოდ ციფრები";
+                ErrorTB.Text = "ჩაწერეთ მხოლოდ მთელი რიცხვი";
             }
         }
         #region PrivateVariables
@@ -107,11 +108,12 @@ namespace BCLoanCalculator
             try
             {
                 App.LoanAmountF = LoanAmountTB.Text;
+                Convert.ToDouble(LoanAmountTB.Text);
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
 
             }
         }
@@ -161,11 +163,12 @@ namespace BCLoanCalculator
             try
             {
                 App.AnnualInterestF = AnnualPercentTB.Text;
+                Convert.ToDouble(AnnualPercentTB.Text);
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
 
             }
         }
@@ -175,11 +178,12 @@ namespace BCLoanCalculator
             try
             {
                 App.PeymentF = PMTTB.Text;
+                Convert.ToDouble(PMTTB.Text);
                 ErrorTB.Text = String.Empty;
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
             }
         }
         int i = 1;
