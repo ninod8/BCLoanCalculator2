@@ -46,7 +46,8 @@
 
                 <!--<TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველდღიური გადასახადი</TextBlock>-->
 
-                <ToggleSwitch Name="ToggleSwitch11"  Margin="10,0"  FontSize="11" Toggled="ToggleSwitch11_Toggled" OnContent="რეგულარული გადასახადი" OffContent="ყოველდღიური გადასახადი" FontWeight="Bold" IsOn="False"/>
+                <ToggleSwitch Name="ToggleSwitch11"  Margin="10,0"  FontSize="11" Toggled="ToggleSwitch11_Toggled" OnContent="რეგულარული გადასახადი" OffContent="რეგულარული გადასახადი" FontWeight="Bold" IsOn="False"/>
+                <!--<CheckBox FontSize="11"  Margin="10,0" Name="CheckB" FontWeight="Bold" Background="#5BEABF" Content="რეგულარული გადასახადის ხელით მითითება"  Checked="CheckBox_Checked"></CheckBox>-->
 
                 <TextBox BorderThickness="0" InputScope="Number" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged" Text="{Binding  DailyPaymentFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 

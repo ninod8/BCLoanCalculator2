@@ -20,82 +20,33 @@ namespace BCLoanCalculator
             _loanAmountFM = App.LoanAmountFM;
             _monthlyPaymentFlat = App.PeymentFM;
             _termFlat = App.TermFM;
-
-            ////_startDateFlat = DateTime.Today.Date.AddMonths(1);
-            ////if (App.StartDateFM != DateTime.Today.Date.AddMonths(1) || App.StartDateFM != DateTime.MinValue)
-            ////{
             _startDateFlat = App.StartDateFM;
-            //}
-
-            //_endDateFlat = DateTime.Today.Date.AddMonths(1);
-            //if (App.EndDateFM != DateTime.Today.Date.AddMonths(1) || App.EndDateFM != DateTime.MinValue)
-            //{
             _endDateFlat = App.EndDateFM;
-            //}
-            //_releaseDateFlat = DateTime.Today.Date;
-            //if (App.ReleaseDateFM != DateTime.Today.Date || App.ReleaseDateFM != DateTime.MinValue)
-            //{
             _releaseDateFlat = App.ReleaseDateFM;
-            //}
-
-
             _annualInterestEL = App.AnnualInterestEL;
             _dailyInterestEL = App.DailyInterestEL;
             _loanAmountEL = App.LoanAmountEL;
             _dailyPayment = App.PeymentEL;
             _interestOnlyEL = App.InterestOnlyEL;
             _termDaily = String.Empty;
-
-            //_startDateDaily = DateTime.Today.Date;
-            //if (App.StartDateEL != DateTime.Today.Date || App.StartDateEL != DateTime.MinValue)
-            //{
             _startDateDaily = App.StartDateEL;
-            //}
-            //_endDateDaily = DateTime.Today.Date;
-
-            //if (App.EndDateEL != DateTime.Today.Date || App.EndDateEL != DateTime.MinValue)
-            //{
             _endDateDaily = App.EndDateEL;
-            //}
-
             _loanAmountELM = App.LoanAmountELM;
             _termMonthly = App.TermELM;
             _monthlyPayment = App.PeymentELM;
             _interestOnlyELM = App.InterestOnlyELM;
             _monthlyInterestELM = App.MonthlyInterestELM;
             _annualInterestForMonthlyELM = App.AnnualInterestELM;
-
-            //_endDateMonthly = DateTime.Today.Date.AddMonths(1);
-            //if (App.EndDateELM != DateTime.Today || App.EndDateELM != DateTime.MinValue)
-            //{
             _endDateMonthly = App.EndDateELM;
-            //}
-            //_startDateMonthly = DateTime.Today.Date;
-            //if (App.StartDateELM != DateTime.Today.Date || App.StartDateELM != DateTime.MinValue)
-            //{
             _startDateMonthly = App.StartDateELM;
-            //}
-            //_releaseDate = DateTime.Today.Date;
-            //if (App.ReleaseDateELM != DateTime.Today.Date || App.ReleaseDateELM != DateTime.MinValue)
-            //{
-            _releaseDate = App.ReleaseDateELM;
-            //}
-
+            _releaseDate = App.ReleaseDateELM;       
             _loanAmountF = App.LoanAmountF;
             _termFlatDaily = App.TermF;
             _dailyPaymentFlat = App.PeymentF;
             _annualInterestF = App.AnnualInterestF;
             _dailyInterestF = App.DailyInterestF;
-            //_startDateFlatDaily = DateTime.Today.Date;
-            //if (App.StartDateF != DateTime.Today.Date || App.StartDateF != DateTime.MinValue)
-            //{
             _startDateFlatDaily = App.StartDateF;
-            //}
-            //_endDateFlatDaily = DateTime.Today.Date;
-            //if (App.EndDateF != DateTime.Today.Date || App.EndDateF != DateTime.MinValue)
-            //{
             _endDateFlatDaily = App.EndDateF;
-            //}
             Items = new ObservableCollection<GridItem>();
             ItemsSum = new ObservableCollection<GridItem>();
             ItemsMonthly = new ObservableCollection<GridItem>();
@@ -1434,56 +1385,6 @@ namespace BCLoanCalculator
             }
         }
 
-        //public void SumDaily()
-        //{
-        //    try
-        //    {
-        //        ItemsSum.Clear();
-        //        double amount = Convert.ToDouble(LoanAmountEL);
-        //        double balance = Convert.ToDouble(LoanAmountEL);
-        //        double dailyInterest = Convert.ToDouble(DailyInterestEL) / 100;
-        //        double sumP = 0;
-        //        double sumI = 0;
-        //        double interest = 0;
-        //        for (int i = 1; i <= Convert.ToDouble(TermDaily); i++)
-        //        {
-        //            int interestonly;
-        //            if (String.IsNullOrEmpty(InterestOnlyEL))
-        //            {
-        //                interestonly = 0;
-        //            }
-        //            else interestonly = Convert.ToInt32(InterestOnlyEL);
-        //            if (Convert.ToDouble(interestonly) > 0)
-        //            {
-        //                while (i <= Convert.ToDouble(interestonly))
-        //                {
-        //                    i++;
-        //                    double interest1 = amount * dailyInterest;
-        //                    sumI += interest1;
-        //                    amount = Convert.ToDouble(LoanAmountEL);
-        //                }
-        //            }
-        //            interest = amount * dailyInterest;
-        //            double principal = Convert.ToDouble(PMTDaily()) - interest;
-        //            balance -= principal;
-
-        //            amount -= principal;
-        //            sumI += interest;
-        //            sumP = sumI + Convert.ToDouble(LoanAmountEL);
-        //            OnPropertyChanged(new PropertyChangedEventArgs("ItemsSum"));
-        //        }
-        //        ItemsSum.Add(new GridItem()
-        //        {
-        //            InterestSum = Math.Round(sumI, 2, MidpointRounding.AwayFromZero).ToString(),
-        //            PeymentSum = Math.Round(sumP, 2, MidpointRounding.AwayFromZero).ToString()
-        //        });
-        //    }
-        //    catch (Exception)
-        //    {
-        //        _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
-        //    }
-        //}
-
         public void GraphDaily()
         {
             try
@@ -1765,53 +1666,6 @@ namespace BCLoanCalculator
             }
         }
 
-        //public void SumMonthly()
-        //{
-        //    try
-        //    {
-        //        ItemsMonthlySum.Clear();
-        //        double amount = Convert.ToDouble(LoanAmountELM);
-        //        double balance = Convert.ToDouble(LoanAmountELM);
-        //        double SumI = 0;
-        //        double SumP = 0;
-        //        double monthlyRate = Convert.ToDouble(DailyInterestELM) * CountDaysForMonthly() / (100 * Convert.ToDouble(TermMonthly));
-        //        if (monthlyRate == 0)
-        //        {
-        //            monthlyRate = Convert.ToDouble(DailyInterestELM) * Convert.ToInt32(TermMonthly) * 30 / (100 * Convert.ToDouble(TermMonthly));
-        //        }
-        //        for (int i = 1; i <= Convert.ToDouble(TermMonthly); i++)
-        //        {
-        //            if (Convert.ToDouble(InterestOnlyELM) > 0)
-        //            {
-        //                while (i <= Convert.ToDouble(InterestOnlyELM))
-        //                {
-        //                    i++;
-        //                    double interest1 = amount * monthlyRate;
-        //                    SumI += interest1;
-        //                }
-        //                SumP = SumI;
-        //            }
-        //            double principal = Convert.ToDouble(PMTMonthly()) - amount * monthlyRate;
-        //            double interest = amount * monthlyRate;
-        //            SumI += interest;
-        //            amount -= principal;
-        //            OnPropertyChanged(new PropertyChangedEventArgs("ItemsMonthly"));
-        //        }
-        //        SumP = SumI + Convert.ToDouble(LoanAmountELM);
-        //        ItemsMonthlySum.Add(new GridItem()
-        //        {
-        //            PaymentSumText = "გადახდების ჯამი",
-        //            InterestSumText = "პროცენტის ჯამი",
-        //            InterestSum = Math.Round(SumI, 2, MidpointRounding.AwayFromZero).ToString(),
-        //            PeymentSum = Math.Round(SumP, 2, MidpointRounding.AwayFromZero).ToString()
-        //        });
-        //    }
-        //    catch (Exception)
-        //    {
-        //        _ex = "შეავსეთ ველი მხოლოდ ციფრებით (მაგ: 34.5)";
-        //    }
-        //}
-
         public void GraphMonthly()
         {
             try
@@ -1920,8 +1774,7 @@ namespace BCLoanCalculator
                                 SumP += Math.Round((interest22 + amount), 2, MidpointRounding.AwayFromZero);
                                 SumI += Math.Round(interest22, 2, MidpointRounding.AwayFromZero);
                             }
-                            //else
-                            //{
+    
                             if (Convert.ToDouble(MonthlyPayment) < Convert.ToDouble(PMTMonthly()))
                             {
                                 while (i < Convert.ToInt32(TermMonthly))
@@ -2798,6 +2651,7 @@ namespace BCLoanCalculator
                             SumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
                             SumP += Math.Round((amount + interest), 2, MidpointRounding.AwayFromZero);
                             amount -= principal;
+                            i = y;
                         }
                         #endregion
 
@@ -3087,7 +2941,6 @@ namespace BCLoanCalculator
             }
             OnPropertyChanged(new PropertyChangedEventArgs("FlatPercentageItems"));
         }
-
       
         public void GraphFlatPercentageDaily()
         {

@@ -330,6 +330,11 @@ namespace BCLoanCalculator
             req.Data.Properties.Title = "გრაფიკი";
             datadef.Complete();
         }
+
+        //private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        //{
+
+        //}
     }
 
 }

@@ -295,5 +295,6 @@ namespace BCLoanCalculator
             req.Data.Properties.Title = "გრაფიკი";
             datadef.Complete();
         }
+
     }
 }

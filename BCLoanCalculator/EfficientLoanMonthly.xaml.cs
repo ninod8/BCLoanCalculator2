@@ -335,6 +335,11 @@ namespace BCLoanCalculator
             req.Data.Properties.Title = "გრაფიკი";
             datadef.Complete();
         }
+
+        //private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        //{
+
+        //}
         //private void EffectiveTB_TextChanged(object sender, TextChangedEventArgs e)
         //{
         //  //  EffectiveTB.Text= (Math.Pow((1 + Convert.ToDouble(AnnualPercentTB) / 365), 365) - 1).ToString();
