@@ -38,16 +38,17 @@
 
                 <TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველდღიური საპროცენტო განაკვეთი (%)</TextBlock>
 
-                <TextBox BorderThickness="0" InputScope="Number" Name="DailyPercentTB" Margin="10,5" TextChanged="DailyPercentTB_TextChanged" Text="{Binding DailyInterestF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox BorderThickness="0" InputScope="Number" Name="DailyPercentTB" Margin="10,5"  TextChanged="DailyPercentTB_TextChanged" Text="{Binding DailyInterestF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">წლიური საპროცენტო განაკვეთი (%)</TextBlock>
 
                 <TextBox BorderThickness="0" InputScope="Number" Name="AnnualPercentTB" Margin="10,5" TextChanged="AnnualPercentTB_TextChanged" Text="{Binding AnnualInterestF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <!--<TextBlock FontSize="11" Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">ყოველდღიური გადასახადი</TextBlock>-->
+                <TextBlock FontSize="11" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center">ყოველდღიური გადასახადი</TextBlock>
 
-                <ToggleSwitch Name="ToggleSwitch11"  Margin="10,0"  FontSize="11" Toggled="ToggleSwitch11_Toggled" OnContent="რეგულარული გადასახადი" OffContent="რეგულარული გადასახადი" FontWeight="Bold" IsOn="False"/>
-                <!--<CheckBox FontSize="11"  Margin="10,0" Name="CheckB" FontWeight="Bold" Background="#5BEABF" Content="რეგულარული გადასახადის ხელით მითითება"  Checked="CheckBox_Checked"></CheckBox>-->
+                <!--<ToggleSwitch Name="ToggleSwitch11"  Margin="10,0"  FontSize="11" Toggled="ToggleSwitch11_Toggled" OnContent="რეგულარული გადასახადი" OffContent="რეგულარული გადასახადი" FontWeight="Bold" IsOn="False"/>-->
+                <CheckBox FontSize="11"  Margin="10,0" Name="CheckB" FontWeight="Bold" Background="#5BEABF" Content="რეგულარული გადასახადის ხელით მითითება"  Checked="CheckB_Checked" Unchecked="CheckB_Unchecked"></CheckBox>
 
                 <TextBox BorderThickness="0" InputScope="Number" Margin="10,5" Name="PMTTB" TextChanged="PMTTB_TextChanged" Text="{Binding  DailyPaymentFlat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 

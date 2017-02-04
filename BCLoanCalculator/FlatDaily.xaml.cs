@@ -148,12 +148,17 @@ namespace BCLoanCalculator
         {
             try
             {
+                string value = DailyPercentTB.Text.Replace(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.PercentSymbol, "");
                 App.DailyInterestF = DailyPercentTB.Text;
+                Convert.ToDouble(value);
+                ErrorTB.Text = String.Empty;
+                //   await Task.Delay(2000);                              
+                //   AnnualPercentTB.Text = AnnualPercentTB.Text + "%";
 
             }
             catch (Exception)
             {
-                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3,14)";
+                ErrorTB.Text = "სწორად შეავსეთ ველები. მაგ: (3.14)";
 
             }
         }
@@ -162,9 +167,13 @@ namespace BCLoanCalculator
         {
             try
             {
+                string value = AnnualPercentTB.Text.Replace(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.PercentSymbol, "");
+
                 App.AnnualInterestF = AnnualPercentTB.Text;
-                Convert.ToDouble(AnnualPercentTB.Text);
+                Convert.ToDouble(value);
                 ErrorTB.Text = String.Empty;
+                //  DailyPercentTB.Text = DailyPercentTB.Text + "%";
+
             }
             catch (Exception)
             {
@@ -198,7 +207,7 @@ namespace BCLoanCalculator
 
             var ld = this.DataContext as LoanData;
             ld.GraphFlatPercentageDaily();
-           // ld.FlatSum();
+            // ld.FlatSum();
             myButton.Content = "გრაფიკის გადათვლა -";
             i++;
             Grafph.Visibility = Visibility.Visible;
@@ -217,21 +226,7 @@ namespace BCLoanCalculator
 
         }
 
-        private void ToggleSwitch11_Toggled(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (ToggleSwitch11.IsOn)
-                {
-                    App.Toggle11 = true;
-                }
-                else { App.Toggle11 = false; }
-            }
-            catch (Exception)
-            {
 
-            }
-        }
 
         private void Grafph_Click(object sender, RoutedEventArgs e)
         {
@@ -296,5 +291,16 @@ namespace BCLoanCalculator
             datadef.Complete();
         }
 
+
+
+        private void CheckB_Unchecked(object sender, RoutedEventArgs e)
+        {
+            App.Toggle11 = false;
+        }
+
+        private void CheckB_Checked(object sender, RoutedEventArgs e)
+        {
+            App.Toggle11 = true;
+        }
     }
 }

@@ -245,28 +245,7 @@ namespace BCLoanCalculator
 
         }
 
-        private void ToggleSwitch22_Toggled(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (ToggleSwitch22.IsOn)
-                {
-                    App.Toggle22 = true;
-                    //ApplicationLanguages.PrimaryLanguageOverride /*=*/ "ka-ge";
-                   
-                }
-                else
-                {
-                    App.Toggle22 = false;
-                    //ApplicationLanguages.PrimaryLanguageOverride = "en-us";
-                    //Frame.Navigate(this.GetType());
-                } 
-            }
-            catch (Exception)
-            {
 
-            }
-        }
 
         private void Grafph_Click(object sender, RoutedEventArgs e)
         {
@@ -329,6 +308,17 @@ namespace BCLoanCalculator
             req.Data.SetHtmlFormat(HtmlFormatHelper.CreateHtmlFormat(html));
             req.Data.Properties.Title = "გრაფიკი";
             datadef.Complete();
+        }
+
+
+        private void CheckB_Checked(object sender, RoutedEventArgs e)
+        {
+            App.Toggle22 = true;
+        }
+
+        private void CheckB_Unchecked(object sender, RoutedEventArgs e)
+        {
+            App.Toggle22 = false;
         }
 
         //private void CheckBox_Checked(object sender, RoutedEventArgs e)
